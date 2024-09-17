@@ -26,18 +26,20 @@ async def root():
     return {"Hello:World"}
 
 
-@app.get('/cities', responses_class=HTMLResponse)
-def get_cities():
+@app.get('/cities', response_class=HTMLResponse)
+def get_cities(request: Request):
     context = {}
     rsCity = []
 
+    cnt = 0
     for city in db:
         strs = f"https://worldtimeapi.org/api/timezone/{city['timezone']}"
         r = requests.get(strs)
         cur_time = r.json()['datetime']
-        rsCity.append({'name': city['name'], 'timezone': city['timezone'], 'current_time': cur_time})
+        cnt += 1
+        rsCity.append({'id': cnt, 'name': city['name'], 'timezone': city['timezone'], 'current_time': cur_time})
 
-    context['requests'] = requests
+    context['request'] = request
     context['rsCity'] = rsCity
 
     return templates.TemplateResponse('city_list.html', context)
