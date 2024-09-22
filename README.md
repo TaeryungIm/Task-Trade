@@ -1,5 +1,7 @@
 # Task-Trade
-We are making a Task-Trade Program
+We are making a Task-Trade Program \
+Currently making demo homepage \
+only having sudo html page file
 
 # FastApi
 This folder is for practicing server \
