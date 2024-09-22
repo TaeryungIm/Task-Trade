@@ -75,7 +75,7 @@ def modify_city(city: CityModify):
     db[city.id-1] = {'name': city.name, 'timezone': city.timezone}
 
     return db[city.id-1]
- 
+
 
 @app.delete('/cities/{city_id}')
 def delete_city(city_id: int):

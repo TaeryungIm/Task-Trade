@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskTrade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a href="#" class="flex items-center">
+                <img src="https://via.placeholder.com/50" alt="Logo" class="mr-2">
+                <span class="text-xl font-bold">TASKTRADE</span>
+            </a>
+            <nav class="flex space-x-4">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded">퀘스트 등록</button>
+                <button class="px-4 py-2 bg-blue-500 text-white rounded">문의하기</button>
+                <button class="px-4 py-2 bg-blue-500 text-white rounded">환전하기</button>
+                <button class="px-4 py-2 bg-blue-500 text-white rounded">로그인</button>
+            </nav>
+        </div>
+    </header>
+    <main class="container mx-auto flex mt-4 space-x-4">
+        <aside class="w-1/6 bg-white p-4 shadow-md">
+            <button class="w-full py-2 bg-blue-500 text-white rounded mb-4">로그인 해주세요</button>
+        </aside>
+        <section class="w-2/6 bg-white p-4 shadow-md overflow-y-auto">
+            <div class="flex justify-between mb-4">
+                <button class="px-4 py-2 bg-gray-200 rounded">퀘스트 목록</button>
+                <button id="sortButton" class="px-4 py-2 bg-gray-200 rounded">최신순</button>
+            </div>
+            <button class="w-full py-2 bg-gray-100 rounded mb-2">퀘스트 1</button>
+            <button class="w-full py-2 bg-gray-100 rounded mb-2">퀘스트 2</button>
+        </section>
+        <section class="w-2/6 bg-white p-4 shadow-md">
+            <h2 class="text-lg font-bold mb-4">실시간 인기 퀘스트 주제</h2>
+            <ol class="list-decimal pl-4">
+                <li>tiktok lite</li>
+                <li>google</li>
+                <li>instagram follow</li>
+            </ol>
+        </section>
+    </main>
+    <script type="module">
+        const sortButton = document.getElementById('sortButton');
+        sortButton.addEventListener('click', () => {
+            if (sortButton.textContent === '최신순') {
+                sortButton.textContent = '리워드순';
+            } else {
+                sortButton.textContent = '최신순';
+            }
+        });
+    </script>
+</body>
+</html>
