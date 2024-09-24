@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from db import session
-from model import UserTable, User
+from model import UserTable, User, Base, ENGINE
 
 app = FastAPI()
 
@@ -15,6 +15,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.on_event("startup")
+def on_startup():
+    print("Creating tables if they do not exist...")
+    Base.metadata.create_all(bind=ENGINE)
+
 
 @app.get('/users')
 def read_users():
@@ -55,11 +62,14 @@ def update_users(users: List[User]):
     return "names updated..."
 
 
-@app.get('/users')
+@app.delete('/user')
 def delete_users(user_id: int):
-    user = session.query(UserTable).filter(UserTable.id == user_id).delete()
+    user = session.query(UserTable).filter(UserTable.id == user_id).first()
+    if user is None:
+        return f"User with id {user_id} does not exist."
+
+    session.delete(user)
     session.commit()
 
     return f"{user.name} deleted..."
-
 
