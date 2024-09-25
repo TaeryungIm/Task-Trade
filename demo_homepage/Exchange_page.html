@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,15 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-100 p-6">
     <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+        <!-- Header Section -->
         <div class="flex items-center justify-between p-4 border-b">
-            <img src="https://via.placeholder.com/50" alt="Task Trade Logo" class="h-12 w-12">
+            <div class="flex items-center">
+                <img src="https://via.placeholder.com/50" alt="Task Trade Logo" class="h-12 w-12">
+                <span class="ml-2 text-xl font-bold">TASK TRADE</span>
+            </div>
             <div class="flex space-x-4">
                 <button class="px-4 py-2 bg-blue-500 text-white rounded">퀘스트 등록</button>
                 <button class="px-4 py-2 bg-blue-500 text-white rounded">문의하기</button>
@@ -23,7 +29,10 @@
                 <button class="px-4 py-2 bg-blue-500 text-white rounded">로그아웃</button>
             </div>
         </div>
+
+        <!-- Main Content Section -->
         <div class="flex">
+            <!-- Profile Sidebar -->
             <div class="w-1/3 p-4 border-r">
                 <p class="mb-2"><strong>name:</strong> TT</p>
                 <p class="mb-2"><strong>coin:</strong> 100c</p>
@@ -33,6 +42,8 @@
                 <p>...</p>
                 <p>...</p>
             </div>
+
+            <!-- Exchange Form Section -->
             <div class="w-2/3 p-4">
                 <p class="mb-4"><strong>내 보유 코인:</strong> 100000c</p>
                 <div class="mb-4">
@@ -52,4 +63,5 @@
         </div>
     </div>
 </body>
+
 </html>

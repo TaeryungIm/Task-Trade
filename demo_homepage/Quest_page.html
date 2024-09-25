@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,10 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-100">
     <div class="max-w-5xl mx-auto p-4">
+        <!-- Header Section -->
         <header class="flex items-center justify-between mb-4">
             <a href="#" class="flex items-center">
                 <img src="https://via.placeholder.com/50" alt="Logo" class="mr-2">
@@ -26,40 +29,50 @@
                 <button class="px-4 py-2 bg-blue-500 text-white rounded">로그아웃</button>
             </nav>
         </header>
+
+        <!-- Main Content Section -->
         <main class="flex space-x-4">
+            <!-- Profile Sidebar -->
             <aside class="w-1/4 bg-white p-4 rounded shadow">
                 <h2 class="font-bold mb-2">Profile</h2>
-                <p>name: TT</p>
-                <p>coin: 100c</p>
-                <p>friend: 40</p>
-                <p>inquiry: n</p>
-                <p>...</p>
-                <p>...</p>
-                <p>...</p>
+                <ul>
+                    <li>name: TT</li>
+                    <li>coin: 100c</li>
+                    <li>friend: 40</li>
+                    <li>inquiry: n</li>
+                    <li>...</li>
+                    <li>...</li>
+                    <li>...</li>
+                </ul>
             </aside>
+
+            <!-- Quest Creation Section -->
             <section class="w-1/2 bg-white p-4 rounded shadow">
                 <h2 class="font-bold mb-2">Create Quest</h2>
-                <input type="text" placeholder="type quest title" class="w-full p-2 mb-2 border rounded">
-                <textarea placeholder="type quest content" class="w-full p-2 mb-2 border rounded"></textarea>
-                <input type="text" placeholder="type some specific" class="w-full p-2 mb-2 border rounded">
+                <input type="text" placeholder="Type quest title" class="w-full p-2 mb-2 border rounded">
+                <textarea placeholder="Type quest content" class="w-full p-2 mb-2 border rounded"></textarea>
+                <input type="text" placeholder="Type some specific" class="w-full p-2 mb-2 border rounded">
                 <div class="flex space-x-2">
                     <button class="flex-1 px-4 py-2 bg-green-500 text-white rounded">Add Image</button>
                     <button class="flex-1 px-4 py-2 bg-green-500 text-white rounded">Save Quest</button>
                 </div>
             </section>
+
+            <!-- Quest List Sidebar -->
             <aside class="w-1/4 bg-white p-4 rounded shadow">
                 <h2 class="font-bold mb-2">title</h2>
                 <p>- 리워드 신청목록</p>
-                <div class="mt-4">
-                    <div class="bg-gray-200 p-2 mb-2 rounded">
-                        <p>quest 1</p>
+                <div class="mt-4 space-y-2">
+                    <div class="bg-gray-200 p-2 rounded">
+                        <p>Quest 1</p>
                         <p>name</p>
                         <p>participant</p>
                     </div>
-                    <!-- Additional quest boxes can be added here -->
+                    <!-- Add additional quest boxes as needed -->
                 </div>
             </aside>
         </main>
     </div>
 </body>
+
 </html>
