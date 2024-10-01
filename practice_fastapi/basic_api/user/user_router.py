@@ -1,13 +1,16 @@
 from fastapi import APIRouter, HTTPException
 from fastapi import Depends, Request
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, scoped_session
 from starlette import status
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
 from app.database import get_db, SessionLocal
-from app.models import User, UserTable
+from app.models import UserTable
 from user import user_crud, user_schema
+from user.user_schema import UserCreate
+from user.user_crud import get_existing_user, create_user, pwd_context
 
 templates = Jinja2Templates(directory="templates")
 session = scoped_session(SessionLocal)
@@ -56,34 +59,17 @@ async def create_account_open(request: Request):
     return templates.TemplateResponse("create_account.html", context)
 
 
-@create_account.get("/back", response_class=HTMLResponse)
-async def back_to_main(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("basic_main.html", context)
-
-
-@create_account.post("/", response_class=HTMLResponse)
-async def create_account_data(user_account: User):
-    userList = list(user_account)
-    uid = userList[0][1]
-    uname = userList[1][1]
-    ugender = userList[2][1]
-    uage = userList[3][1]
-    upw = userList[4][1]
-    uemail = userList[5][1]
-
-    user_data = UserTable()
-    user_data.id = uid
-    user_data.username = uname
-    user_data.gender = ugender
-    user_data.age = uage
-    user_data.password = upw
-    user_data.email = uemail
-
-    session.add(user_data)
+@create_account.post("/")
+async def create_account_db(user_create: UserCreate, db: Session = Depends(get_db)):
     try:
-        session.commit()
-    except:
-        session.rollback()
+        existing_user = get_existing_user(db, user_create)
+        if existing_user:
+            raise HTTPException(status_code=400, detail="User already exists")
 
-    return f"new user {uname} created..."
+        create_user(db, user_create)
+        return {"message": "User created successfully!"}
+    except IntegrityError as e:
+        db.rollback()
+        print(f"Error occurred: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+

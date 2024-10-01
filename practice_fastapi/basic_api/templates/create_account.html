@@ -1,103 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create Account</title>
 
-    {% block scripts %}
-        <script>
-            function postAccount(event) {
-                // Prevent default form submission behavior
-                event.preventDefault();
+        {% block scripts %}
+            <script>
+                function postAccount(event) {
+                    // Prevent default form submission behavior
+                    event.preventDefault();
 
-                var uid = document.getElementById('id').value;
-                var uname = document.getElementById('username').value;
-                var ugender = document.getElementById('gender').value;
-                var upw1 = document.getElementById('password1').value;
-                var upw2 = document.getElementById('password2').value;
-                var uemail = document.getElementById('email').value;
-                var uage = parseInt(document.getElementById('age').value);
+                    var uid = document.getElementById('userid').value;
+                    var uname = document.getElementById('username').value;
+                    var ugender = document.getElementById('gender').value;
+                    var upw1 = document.getElementById('password1').value;
+                    var upw2 = document.getElementById('password2').value;
+                    var uemail = document.getElementById('email').value;
+                    var uage = parseInt(document.getElementById('age').value);
 
-                // Check if passwords match
-                if (upw1 !== upw2) {
-                    alert("Passwords do not match!");
-                    return;
+                    var data = {
+                        userid: uid,
+                        username: uname,
+                        gender: ugender,
+                        age: uage,
+                        password1: upw1,
+                        password2: upw2,
+                        email: uemail
+                    };
+
+                    var jsonstr = JSON.stringify(data);
+
+                    // Make the AJAX request
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/create_account");
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.send(jsonstr);
+
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            alert("Account created successfully!");
+                        } else if (xhr.status === 422) {  // Handle validation errors
+                            let response = JSON.parse(xhr.responseText);
+                            let errorMessages = response.detail.map(error => error.msg).join("\n");
+                            alert("Validation Error: " + errorMessages);
+                        } else {
+                            alert("Error creating account: " + xhr.responseText);
+                        }
+                    };
                 }
+            </script>
+        {% endblock %}
 
-                var data = {
-                    id: uid,
-                    username: uname,
-                    gender: ugender,
-                    age: uage,
-                    password: upw1,
-                    email: uemail
-                };
-
-                var jsonstr = JSON.stringify(data);
-
-                // Make the AJAX request
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/create_account");
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.send(jsonstr);
-
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        alert("Account created successfully!");
-                    } else {
-                        alert("Error creating account. Please try again.");
-                    }
-                };
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background-color: #f4f4f4;
             }
-        </script>
-    {% endblock %}
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+            input {
+                padding: 10px;
+                margin: 5px 0;
+                font-size: 16px;
+            }
+            button {
+                padding: 10px;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Create Account</h1>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        input {
-            padding: 10px;
-            margin: 5px 0;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Create Account</h1>
+        <!-- Form for account creation -->
+        <form onsubmit="postAccount(event)">
+            <input type="text" id="username" placeholder="Name" required>
+            <input type="text" id="gender" placeholder="Gender" required>
+            <input type="number" id="age" placeholder="Age" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="userid" placeholder="ID" required>
+            <input type="password" id="password1" placeholder="Password" required>
+            <input type="password" id="password2" placeholder="Retype Password" required>
+            <button type="submit">Create Account</button>
+        </form>
 
-    <!-- Form for account creation -->
-    <form onsubmit="postAccount(event)">
-        <input type="text" id="username" placeholder="Name" required>
-        <input type="text" id="gender" placeholder="Gender" required>
-        <input type="number" id="age" placeholder="Age" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="text" id="id" placeholder="ID" required>
-        <input type="password" id="password1" placeholder="Password" required>
-        <input type="password" id="password2" placeholder="Retype Password" required>
-        <button type="submit">Create Account</button>
-    </form>
-
-    <!-- Button to go back to the main page -->
-    <form action="/create_account/back" method="get">
-        <button type="submit" id="main">Back to main</button>
-    </form>
-
-</body>
+    </body>
 </html>

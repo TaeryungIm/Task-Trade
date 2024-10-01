@@ -1,26 +1,15 @@
-from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
 
 from .database import Base
 
 
 class UserTable(Base):
-    __tablename__ = "user"
+    __tablename__ = "users"  # Table name
 
-    id = Column(Integer, primary_key=True)
-    username = Column(String, unique=True, nullable=False)
-    gender = Column(String, unique=True, nullable=False)
-    age = Column(Integer, primary_key=True)
-    password = Column(String, nullable=False)
-    email = Column(String, unique=True, nullable=False)
-
-
-class User(BaseModel):
-    id      : str
-    username: str
-    gender  : str
-    age     : int
-    password: str
-    email   : str
+    userid = Column(String(50), primary_key=True)  # Specify length for VARCHAR
+    username = Column(String(100), nullable=False)  # VARCHAR with length
+    email = Column(String(100), unique=True, nullable=False)  # VARCHAR with length
+    password = Column(String(100), nullable=False)  # VARCHAR with length
+    gender = Column(String(10), nullable=False)
+    age = Column(Integer, nullable=False)
 
