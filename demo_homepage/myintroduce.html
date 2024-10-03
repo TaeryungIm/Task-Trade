@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Trade 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        /* 왼쪽 사이드바 */
+        .sidebar {
+            width: 200px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+        .sidebar p {
+            margin: 10px 0;
+        }
+        /* 상단 메뉴바 */
+        .top-menu {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .top-menu button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .top-menu button:hover {
+            background-color: #45a049;
+        }
+        /* 메인 내용 */
+        .main-content {
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .main-content h2 {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"], input[type="button"] {
+            width: 95%;
+            padding: 10px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #007B9E;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 메뉴바 -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Trade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        .main {
+            width: 60%;
+            padding: 10px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e0e0e0;
+            padding: 10px;
+        }
+        .header img {
+            width: 50px;
+            height: 50px;
+        }
+        .button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #d0d0d0;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #c0c0c0;
+        }
+        .fixed-boxes {
+            display: flex;
+            justify-content: space-between;
+        }
+        .fixed-boxes > div {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+        }
+        .proportional {
+            display: flex;
+        }
+        .proportional div {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .proportional .box1 {
+            flex: 1;
+        }
+        .proportional .box2 {
+            flex: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="main_logo.png" alt="Main Logo">
+        <div>
+            <button class="button" onclick="location.href='quest_page.html'">퀘스트 등록</button>
+            <button class="button" onclick="location.href='inquiry_page.html'">문의하기</button>
+            <button class="button" onclick="location.href='exchange_page.html'">환전하기</button>
+            <button class="button" onclick="location.href='login_page.html'">로그인</button>
+        </div>
+    </div>
+    </div>
+
+    <div class="container">
+        <!-- 왼쪽 사이드바 -->
+        <div class="sidebar">
+            <a href="main.html">
+                <img src="logo.png" alt="Main Page Link">
+            </a>
+            <p>name: TT</p>
+            <p>coin: 100c</p>
+            <p>friend: 40</p>
+            <p>inquiry: n</p>
+        </div>
+
+        <!-- 메인 내용 -->
+        <div class="main-content">
+            <h2>내 보유 코인: 1000000c</h2>
+            <form action="exchange.html" method="post">
+                <label for="coin-input">환전하고 싶은 코인</label>
+                <input type="number" id="coin-input" placeholder="put number in W" required><br>
+
+                <label for="wallet-select">결제 수단 선택</label>
+                <input type="button" id="wallet-select" value="결제 수단 선택"><br>
+
+                <label><input type="checkbox" required> 환전시 주의사항을 모두 읽었습니다.</label><br>
+                <label><input type="checkbox" required> 배정 약관에 모두 동의합니다.</label><br>
+
+                <input type="submit" value="확인">
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
