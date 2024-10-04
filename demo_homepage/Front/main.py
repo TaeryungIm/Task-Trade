@@ -3,8 +3,8 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
-from app.database import Base, engine
-from user import user_router
+from Database.database import Base, engine
+from Account_system import create_account_router
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -21,8 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(user_router.login)
-app.include_router(user_router.create_account)
+app.include_router(create_account_router.create_account)
 
 
 @app.on_event("startup")
@@ -34,5 +33,5 @@ def on_startup():
 @app.get("/", response_class=HTMLResponse)
 async def root_home(request: Request):
     context = {'request': request}
-    return templates.TemplateResponse("basic_main.html", context)
+    return templates.TemplateResponse("main.html", context)
 

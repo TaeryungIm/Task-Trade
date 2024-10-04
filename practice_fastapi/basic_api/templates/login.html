@@ -4,6 +4,46 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Log In</title>
+
+        {% block scripts %}
+            <script>
+                function loginAccount(event){
+                    event.preventDefault();
+
+                    var uid = document.getElementById('userid').value;
+                    var upw = document.getElementById('password').value;
+
+                    var data = {
+                        userid: uid,
+                        password1: upw
+                    };
+
+                    var jsonstr = JSON.stringify(data);
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/login");
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.send(jsonstr);
+
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            alert("Successfully logged in!");
+
+                            // Clear the form fields
+                            document.getElementById('userid').value = '';
+                            document.getElementById('password').value = '';
+                        } else if (xhr.status === 422) {  // Handle validation errors
+                            let response = JSON.parse(xhr.responseText);
+                            let errorMessages = response.detail.map(error => error.msg).join("\n");
+                            alert("Validation Error: " + errorMessages);
+                        } else {
+                            alert("Error logging in: " + xhr.responseText);
+                        }
+                    };
+                }
+            </script>
+        {% endblock %}
+
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -32,14 +72,11 @@
     </head>
     <body>
         <h1>Log In</h1>
-        <form action="/login/back" method="get">
-            <button type="submit" id="main">Back to main</button>
-        </form>
 
-        <form action="/login" method="get">
-            <input type="text" id="id" placeholder="ID" required>
+        <form onsubmit="loginAccount(event)">
+            <input type="text" id="userid" placeholder="ID" required>
             <input type="password" id="password" placeholder="Password" required>
-            <button type="submit" id="bt_login">Log In</button>
+            <button type="submit">Log In</button>
         </form>
     </body>
 </html>

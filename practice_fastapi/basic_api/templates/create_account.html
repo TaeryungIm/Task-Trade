@@ -40,6 +40,15 @@
                     xhr.onload = function() {
                         if (xhr.status === 200) {
                             alert("Account created successfully!");
+
+                            // Clear the form fields
+                            document.getElementById('username').value = '';
+                            document.getElementById('gender').value = '';
+                            document.getElementById('age').value = '';
+                            document.getElementById('email').value = '';
+                            document.getElementById('userid').value = '';
+                            document.getElementById('password1').value = '';
+                            document.getElementById('password2').value = '';
                         } else if (xhr.status === 422) {  // Handle validation errors
                             let response = JSON.parse(xhr.responseText);
                             let errorMessages = response.detail.map(error => error.msg).join("\n");
