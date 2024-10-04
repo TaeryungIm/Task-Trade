@@ -1,7 +1,7 @@
 # Task-Trade
 We are making a Task-Trade Program \
 
-#Demo_Homepage
+# Demo_Homepage
 Currently making demo homepage \
 only having sudo html page file
 
