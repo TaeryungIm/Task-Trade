@@ -5,17 +5,12 @@ from sqlalchemy.orm import Session, scoped_session
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
-from Database.database import get_db, SessionLocal
-from Account_system.user_schema import UserCreate
-from Account_system.user_add_db import get_existing_user, create_user
+from app.database.database import get_db, SessionLocal
+from app.account_system.account_schema import UserCreate
+from app.account_system.account_add_db import get_existing_user, create_user
 
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="app/templates")
 session = scoped_session(SessionLocal)
-
-
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
-SECRET_KEY = "45f3f4372e4acbebe7a9ee69079b3093dfedd7bea9b86ac618346fdea8f0341e"
-ALGORITHM = "HS256"
 
 
 create_account = APIRouter(
@@ -25,7 +20,7 @@ create_account = APIRouter(
 
 # Handle POST request for creating an account
 @create_account.get("/", response_class=HTMLResponse)
-async def create_account_open(request: Request):
+async def open_account(request: Request):
     context = {'request': request}
     return templates.TemplateResponse("create_account.html", context)
 

@@ -22,7 +22,7 @@
             text-align: center;
         }
         .login-container img {
-            width: 50px;
+            width: 70px;
             height: 50px;
             cursor: pointer;
         }
@@ -49,8 +49,14 @@
         input[type="button"]:hover, input[type="submit"]:hover {
             background-color: #45a049;
         }
-        .register-button {
-            background-color: #008CBA;
+        .signup-link {
+            color: #008CBA;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .signup-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -59,20 +65,22 @@
     <div class="login-container">
         <!-- 메인 페이지로 링크 -->
         <a href="main.html">
-            <img src="logo.png" alt="Main Page Link">
+            <img src="/static/images/main_logo.png" alt="Main Logo">
         </a>
 
         <!-- 로그인 폼 -->
         <h2>Task Trade 로그인 하기</h2>
 
-        <form action="login.html" method="post">
+        <form action="/login" method="post">
             <input type="text" placeholder="ID" required><br>
             <input type="password" placeholder="PASSWORD" required><br>
             <input type="submit" value="로그인">
         </form>
 
-        <!-- 회원가입 버튼 -->
-        <input type="button" value="회원가입" class="register-button" onclick="location.href='create_account.html'">
+        <!-- 회원가입 링크 -->
+        <form action="/create_account" method="get">
+            <a href="/create_account" class="signup-link">회원가입</a>
+        </form>
     </div>
 
 </body>

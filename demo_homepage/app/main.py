@@ -1,13 +1,19 @@
 from fastapi import FastAPI, Request
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse
+from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
-from Database.database import Base, engine
-from Account_system import create_account_router
+from app.account_system.login_router import login
+from app.database.database import Base, engine
+from app.account_system import account_router, login_router
+from app.quest_system import quest_router
+from app.inquiry_system import inquiry_router
+from app.exchange_system import exchange_router
 
 app = FastAPI()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="app/templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 origins = [
     "http://127.0.0.1:8000/main",
@@ -21,7 +27,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(create_account_router.create_account)
+app.include_router(account_router.create_account)
+app.include_router(quest_router.quest)
+app.include_router(inquiry_router.inquiry)
+app.include_router(exchange_router.exchange)
+app.include_router(login_router.login)
 
 
 @app.on_event("startup")
