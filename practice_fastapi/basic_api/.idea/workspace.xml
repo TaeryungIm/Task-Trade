@@ -5,32 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0860a14-b083-45d6-a882-b023801a48f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../demo_homepage/app/account_system/login_router.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../demo_homepage/app/exchange_system/exchange_router.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../demo_homepage/app/inquiry_system/inquiry_router.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../demo_homepage/app/quest_system/quest_router.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../demo_homepage/app/templates/exchange.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../demo_homepage/app/templates/inquiry.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../demo_homepage/app/templates/quest_up.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Account_system/create_account_router.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Account_system/user_add_db.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Account_system/user_schema.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Database/database.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Database/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Front/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Images/main_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/Exchange_page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/Inquiry_page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/Login_page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/Main_page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/Quest_page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/create_account.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/myintroduce.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/q_up.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../demo_homepage/Templates/question.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../demo_homepage/app/account_system/account_add_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../demo_homepage/app/account_system/account_add_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../demo_homepage/app/account_system/account_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../demo_homepage/app/account_system/account_schema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../demo_homepage/app/account_system/login_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../demo_homepage/app/account_system/login_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../demo_homepage/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../demo_homepage/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../demo_homepage/app/templates/create_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../demo_homepage/app/templates/create_account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../demo_homepage/app/templates/inquiry.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../demo_homepage/app/templates/inquiry.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../demo_homepage/app/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../demo_homepage/app/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/notification-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/notification-api.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/user_router.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../demo_homepage/.idea/demo_homepage.iml" filepath="$PROJECT_DIR$/../../demo_homepage/.idea/demo_homepage.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/notification-api.iml" filepath="$PROJECT_DIR$/.idea/notification-api.iml" />
     </modules>
   </component>

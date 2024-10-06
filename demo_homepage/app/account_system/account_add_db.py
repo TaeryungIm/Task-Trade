@@ -25,8 +25,14 @@ def create_user(db: Session, user_create: UserCreate):
         return "Error creating user"
 
 
+def get_user(db: Session, username: str):
+    return db.query(UserTable).filter(UserTable.username == username).first()
+
+
 def get_existing_user(db: Session, user_create: UserCreate):
     return db.query(UserTable).filter(
         (UserTable.username == user_create.username) |
         (UserTable.email == user_create.email)
     ).first()
+
+

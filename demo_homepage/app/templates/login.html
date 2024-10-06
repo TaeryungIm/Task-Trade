@@ -4,6 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Trade 로그인</title>
+
+    {% block scripts %}
+        <script>
+        function loginAccount(event) {
+            event.preventDefault();
+
+            var uid = document.getElementById('userid').value;
+            var upw = document.getElementById('password').value;
+
+            var data = {
+                username: uid,  // Assuming FastAPI expects 'username' (OAuth2PasswordRequestForm standard)
+                password: upw   // Assuming FastAPI expects 'password'
+            };
+
+            // Serialize data using qs.stringify for URL encoding
+            var qs_str = qs.stringify(data);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/login");
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send(qs_str);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Successful login
+                    var response = JSON.parse(xhr.responseText);
+
+                    // Store the access token in localStorage for future requests
+                    localStorage.setItem("access_token", response.access_token);
+                    localStorage.setItem("username", response.username);
+
+                    alert("로그인 되었습니다!");
+
+                    // Clear the form fields
+                    document.getElementById('userid').value = '';
+                    document.getElementById('password').value = '';
+
+                    // Redirect to main page
+                    window.location.href = "/main";
+
+                } else if (xhr.status === 422) {  // Handle validation errors
+                    let response = JSON.parse(xhr.responseText);
+                    let errorMessages = response.detail.map(error => error.msg).join("\n");
+                    alert("Validation Error: " + errorMessages);
+                } else if (xhr.status === 401) {  // Handle authentication failure
+                    alert("Invalid username or password. Please try again.");
+                } else {
+                    alert("Error logging in: " + xhr.responseText);
+                }
+            };
+        }
+
+        </script>
+    {% endblock %}
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,7 +126,7 @@
         <!-- 로그인 폼 -->
         <h2>Task Trade 로그인 하기</h2>
 
-        <form action="/login" method="post">
+        <form onsubmit="loginAccount(event)">
             <input type="text" placeholder="ID" required><br>
             <input type="password" placeholder="PASSWORD" required><br>
             <input type="submit" value="로그인">

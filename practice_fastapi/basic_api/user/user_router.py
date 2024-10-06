@@ -41,7 +41,7 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
                            db: Session = Depends(get_db)):
 
     # check user and password
-    user = user_crud.get_user(db, form_data.username)
+    user = user_crud.get_existing_user(db, form_data.username)
     if not user or not pwd_context.verify(form_data.password, user.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

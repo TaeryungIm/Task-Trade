@@ -6,6 +6,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 (basic_api)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="demo_homepage" />
   </component>
   <component name="PyNamespacePackagesService">
     <option name="namespacePackageFolders">

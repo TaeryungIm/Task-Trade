@@ -96,118 +96,120 @@
     </style>
 </head>
 <body>
-
     <!-- 상단 메뉴바 -->
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Trade</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            flex-direction: row;
-        }
-        .sidebar {
-            width: 20%;
-            padding: 10px;
-            background-color: #f0f0f0;
-        }
-        .main {
-            width: 60%;
-            padding: 10px;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            background-color: #e0e0e0;
-            padding: 10px;
-        }
-        .header img {
-            width: 70px;
-            height: 50px;
-        }
-        .button {
-            margin: 5px;
-            padding: 10px;
-            background-color: #d0d0d0;
-            border: none;
-            cursor: pointer;
-        }
-        .button:hover {
-            background-color: #c0c0c0;
-        }
-        .fixed-boxes {
-            display: flex;
-            justify-content: space-between;
-        }
-        .fixed-boxes > div {
-            flex: 1;
-            margin: 10px;
-            padding: 20px;
-            background-color: #fafafa;
-            border: 1px solid #ddd;
-        }
-        .proportional {
-            display: flex;
-        }
-        .proportional div {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        .proportional .box1 {
-            flex: 1;
-        }
-        .proportional .box2 {
-            flex: 2;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <img src="/static/images/main_logo.png" alt="Main Logo">
-        <div>
-            <button class="button" onclick="location.href='quest_page.html'">퀘스트 등록</button>
-            <button class="button" onclick="location.href='inquiry_page.html'">문의하기</button>
-            <button class="button" onclick="location.href='exchange_page.html'">환전하기</button>
-            <button class="button" onclick="location.href='login_page.html'">로그인</button>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- 왼쪽 사이드바 -->
-        <div class="sidebar">
-            <a href="main.html">
-                <img src="logo.png" alt="Main Page Link">
-            </a>
-            <p>name: TT</p>
-            <p>coin: 100c</p>
-            <p>friend: 40</p>
-            <p>inquiry: n</p>
+     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Task Trade</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            .container {
+                display: flex;
+                flex-direction: row;
+            }
+            .sidebar {
+                width: 20%;
+                padding: 10px;
+                background-color: #f0f0f0;
+            }
+            .sidebar img {
+                width: 55px;
+                height: 40px;
+            }
+            .main {
+                width: 60%;
+                padding: 10px;
+            }
+            .header {
+                display: flex;
+                justify-content: space-between;
+                background-color: #e0e0e0;
+                padding: 10px;
+            }
+            .header img {
+                width: 70px;
+                height: 50px;
+            }
+            .button {
+                margin: 5px;
+                padding: 10px;
+                background-color: #d0d0d0;
+                border: none;
+                cursor: pointer;
+            }
+            .button:hover {
+                background-color: #c0c0c0;
+            }
+            .fixed-boxes {
+                display: flex;
+                justify-content: space-between;
+            }
+            .fixed-boxes > div {
+                flex: 1;
+                margin: 10px;
+                padding: 20px;
+                background-color: #fafafa;
+                border: 1px solid #ddd;
+            }
+            .proportional {
+                display: flex;
+            }
+            .proportional div {
+                padding: 10px;
+                border: 1px solid #ddd;
+            }
+            .proportional .box1 {
+                flex: 1;
+            }
+            .proportional .box2 {
+                flex: 2;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <img src="/static/images/main_logo.png" alt="Main Logo">
+            <div>
+                <button class="button" onclick="location.href='quest_page.html'">퀘스트 등록</button>
+                <button class="button" onclick="location.href='inquiry_page.html'">문의하기</button>
+                <button class="button" onclick="location.href='exchange_page.html'">환전하기</button>
+                <button class="button" onclick="location.href='login_page.html'">로그인</button>
+            </div>
         </div>
 
-        <!-- 메인 내용 -->
-        <div class="main-content">
-            <h2>문의하기</h2>
-            <form action="send_inquiry.html" method="post">
-                <label for="inquiry-title">문의 제목</label>
-                <input type="text" id="inquiry-title" placeholder="type inquiry title" required><br>
+        <div class="container">
+            <!-- 왼쪽 사이드바 -->
+            <div class="sidebar">
+                <a href="main.html">
+                    <img src="/static/images/main_logo.png" alt="Main Logo">
+                </a>
+                <p>name: TT</p>
+                <p>coin: 100c</p>
+                <p>friend: 40</p>
+                <p>inquiry: n</p>
+            </div>
 
-                <label for="inquiry-content">문의 내용</label>
-                <textarea id="inquiry-content" rows="5" placeholder="type inquiry main context" required></textarea><br>
+            <!-- 메인 내용 -->
+            <div class="main-content">
+                <h2>문의하기</h2>
+                <form action="send_inquiry.html" method="post">
+                    <label for="inquiry-title">문의 제목</label>
+                    <input type="text" id="inquiry-title" placeholder="type inquiry title" required><br>
 
-                <div class="contact-method">
-                    <label><input type="radio" name="contact-method" value="text" required> 문자</label>
-                    <label><input type="radio" name="contact-method" value="email"> e-mail</label>
-                </div>
+                    <label for="inquiry-content">문의 내용</label>
+                    <textarea id="inquiry-content" rows="5" placeholder="type inquiry main context" required></textarea><br>
 
-                <input type="submit" value="send button">
-            </form>
+                    <div class="contact-method">
+                        <label><input type="radio" name="contact-method" value="text" required> 문자</label>
+                        <label><input type="radio" name="contact-method" value="email"> e-mail</label>
+                    </div>
+
+                    <input type="submit" value="send button">
+                </form>
+            </div>
         </div>
-    </div>
-
+    </body>
 </body>
 </html>

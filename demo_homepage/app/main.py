@@ -4,7 +4,6 @@ from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
-from app.account_system.login_router import login
 from app.database.database import Base, engine
 from app.account_system import account_router, login_router
 from app.quest_system import quest_router
