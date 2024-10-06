@@ -8,7 +8,8 @@ from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
 from datetime import timedelta, datetime
-from jwt.api_jwt import encode
+from authlib.jose import jwt
+import os
 
 from app.database.database import get_db, SessionLocal
 from app.account_system.account_schema import Token
@@ -18,7 +19,7 @@ templates = Jinja2Templates(directory="app/templates")
 session = scoped_session(SessionLocal)
 
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
-SECRET_KEY = "7e8adf385c46103cc2077702b9d68a548a943fc9ec2d28149aad7ac8b4f43993"
+SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 
 
@@ -52,7 +53,8 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
         "sub": user.username,
         "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     }
-    access_token = encode(data, SECRET_KEY, algorithm=ALGORITHM)
+    header = {"alg": ALGORITHM}
+    access_token = jwt.encode(header, data, SECRET_KEY).decode('utf-8')
 
     return {
         "access_token": access_token,
