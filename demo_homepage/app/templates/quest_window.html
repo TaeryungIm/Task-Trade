@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest Window</title>
+
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="/static/css/quest_window.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- 위쪽 -->
+        <div class="header">
+            <img src="/static/images/main_logo.png" alt="Main Logo">
+            <button>퀘스트 등록</button>
+            <button>문의하기</button>
+            <button>환전하기</button>
+            <button>로그아웃</button>
+        </div>
+
+        <!-- 메인 -->
+        <div class="content">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <p>name: TT</p>
+                <p>coin: 100c</p>
+                <p>friend: 40</p>
+                <p>inquiry: n</p>
+            </div>
+
+            <!-- 오른쪽 아귀찮아 모시꺵이 -->
+            <div class="right-panel">
+                <!-- Quest Form -->
+                <div class="quest-form">
+                    <input type="text" placeholder="type quest title">
+                    <textarea placeholder="type quest content"></textarea>
+                    <input type="text" placeholder="type some specific">
+                    <div class="buttons">
+                        <button>button to add image</button>
+                        <button>button to save quest</button>
+                    </div>
+                </div>
+
+                <!-- Title and Quest List -->
+                <div class="title-box">
+                    <p>title - 리워드 신청목록</p>
+                </div>
+
+                <div class="quest-list">
+                    <div class="fixed-boxes">
+                        <div>quest 1</div>
+                        <div>name participant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
