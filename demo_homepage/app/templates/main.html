@@ -4,84 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Trade</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            flex-direction: row;
-        }
-        .sidebar {
-            width: 20%;
-            padding: 10px;
-            background-color: #f0f0f0;
-        }
-        .main {
-            width: 60%;
-            padding: 10px;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #e0e0e0;
-            padding: 10px;
-        }
-        .header img {
-            width: 70px;
-            height: 50px;
-        }
-        .header-buttons {
-            display: flex;
-            flex-direction: row;
-            gap: 10px; /* Add space between buttons */
-        }
-        .header-buttons button {
-            padding: 15px 30px;
-            font-size: 16px;
-        }
-        .header-buttons form {
-            margin:0 ;
-        }
-        .header-buttons button:hover {
-            background-color: #c0c0c0;
-        }
-        .button {
-            margin: 5px;
-            padding: 10px;
-            background-color: #d0d0d0;
-            border: none;
-            cursor: pointer;
-        }
-        .button:hover {
-            background-color: #c0c0c0;
-        }
-        .fixed-boxes {
-            display: flex;
-            justify-content: space-between;
-        }
-        .fixed-boxes > div {
-            flex: 1;
-            margin: 10px;
-            padding: 20px;
-            background-color: #fafafa;
-            border: 1px solid #ddd;
-        }
-        .proportional {
-            display: flex;
-        }
-        .proportional div {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        .proportional .box1 {
-            flex: 1;
-        }
-        .proportional .box2 {
-            flex: 2;
-        }
-    </style>
+
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
 
@@ -98,7 +23,7 @@
             <form action='/exchange' method='get'>
                 <button type="submit">환전하기</button>
             </form>
-            <form action='/login' method='get'>
+            <form action='/login_page' method='get'>
                 <button type="submit">로그인</button>
             </form>
         </div>

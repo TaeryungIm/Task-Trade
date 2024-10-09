@@ -5,121 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Trade 로그인</title>
 
-    {% block scripts %}
-        <script>
-        function loginAccount(event) {
-            event.preventDefault();
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="/static/css/login.css">
 
-            var uid = document.getElementById('userid').value;
-            var upw = document.getElementById('password').value;
+    <!-- Link to external JavaScript -->
+    <script defer src="/static/js/login.js"></script>
 
-            var data = {
-                username: uid,  // Assuming FastAPI expects 'username' (OAuth2PasswordRequestForm standard)
-                password: upw   // Assuming FastAPI expects 'password'
-            };
-
-            // Serialize data using qs.stringify for URL encoding
-            var qs_str = qs.stringify(data);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/login");
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send(qs_str);
-
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Successful login
-                    var response = JSON.parse(xhr.responseText);
-
-                    // Store the access token in localStorage for future requests
-                    localStorage.setItem("access_token", response.access_token);
-                    localStorage.setItem("username", response.username);
-
-                    alert("로그인 되었습니다!");
-
-                    // Clear the form fields
-                    document.getElementById('userid').value = '';
-                    document.getElementById('password').value = '';
-
-                    // Redirect to main page
-                    window.location.href = "/main";
-
-                } else if (xhr.status === 422) {  // Handle validation errors
-                    let response = JSON.parse(xhr.responseText);
-                    let errorMessages = response.detail.map(error => error.msg).join("\n");
-                    alert("Validation Error: " + errorMessages);
-                } else if (xhr.status === 401) {  // Handle authentication failure
-                    alert("Invalid username or password. Please try again.");
-                } else {
-                    alert("Error logging in: " + xhr.responseText);
-                }
-            };
-        }
-
-        </script>
-    {% endblock %}
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        .login-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-        .login-container img {
-            width: 70px;
-            height: 50px;
-            cursor: pointer;
-        }
-        .login-container h2 {
-            margin-bottom: 20px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="button"], input[type="submit"] {
-            width: 95%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px 0;
-        }
-        input[type="button"]:hover, input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        .signup-link {
-            color: #008CBA;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        .signup-link:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 <body>
 
     <div class="login-container">
         <!-- 메인 페이지로 링크 -->
-        <a href="main.html">
+        <a href="/">
             <img src="/static/images/main_logo.png" alt="Main Logo">
         </a>
 
@@ -127,15 +24,17 @@
         <h2>Task Trade 로그인 하기</h2>
 
         <form onsubmit="loginAccount(event)">
-            <input type="text" placeholder="ID" required><br>
-            <input type="password" placeholder="PASSWORD" required><br>
-            <input type="submit" value="로그인">
+            <input type="text" id="userid" placeholder="ID" required><br>
+            <input type="password" id="password" placeholder="비밀번호" required><br>
+            <button type="submit">로그인</button>
         </form>
 
-        <!-- 회원가입 링크 -->
-        <form action="/create_account" method="get">
-            <a href="/create_account" class="signup-link">회원가입</a>
+        <!-- 회원가입 링크 with clickable text instead of button -->
+        <form id="signupForm" action="/create_account_page" method="get">
+            <!-- This is the clickable text styled as a link -->
+            <span class="submit-text" onclick="document.getElementById('signupForm').submit()">회원가입</span>
         </form>
+
     </div>
 
 </body>

@@ -1,8 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from fastapi import Depends, Request
+from fastapi import Depends
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, scoped_session
-from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
 from app.database.database import get_db, SessionLocal
@@ -16,13 +15,6 @@ session = scoped_session(SessionLocal)
 create_account = APIRouter(
     prefix="/create_account",
 )
-
-
-# Handle POST request for creating an account
-@create_account.get("/", response_class=HTMLResponse)
-async def open_account(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("create_account.html", context)
 
 
 @create_account.post("/")

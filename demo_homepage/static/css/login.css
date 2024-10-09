@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+.login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+.login-container img {
+    width: 70px;
+    height: 50px;
+    cursor: pointer;
+}
+.login-container h2 {
+    margin-bottom: 20px;
+}
+input[type="text"], input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+button {
+    width: 95%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+button:hover {
+    background-color: #45a049;
+}
+.signup-link {
+    color: #008CBA;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+.signup-link:hover {
+    text-decoration: underline;
+}
+.submit-text {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+.submit-text:hover {
+    cursor: pointer; /* Change cursor */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add a 3D shadow effect */
+    transform: scale(1.05); /* Slightly scale the text for a pop effect */
+}
+
