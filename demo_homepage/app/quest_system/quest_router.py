@@ -22,4 +22,4 @@ quest = APIRouter(
 @quest.get("/", response_class=HTMLResponse)
 async def quest_upload(request: Request):
     context = {'request': request}
-    return templates.TemplateResponse("quest_up.html", context)
+    return templates.TemplateResponse("quest_window.html", context)
