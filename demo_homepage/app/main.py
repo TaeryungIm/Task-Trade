@@ -14,13 +14,10 @@ app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-origins = [
-    "http://127.0.0.1:8000/main",
-]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -44,3 +41,14 @@ async def root_home(request: Request):
     context = {'request': request}
     return templates.TemplateResponse("main.html", context)
 
+
+@app.get("/login_page", response_class=HTMLResponse)
+async def make_login(request: Request):
+    context = {'request': request}
+    return templates.TemplateResponse("login.html", context)
+
+
+@app.get("/create_account_page", response_class=HTMLResponse)
+async def open_account(request: Request):
+    context = {'request': request}
+    return templates.TemplateResponse("create_account.html", context)
