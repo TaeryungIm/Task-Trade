@@ -26,7 +26,7 @@
             <form action='/exchange' method='get'>
                 <button type="submit">환전하기</button>
             </form>
-            <form action='/login_page' method='get'>
+            <form action='/login' method='get'>
                 <button id="login-btn" type="submit">로그인</button>
             </form>
             <button id="logout-btn" onclick="logout()">로그아웃</button>
@@ -40,8 +40,11 @@
                 <p>coin: 100c</p>
                 <p>friend: 40</p>
                 <p>inquiry: n</p>
+                <form action='/account/modify' method='get'>
+                    <button type="submit">내 정보 변경</button>
+                </form>
             </div>
-            <form id="login_link" action="/login_page" method="get">
+            <form id="login_link" action="/login" method="get">
                 <!-- This is the clickable text styled as a link -->
                 <span class="submit-text" onclick="document.getElementById('login_link').submit()">로그인을 하세요</span>
             </form>

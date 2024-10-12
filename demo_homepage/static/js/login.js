@@ -10,7 +10,7 @@ function loginAccount(event) {
     data.append('password', upw);  // Assuming FastAPI expects 'password'
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/login");
+    xhr.open("POST", "/login/login");
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(data);  // Send the URLSearchParams object
 

@@ -23,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(account_router.create_account)
+app.include_router(account_router.account)
 app.include_router(quest_router.quest)
 app.include_router(inquiry_router.inquiry)
 app.include_router(exchange_router.exchange)
@@ -42,13 +42,19 @@ async def root_home(request: Request):
     return templates.TemplateResponse("main.html", context)
 
 
-@app.get("/login_page", response_class=HTMLResponse)
+@app.get("/login", response_class=HTMLResponse)
 async def make_login(request: Request):
     context = {'request': request}
     return templates.TemplateResponse("login.html", context)
 
 
-@app.get("/create_account_page", response_class=HTMLResponse)
+@app.get("/account/create", response_class=HTMLResponse)
 async def open_account(request: Request):
     context = {'request': request}
     return templates.TemplateResponse("create_account.html", context)
+
+
+@app.get("/account/modify", response_class=HTMLResponse)
+async def open_account_mod(request: Request):
+    context = {'request': request}
+    return templates.TemplateResponse("mod_user_acc.html", context)

@@ -24,7 +24,7 @@ function postAccount(event) {
 
     // Make the AJAX request
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/create_account");
+    xhr.open("POST", "/account/create/create");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(jsonstr);
 
