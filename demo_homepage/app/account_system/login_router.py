@@ -13,7 +13,7 @@ import os
 
 from app.database.database import get_db, SessionLocal
 from app.account_system.account_schema import Token
-from app.account_system.account_add_db import pwd_context, get_user_by_name
+from app.account_system.account_add_db import pwd_context, get_user_by_id
 
 templates = Jinja2Templates(directory="app/templates")
 session = scoped_session(SessionLocal)
@@ -37,7 +37,7 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
     # check user and password
     if not SECRET_KEY:
         raise ValueError("SECRET_KEY is not set or empty")
-    user = get_user_by_name(db, form_data.username)
+    user = get_user_by_id(db, form_data.username)  # username is userid
     if not user or not pwd_context.verify(form_data.password, user.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -56,6 +56,7 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
     return Token(
         access_token=access_token,
         token_type="bearer",
-        username=user.username
+        username=user.username,
+        userid=user.userid
     )
 

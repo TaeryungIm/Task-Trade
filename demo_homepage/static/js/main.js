@@ -6,9 +6,9 @@ const user_login = document.getElementById('login_link');
 
 // check status on main page according to login/out states
 window.onload = function() {
-    const username = localStorage.getItem("username");
+    const userid = localStorage.getItem("userid");
 
-    if (username) {
+    if (userid) {
         // User is logged in
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'block';
@@ -26,7 +26,7 @@ window.onload = function() {
 // Simulate logout function
 function logout() {
     // Remove the user from localStorage
-    localStorage.removeItem("username");
+    localStorage.removeItem("userid");
     localStorage.removeItem("access_token");
 
     // Update the UI
