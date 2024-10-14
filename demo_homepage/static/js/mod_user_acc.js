@@ -2,7 +2,8 @@
 window.onload = function() {
     document.getElementById('email').disabled = true;
     document.getElementById('current_password').disabled = true;
-    document.getElementById('new_password').disabled = true;
+    document.getElementById('new_password1').disabled = true;
+    document.getElementById('new_password2').disabled = true;
 }
 
 function handleIdCheck(event) {
@@ -12,7 +13,7 @@ function handleIdCheck(event) {
     var formData = new URLSearchParams(); // Use URLSearchParams for form data
     formData.append('userid', userID);
 
-    fetch('/account/modify/idcheck', {
+    fetch('/account/update/idcheck', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded' // Explicitly set the content type
@@ -47,7 +48,7 @@ function handlePWCheck(event) {
     formData.append('userpw', userPW);
 
 
-    fetch('/account/modify/pwcheck', {
+    fetch('/account/update/pwcheck', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -58,7 +59,8 @@ function handlePWCheck(event) {
     .then(data => {
         if (data.success) {
             // ID is valid, enable the other fields
-            document.getElementById('new_password').disabled = false;
+            document.getElementById('new_password1').disabled = false;
+            document.getElementById('new_password2').disabled = false;
             alert(data.message); // Show success message
         } else {
             // ID check failed, show error message
@@ -73,5 +75,47 @@ function handlePWCheck(event) {
 
 
 function handleAccountCheck(event) {
+    event.preventDefault(); // Prevent default form submission
 
+    var curID = localStorage.getItem('userid');
+    var modID = document.getElementById('userID').value;
+    var modEmail = document.getElementById('email').value;
+    var modPW1 = document.getElementById('new_password1').value;
+    var modPW2 = document.getElementById('new_password2').value;
+
+    var data = {
+        curid: curID,
+        modid: modID,
+        modemail: modEmail,
+        modpw1: modPW1,
+        modpw2: modPW2
+    };
+
+    var jsonstr = JSON.stringify(data);
+
+    fetch('/account/update/userdata', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: jsonstr
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message); // Show success message
+            document.getElementById('userID').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('current_password').value = '';
+            document.getElementById('new_password1').value = '';
+            document.getElementById('new_password2').value = '';
+
+            // Redirect to main page
+            window.location.href = "/";
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred: ' + error.message);
+    });
 }
