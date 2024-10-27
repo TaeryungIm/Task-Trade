@@ -18,12 +18,8 @@
 
         <div class="header-buttons">
             <button id=quest_btn onclick="link_quest()">퀘스트 등록</button>
-            <form action='/inquiry' method='get'>
-                <button type="submit">문의하기</button>
-            </form>
-            <form action='/exchange' method='get'>
-                <button type="submit">환전하기</button>
-            </form>
+            <button type="submit" onclick="link_inquiry()">문의하기</button>
+            <button type="submit" onclick="link_exchange()">환전하기</button>
             <form action='/login' method='get'>
                 <button id="login-btn" type="submit">로그인</button>
             </form>
