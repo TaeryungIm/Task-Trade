@@ -2,7 +2,7 @@ from pydantic import BaseModel, field_validator, EmailStr
 from pydantic_core.core_schema import FieldValidationInfo
 
 
-# account_making 에 사용하는 model
+# account making 에 사용하는 model
 class UserCreate(BaseModel):
     userid  : str
     username: str
