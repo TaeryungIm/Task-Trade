@@ -39,6 +39,10 @@ function postAccount(event) {
             document.getElementById('userid').value = '';
             document.getElementById('password1').value = '';
             document.getElementById('password2').value = '';
+
+            // After creating the account, return to the login page
+            window.location.replace("/login");
+
         } else if (xhr.status === 422) {  // Handle validation errors
             let response = JSON.parse(xhr.responseText);
             let errorMessages = response.detail.map(error => error.msg).join("\n");

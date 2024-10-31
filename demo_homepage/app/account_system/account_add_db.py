@@ -53,4 +53,3 @@ def get_existing_user(db: Session, user_create: UserCreate):
         (UserTable.userid == user_create.userid)
     ).first()
 
-

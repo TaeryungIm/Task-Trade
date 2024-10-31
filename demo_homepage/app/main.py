@@ -33,28 +33,25 @@ app.include_router(login_router.login)
 @app.on_event("startup")
 def on_startup():
     # Create all tables
+    # Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
 
 @app.get("/", response_class=HTMLResponse)
 async def root_home(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("main.html", context)
+    return templates.TemplateResponse("main.html", {'request': request})
 
 
 @app.get("/login", response_class=HTMLResponse)
-async def make_login(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("login.html", context)
+async def login_page(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request})
 
 
 @app.get("/account/create", response_class=HTMLResponse)
 async def open_account(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("create_account.html", context)
+    return templates.TemplateResponse("create_account.html", {'request': request})
 
 
 @app.get("/account/modify", response_class=HTMLResponse)
 async def open_account_mod(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("mod_user_acc.html", context)
+    return templates.TemplateResponse("upd_user_acc.html", {'request': request})

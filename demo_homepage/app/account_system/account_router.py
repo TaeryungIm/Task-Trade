@@ -1,18 +1,16 @@
 from fastapi import APIRouter, HTTPException
 from fastapi import Depends, Form
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session, scoped_session
+from sqlalchemy.orm import Session
 from starlette.templating import Jinja2Templates
 from starlette.responses import JSONResponse
 
-from app.database.database import get_db, SessionLocal
+from app.database.database import get_db
 from app.account_system.account_schema import UserCreate, UserUpdate
 from app.account_system.account_add_db import get_existing_user, get_user_by_id, pwd_context
 from app.account_system.account_add_db import create_user, update_user
 
 templates = Jinja2Templates(directory="app/templates")
-session = scoped_session(SessionLocal)
-
 
 account = APIRouter(
     prefix="/account",

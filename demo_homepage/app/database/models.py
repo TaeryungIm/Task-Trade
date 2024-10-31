@@ -1,3 +1,4 @@
+from django.db.models import CASCADE
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
@@ -17,8 +18,8 @@ class UserTable(Base):
     age = Column(Integer, nullable=False)
 
     # connection with other tables
-    demo_inquiries = relationship("InquiryTable", back_populates="demo_user")
-    demo_quest = relationship("QuestTable", back_populates="demo_user")
+    demo_inquiry = relationship("InquiryTable", back_populates="demo_user", cascade="all, delete")
+    demo_quest = relationship("QuestTable", back_populates="demo_user", cascade="all, delete")
 
 
 class InquiryTable(Base):
@@ -28,7 +29,7 @@ class InquiryTable(Base):
     id = Column(Integer, primary_key=True, index=True)
     inquiry_title = Column(String(50), nullable=False)
     inquiry_content = Column(String(500), nullable=False)
-    userid = Column(String, ForeignKey("demo_users.userid"))
+    userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE"))
 
     # time info
     created_at = Column(DateTime, default=datetime.utcnow())
@@ -46,7 +47,7 @@ class QuestTable(Base):
     quest_title = Column(String(50), nullable=False)
     quest_type = Column(String(50), nullable=False)
     quest_content = Column(String(500), nullable=False)
-    userid = Column(String, ForeignKey("demo_users.userid"))
+    userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE"))
 
     # time info
     created_at = Column(DateTime, default=datetime.utcnow())
