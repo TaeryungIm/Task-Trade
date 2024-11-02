@@ -48,10 +48,10 @@ async def login_page(request: Request):
 
 
 @app.get("/account/create", response_class=HTMLResponse)
-async def open_account(request: Request):
+async def open_account_cre(request: Request):
     return templates.TemplateResponse("create_account.html", {'request': request})
 
 
-@app.get("/account/modify", response_class=HTMLResponse)
-async def open_account_mod(request: Request):
+@app.get("/account/update", response_class=HTMLResponse)
+async def open_account_upd(request: Request):
     return templates.TemplateResponse("upd_user_acc.html", {'request': request})

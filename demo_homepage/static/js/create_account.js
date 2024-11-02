@@ -5,9 +5,8 @@ function postAccount(event) {
     var uid = document.getElementById('userid').value;
     var uname = document.getElementById('username').value;
     var ugender = document.querySelector('input[name="gender"]:checked').value;
-    var upw1 = document.getElementById('password1').value;
-    var upw2 = document.getElementById('password2').value;
-    var uemail = document.getElementById('email').value;
+    var upw1 = document.getElementById('password').value;
+    var upw2 = document.getElementById('confirm_password').value;
     var uage = parseInt(document.getElementById('age').value);
 
     var data = {
@@ -17,7 +16,6 @@ function postAccount(event) {
         age: uage,
         password1: upw1,
         password2: upw2,
-        email: uemail
     };
 
     var jsonstr = JSON.stringify(data);

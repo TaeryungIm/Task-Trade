@@ -6,8 +6,8 @@ from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
 from app.database.database import get_db
-from app.quest_system.quest_schema import QuestCreate
-from app.quest_system.quest_db import create_quest
+from app.quest_system.quest_schema import QuestCreate, QuestRequest, QuestResponse
+from app.quest_system.quest_db import create_quest, get_quest_by_id
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -35,3 +35,20 @@ async def create_quest_db(quest_create: QuestCreate, db: Session = Depends(get_d
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
+# Display all possible quests in progress
+@quest.post("/display", response_model=QuestResponse)
+async def get_quest_from_db(quest_request: QuestRequest, db: Session = Depends(get_db)):
+    # get requested quest by id
+    requested_quest = get_quest_by_id(db, quest_request.id)
+
+    if requested_quest is None:
+        # Raise a 404 Not Found error if the quest does not exist
+        raise HTTPException(status_code=404, detail="Quest not found")
+
+    # If found, return the requested quest
+    return QuestResponse(
+        quest_title=requested_quest.quest_title,
+        quest_type=requested_quest.quest_type,
+        userid=requested_quest.userid,
+        updated_at=requested_quest.updated_at
+    )

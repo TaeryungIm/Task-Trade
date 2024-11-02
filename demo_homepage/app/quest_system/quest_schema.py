@@ -36,3 +36,17 @@ class QuestUpdate(BaseModel):
         if not any([values.get('questtitleup'), values.get('questtypeup'), values.get('questcontentup')]):
             raise ValueError("At least one field must be provided!")
         return v
+
+
+class QuestRequest(BaseModel):
+    id: int
+
+
+class QuestResponse(BaseModel):
+    quest_title: str
+    quest_type: str
+    userid: str
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True  # Use from_attributes instead of orm_mode

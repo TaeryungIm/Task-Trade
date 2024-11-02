@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Trade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e0e0e0;
+            padding: 10px;
+        }
+        .header img {
+            width: 70px;
+            height: 50px;
+        }
+        .header-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        .header-buttons button {
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+        .header-buttons form {
+            margin: 0;
+        }
+        .header-buttons button:hover {
+            background-color: #c0c0c0;
+        }
+        .button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #d0d0d0;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #c0c0c0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 10px;
+            background-color: #f0f0f0;
+            box-sizing: border-box;
+        }
+        .main {
+            width: 80%;
+            padding: 10px;
+            background-color: #ffffff;
+            position: relative;
+        }
+        /* New row of boxes */
+        .box-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+        }
+        .box-row .box {
+            width: calc(20% - 10px);
+            height: 80px;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #333;
+        }
+        /* Pagination buttons */
+        .pagination-buttons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            gap: 5px;
+        }
+        .pagination-buttons button {
+            background-color: #d0d0d0;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 16px;
+        }
+        /* Dropdown for sorting */
+        .sort-dropdown {
+            position: absolute;
+            top: -30px;
+            left: 0;
+        }
+        .fixed-boxes {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .fixed-boxes > div {
+            width: 48%;
+            margin: 10px 0;
+            padding: 20px;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+        }
+        .sidebar .submit-text {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+
+        .sidebar .submit-text:hover {
+            cursor: pointer; /* Change cursor */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add a 3D shadow effect */
+            transform: scale(1.05); /* Slightly scale the text for a pop effect */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section with Logo and Buttons -->
+    <div class="header">
+        <img src="main_logo.png" alt="Main Logo">
+        <div>
+            <button class="button" onclick="location.href='quest_page.html'">퀘스트 등록</button>
+            <button class="button" onclick="location.href='inquiry_page.html'">문의하기</button>
+            <button class="button" onclick="location.href='exchange_page.html'">환전하기</button>
+            <button class="button" onclick="location.href='login_page.html'">로그인</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <p>name: TT</p>
+            <p>coin: 100c</p>
+            <p>friend: 40</p>
+            <p>inquiry: n</p>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="main">
+            <!-- Dropdown for sorting positioned between header and box row -->
+            <div class="sort-dropdown">
+                <select id="sortOrder">
+                    <option>일일 인기순</option>
+                    <option>주간 인기순</option>
+                    <option>월간 인기순</option>
+                </select>
+            </div>
+
+            <!-- New Box Row Section under Header -->
+            <div class="box-row">
+                <!-- Pagination buttons above Box 5 -->
+                <div class="pagination-buttons">
+                    <button onclick="prevPage()"><</button>
+                    <button onclick="nextPage()">></button>
+                </div>
+
+                <!-- Boxes (initially showing 1-5) -->
+                <div class="box" id="box1">Box 1</div>
+                <div class="box" id="box2">Box 2</div>
+                <div class="box" id="box3">Box 3</div>
+                <div class="box" id="box4">Box 4</div>
+                <div class="box" id="box5">Box 5</div>
+            </div>
+
+            <!-- Quest and Popular Topic Section -->
+            <div class="fixed-boxes">
+                <div>
+                    <h3>퀘스트 목록</h3>
+                    <button class="button">퀘스트 1</button>
+                    <button class="button">퀘스트 2</button>
+                </div>
+                <div>
+                    <h3>실시간 인기 퀘스트 주제</h3>
+                    <ul>
+                        <li>tiktok lite</li>
+                        <li>google</li>
+                        <li>instagram follow</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for pagination -->
+    <script>
+        let currentPage = 1;
+
+        function showBoxes(page) {
+            const boxRow = document.querySelector('.box-row');
+            const boxes = boxRow.querySelectorAll('.box');
+            boxes.forEach((box, index) => {
+                if (page === 1) {
+                    box.textContent = `Box ${index + 1}`;
+                } else {
+                    box.textContent = `Box ${index + 6}`;
+                }
+            });
+        }
+
+        function prevPage() {
+            if (currentPage === 2) {
+                currentPage = 1;
+                showBoxes(currentPage);
+            }
+        }
+
+        function nextPage() {
+            if (currentPage === 1) {
+                currentPage = 2;
+                showBoxes(currentPage);
+            }
+        }
+
+        // Initialize boxes on page load
+        showBoxes(currentPage);
+    </script>
+
+</body>
+</html>

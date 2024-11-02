@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field_validator, EmailStr
+from pydantic import BaseModel, field_validator
 from pydantic_core.core_schema import FieldValidationInfo
 
 
@@ -10,9 +10,8 @@ class UserCreate(BaseModel):
     age     : int
     password1: str
     password2: str
-    email: EmailStr
 
-    @field_validator('username', 'age', 'gender', 'userid', 'password1', 'password2', 'email')
+    @field_validator('username', 'age', 'gender', 'userid', 'password1', 'password2')
     def not_empty(cls, v):
         if isinstance(v, str):  # Only strip if the value is a string
             if not v or not v.strip():

@@ -1,4 +1,3 @@
-from django.db.models import CASCADE
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
@@ -8,11 +7,10 @@ from .database import Base
 class UserTable(Base):
     __tablename__ = "demo_users"  # User Table name
 
-    # account info
+    # account info + nickname?
     id = Column(Integer, primary_key=True, index=True)
-    userid = Column(String(50), unique=True, nullable=False)  # Specify length for VARCHAR
+    userid = Column(String(50), unique=True, nullable=False)  # Specified as e-mail
     username = Column(String(100), nullable=False)  # VARCHAR with length
-    email = Column(String(100), unique=True, nullable=False)  # VARCHAR with length
     password = Column(String(100), nullable=False)  # VARCHAR with length
     gender = Column(String(10), nullable=False)
     age = Column(Integer, nullable=False)

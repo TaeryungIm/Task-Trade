@@ -3,6 +3,7 @@ const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
 const user_info = document.getElementById('state_login');
 const user_login = document.getElementById('login_link');
+let currentPage = 1;
 
 // check status on main page according to login/out states
 window.onload = function() {
@@ -20,6 +21,8 @@ window.onload = function() {
         user_info.style.display = 'none';
         user_login.style.display = 'block';
     }
+
+    showBoxes(currentPage);
 };
 
 // Simulate logout function
@@ -72,5 +75,42 @@ function link_exchange() {
     // If logged in, link to exchange page
     else {
         window.location.href = '/exchange';
+    }
+}
+
+function showBoxes(page) {
+    const boxRow = document.querySelector('.box-row');
+    const boxes = boxRow.querySelectorAll('.box');
+    boxes.forEach((box, index) => {
+        const questIndex = 5 * (page - 1) + index + 1;
+        fetch('/quest/display', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: questIndex })
+        })
+        .then(response => response.json())
+        .then(data => {
+            box.textContent
+                = `Title: ${data.quest_title} \nType: ${data.quest_type} \nLast Update: ${data.updated_at}`;
+        })
+        .catch(error => {
+            box.textContent = `No Quest`;
+        });
+    });
+}
+
+function prevPage() {
+    if (currentPage === 2) {
+        currentPage = 1;
+        showBoxes(currentPage);
+    }
+}
+
+function nextPage() {
+    if (currentPage === 1) {
+        currentPage = 2;
+        showBoxes(currentPage);
     }
 }

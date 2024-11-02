@@ -29,7 +29,6 @@ login = APIRouter(
 )
 
 
-# 너 이따가 분리
 @login.post("/login", response_model=Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
                            db: Session = Depends(get_db)):

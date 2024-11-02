@@ -38,3 +38,7 @@ def update_quest(db: Session, quest_update: QuestUpdate):
     except:
         db.rollback()
         return "Error updating user"
+
+
+def get_quest_by_id(db: Session, id: int):
+    return db.query(QuestTable).filter(QuestTable.id == id).first()

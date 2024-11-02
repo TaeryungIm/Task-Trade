@@ -1,23 +1,11 @@
 body {
     font-family: Arial, sans-serif;
-}
-.container {
-    display: flex;
-    flex-direction: row;
-}
-.sidebar {
-    width: 20%;
-    padding: 10px;
-    background-color: #f0f0f0;
-}
-.main {
-    width: 60%;
-    padding: 10px;
+    margin: 0;
+    padding: 0;
 }
 .header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     background-color: #e0e0e0;
     padding: 10px;
 }
@@ -31,7 +19,8 @@ body {
     gap: 10px;
 }
 .header-buttons button {
-    padding: 15px 30px;
+    margin: 5px;
+    padding: 10px;
     font-size: 16px;
 }
 .header-buttons form {
@@ -50,29 +39,73 @@ body {
 .button:hover {
     background-color: #c0c0c0;
 }
+.container {
+    display: flex;
+    flex-direction: row;
+}
+.sidebar {
+    width: 20%;
+    padding: 10px;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+}
+.main {
+    width: 80%;
+    padding: 10px;
+    background-color: #ffffff;
+    position: relative;
+}
+/* New row of boxes */
+.box-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    position: relative;
+}
+.box-row .box {
+    width: calc(20% - 10px);
+    height: 80px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #333;
+}
+/* Pagination buttons */
+.pagination-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 5px;
+}
+.pagination-buttons button {
+    background-color: #d0d0d0;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+}
+/* Dropdown for sorting */
+.sort-dropdown {
+    position: absolute;
+    top: -30px;
+    left: 0;
+}
 .fixed-boxes {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 .fixed-boxes > div {
-    flex: 1;
-    margin: 10px;
+    width: 48%;
+    margin: 10px 0;
     padding: 20px;
     background-color: #fafafa;
     border: 1px solid #ddd;
-}
-.proportional {
-    display: flex;
-}
-.proportional div {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-.proportional .box1 {
-    flex: 1;
-}
-.proportional .box2 {
-    flex: 2;
 }
 .sidebar .submit-text {
     text-decoration: underline;

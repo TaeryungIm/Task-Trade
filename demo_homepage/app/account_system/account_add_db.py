@@ -12,7 +12,6 @@ def create_user(db: Session, user_create: UserCreate):
         userid=user_create.userid,
         username=user_create.username,
         password=pwd_context.hash(user_create.password1),  # hash password
-        email=user_create.email,
         gender=user_create.gender,
         age=user_create.age
     )
@@ -31,7 +30,6 @@ def update_user(db: Session, user_update: UserUpdate):
         return "User not found"
 
     # 사용자 정보 변경
-    db_user.email = user_update.modemail if user_update.modemail else db_user.email
     db_user.userid = user_update.modid if user_update.modid else db_user.userid
     if user_update.modpw1:
         db_user.password = pwd_context.hash(user_update.modpw1)
