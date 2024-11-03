@@ -7,6 +7,9 @@
 
     <!-- Link to external CSS -->
     <link rel="stylesheet" href="/static/css/main.css">
+
+    <script defer src="/static/js/main.js"></script>
+
 </head>
 <body>
 
@@ -14,30 +17,60 @@
         <img src="/static/images/main_logo.png" alt="Main Logo">
 
         <div class="header-buttons">
-            <form action='/quest' method='get'>
-                <button type="submit">퀘스트 등록</button>
+            <button id="quest_btn" onclick="link_quest()">퀘스트 등록</button>
+            <button type="submit" onclick="link_inquiry()">문의하기</button>
+            <button type="submit" onclick="link_exchange()">환전하기</button>
+            <form action='/login' method='get'>
+                <button id="login-btn" type="submit">로그인</button>
             </form>
-            <form action='/inquiry' method='get'>
-                <button type="submit">문의하기</button>
-            </form>
-            <form action='/exchange' method='get'>
-                <button type="submit">환전하기</button>
-            </form>
-            <form action='/login_page' method='get'>
-                <button type="submit">로그인</button>
-            </form>
+            <button id="logout-btn" onclick="logout()">로그아웃</button>
         </div>
     </div>
 
     <div class="container">
         <div class="sidebar">
-            <p>name: TT</p>
-            <p>coin: 100c</p>
-            <p>friend: 40</p>
-            <p>inquiry: n</p>
+            <div id="state_login" class="state_login">
+                <p>name: TT</p>
+                <p>coin: 100c</p>
+                <p>friend: 40</p>
+                <p>inquiry: n</p>
+                <form action='/account/update' method='get'>
+                    <button type="submit">내 정보 변경</button>
+                </form>
+            </div>
+            <form id="login_link" action="/login" method="get">
+                <!-- This is the clickable text styled as a link -->
+                <span class="submit-text" onclick="document.getElementById('login_link').submit()">로그인을 하세요</span>
+            </form>
         </div>
 
         <div class="main">
+            <!-- Dropdown for sorting positioned between header and box row -->
+            <div class="sort-dropdown">
+                <select id="sortOrder">
+                    <option>일일 인기순</option>
+                    <option>주간 인기순</option>
+                    <option>월간 인기순</option>
+                </select>
+            </div>
+
+            <!-- New Box Row Section under Header -->
+            <div class="box-row">
+                <!-- Pagination buttons above Box 5 -->
+                <div class="pagination-buttons">
+                    <button onclick="prevPage()"><</button>
+                    <button onclick="nextPage()">></button>
+                </div>
+
+                <!-- Boxes (initially showing 1-5) -->
+                <div class="box" id="box1">Box 1</div>
+                <div class="box" id="box2">Box 2</div>
+                <div class="box" id="box3">Box 3</div>
+                <div class="box" id="box4">Box 4</div>
+                <div class="box" id="box5">Box 5</div>
+            </div>
+
+            <!-- Quest and Popular Topic Section -->
             <div class="fixed-boxes">
                 <div>
                     <h3>퀘스트 목록</h3>

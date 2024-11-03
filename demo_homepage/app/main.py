@@ -23,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(account_router.create_account)
+app.include_router(account_router.account)
 app.include_router(quest_router.quest)
 app.include_router(inquiry_router.inquiry)
 app.include_router(exchange_router.exchange)
@@ -33,22 +33,25 @@ app.include_router(login_router.login)
 @app.on_event("startup")
 def on_startup():
     # Create all tables
+    # Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
 
 @app.get("/", response_class=HTMLResponse)
 async def root_home(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("main.html", context)
+    return templates.TemplateResponse("main.html", {'request': request})
 
 
-@app.get("/login_page", response_class=HTMLResponse)
-async def make_login(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("login.html", context)
+@app.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request})
 
 
-@app.get("/create_account_page", response_class=HTMLResponse)
-async def open_account(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("create_account.html", context)
+@app.get("/account/create", response_class=HTMLResponse)
+async def open_account_cre(request: Request):
+    return templates.TemplateResponse("create_account.html", {'request': request})
+
+
+@app.get("/account/update", response_class=HTMLResponse)
+async def open_account_upd(request: Request):
+    return templates.TemplateResponse("upd_user_acc.html", {'request': request})

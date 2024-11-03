@@ -5,9 +5,8 @@ function postAccount(event) {
     var uid = document.getElementById('userid').value;
     var uname = document.getElementById('username').value;
     var ugender = document.querySelector('input[name="gender"]:checked').value;
-    var upw1 = document.getElementById('password1').value;
-    var upw2 = document.getElementById('password2').value;
-    var uemail = document.getElementById('email').value;
+    var upw1 = document.getElementById('password').value;
+    var upw2 = document.getElementById('confirm_password').value;
     var uage = parseInt(document.getElementById('age').value);
 
     var data = {
@@ -17,14 +16,13 @@ function postAccount(event) {
         age: uage,
         password1: upw1,
         password2: upw2,
-        email: uemail
     };
 
     var jsonstr = JSON.stringify(data);
 
     // Make the AJAX request
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/create_account");
+    xhr.open("POST", "/account/create/create");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(jsonstr);
 
@@ -39,6 +37,10 @@ function postAccount(event) {
             document.getElementById('userid').value = '';
             document.getElementById('password1').value = '';
             document.getElementById('password2').value = '';
+
+            // After creating the account, return to the login page
+            window.location.replace("/login");
+
         } else if (xhr.status === 422) {  // Handle validation errors
             let response = JSON.parse(xhr.responseText);
             let errorMessages = response.detail.map(error => error.msg).join("\n");

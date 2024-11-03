@@ -31,9 +31,7 @@ h2 {
     margin-bottom: 5px;
     font-weight: bold;
 }
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group input[type="password"] {
+.form-group input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -45,21 +43,11 @@ h2 {
     border-color: #007bff;
     outline: none;
 }
-.form-group .gender-options {
-    display: flex;
-    justify-content: space-around;
-}
-.form-group .gender-options label {
-    font-weight: normal;
-}
-.form-group input[type="radio"] {
-    margin-right: 5px;
-}
 .form-group button {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;

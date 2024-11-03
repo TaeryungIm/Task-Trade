@@ -6,11 +6,11 @@ function loginAccount(event) {
 
     // Create URLSearchParams object
     var data = new URLSearchParams();
-    data.append('username', uid);  // Assuming FastAPI expects 'username'
-    data.append('password', upw);  // Assuming FastAPI expects 'password'
+    data.append('username', uid);
+    data.append('password', upw);
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/login");
+    xhr.open("POST", "/login/login");
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(data);  // Send the URLSearchParams object
 
@@ -22,6 +22,7 @@ function loginAccount(event) {
             // Store the access token in localStorage for future requests
             localStorage.setItem("access_token", response.access_token);
             localStorage.setItem("username", response.username);
+            localStorage.setItem("userid", response.userid);
 
             alert("로그인 되었습니다!");
 
