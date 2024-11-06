@@ -13,7 +13,8 @@ def create_user(db: Session, user_create: UserCreate):
         username=user_create.username,
         password=pwd_context.hash(user_create.password1),  # hash password
         gender=user_create.gender,
-        age=user_create.age
+        age=user_create.age,
+        contact_number=user_create.contact
     )
     db.add(db_user)
     try:

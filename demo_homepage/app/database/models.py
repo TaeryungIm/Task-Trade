@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from .database import Base
+
+from app.database.database import Base
 
 
 class UserTable(Base):
@@ -14,6 +15,7 @@ class UserTable(Base):
     password = Column(String(100), nullable=False)  # VARCHAR with length
     gender = Column(String(10), nullable=False)
     age = Column(Integer, nullable=False)
+    contact_number = Column(String(15), nullable=True)
 
     # connection with other tables
     demo_inquiry = relationship("InquiryTable", back_populates="demo_user", cascade="all, delete")

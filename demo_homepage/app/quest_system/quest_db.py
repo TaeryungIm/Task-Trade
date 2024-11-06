@@ -19,13 +19,13 @@ def create_quest(db: Session, quest_create: QuestCreate):
         return f"New quest title of {quest_create.questtitle} created..."
     except:
         db.rollback()
-        return "Error creating quest"
+        return "Error creating quest!"
 
 
 def update_quest(db: Session, quest_update: QuestUpdate):
     db_quest = db.query(QuestTable).filter(QuestTable.userid == quest_update.userid).first()
     if db_quest is None:
-        return "Quest not found"
+        return "Quest not found!"
 
     # update the quest data
     db_quest.quest_title = quest_update.questtitleup if quest_update.questtitleup else db_quest.quest_title
@@ -37,7 +37,7 @@ def update_quest(db: Session, quest_update: QuestUpdate):
         return f"Quest title of {db_quest.quest_title} updated successfully."
     except:
         db.rollback()
-        return "Error updating user"
+        return "Error updating user!"
 
 
 def get_quest_by_id(db: Session, id: int):

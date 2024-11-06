@@ -1,17 +1,15 @@
 from datetime import datetime
-
-from pydantic import BaseModel, field_validator
-from pydantic_core.core_schema import FieldValidationInfo
+from pydantic import BaseModel, field_validator, EmailStr
 
 
 # quest model for quest making
 class QuestCreate(BaseModel):
-    userid:         str
+    userid:         EmailStr
     questtitle:     str
     questtype:      str
     questcontent:   str
 
-    @field_validator('userid', 'questtitle', 'questcontent', 'questtype')
+    @field_validator('questtitle', 'questcontent', 'questtype')
     def not_empty(cls, v):
         if isinstance(v, str):  # Only strip if the value is a string
             if not v or not v.strip():
@@ -23,11 +21,11 @@ class QuestCreate(BaseModel):
 
 # quest model for quest update
 class QuestUpdate(BaseModel):
-    userid:         str
-    questtitleup: str | None = None
-    questtypeup: str | None = None
+    userid:         EmailStr
+    questtitleup:   str | None = None
+    questtypeup:    str | None = None
     questcontentup: str | None = None
-    updatetime: datetime | None = None
+    updatetime:     datetime | None = None
 
     @field_validator('questtitleup', 'questtypeup', 'questcontentup', mode="before")
     @staticmethod
@@ -43,10 +41,10 @@ class QuestRequest(BaseModel):
 
 
 class QuestResponse(BaseModel):
-    quest_title: str
-    quest_type: str
-    userid: str
-    updated_at: datetime
+    quest_title:    str
+    quest_type:     str
+    userid:         EmailStr
+    updated_at:     datetime
 
     class Config:
         from_attributes = True  # Use from_attributes instead of orm_mode

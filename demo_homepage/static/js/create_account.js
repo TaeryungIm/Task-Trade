@@ -8,12 +8,14 @@ function postAccount(event) {
     var upw1 = document.getElementById('password').value;
     var upw2 = document.getElementById('confirm_password').value;
     var uage = parseInt(document.getElementById('age').value);
+    var ucontact = document.getElementById('contact').value;
 
     var data = {
         userid: uid,
         username: uname,
         gender: ugender,
         age: uage,
+        contact: ucontact,
         password1: upw1,
         password2: upw2,
     };
@@ -33,13 +35,14 @@ function postAccount(event) {
             // Clear the form fields
             document.getElementById('username').value = '';
             document.getElementById('age').value = '';
+            document.getElementById('contact').value = '';
             document.getElementById('email').value = '';
             document.getElementById('userid').value = '';
             document.getElementById('password1').value = '';
             document.getElementById('password2').value = '';
 
             // After creating the account, return to the login page
-            window.location.replace("/login");
+            window.location.replace("/");
 
         } else if (xhr.status === 422) {  // Handle validation errors
             let response = JSON.parse(xhr.responseText);

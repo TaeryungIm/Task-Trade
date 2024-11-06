@@ -83,6 +83,7 @@ function showBoxes(page) {
     const boxes = boxRow.querySelectorAll('.box');
     boxes.forEach((box, index) => {
         const questIndex = 5 * (page - 1) + index + 1;
+
         fetch('/quest/display', {
             method: 'POST',
             headers: {
@@ -90,13 +91,18 @@ function showBoxes(page) {
             },
             body: JSON.stringify({ id: questIndex })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                // If response status is not 200, throw an error
+                throw new Error(`No quest found with ID: ${questIndex}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            box.textContent
-                = `Title: ${data.quest_title} \nType: ${data.quest_type} \nLast Update: ${data.updated_at}`;
+            box.textContent = `Title: ${data.quest_title}\nType: ${data.quest_type}\nLast Update: ${data.updated_at}`;
         })
         .catch(error => {
-            box.textContent = `No Quest`;
+            box.textContent = "No Quest";
         });
     });
 }

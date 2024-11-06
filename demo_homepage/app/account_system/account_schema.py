@@ -1,17 +1,18 @@
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, field_validator, EmailStr
 from pydantic_core.core_schema import FieldValidationInfo
 
 
 # account making 에 사용하는 model
 class UserCreate(BaseModel):
-    userid  : str
+    userid  : EmailStr
     username: str
     gender  : str
     age     : int
+    contact : str
     password1: str
     password2: str
 
-    @field_validator('username', 'age', 'gender', 'userid', 'password1', 'password2')
+    @field_validator('username', 'age', 'gender', 'contact', 'userid', 'password1', 'password2')
     def not_empty(cls, v):
         if isinstance(v, str):  # Only strip if the value is a string
             if not v or not v.strip():
@@ -29,7 +30,7 @@ class UserCreate(BaseModel):
 
 # account_modifying 에 사용하는 model
 class UserUpdate(BaseModel):
-    curid   : str
+    curid   : EmailStr
     modid   : str
     modemail: str
     modpw1  : str
@@ -56,4 +57,4 @@ class Token(BaseModel):
     access_token:   str
     token_type:     str
     username:       str
-    userid:         str
+    userid:         EmailStr

@@ -6,7 +6,9 @@
     <title>Task Trade 문의하기</title>
 
     <!-- Link to external CSS -->
-    <link rel="stylesheet" href="/static/css/inquiry.css">
+    <link rel="stylesheet" href="/static/css/inquiry.css?v=1.0.0">
+
+    <script defer src="/static/js/inquiry.js?v=1.0.0"></script>
 </head>
 <body>
 
@@ -24,9 +26,6 @@
     <div class="container">
         <!-- 왼쪽 사이드바 -->
         <div class="sidebar">
-            <a href="/">
-                <img src="/static/images/main_logo.png" alt="Main Logo">
-            </a>
             <p>name: TT</p>
             <p>coin: 100c</p>
             <p>friend: 40</p>
@@ -36,20 +35,20 @@
         <!-- 메인 내용 -->
         <div class="main-content">
             <h2>문의하기</h2>
-            <form action="send_inquiry.html" method="post">
-                <label for="inquiry-title">문의 제목</label>
-                <input type="text" id="inquiry-title" placeholder="type inquiry title" required><br>
+            <form class="inquiry-form" onsubmit="handleInquiry(event)">
+                <label for="inquiry_title">문의 제목</label>
+                <input type="text" id="inquiry_title" placeholder="type inquiry title" required><br>
 
-                <label for="inquiry-content">문의 내용</label>
-                <textarea id="inquiry-content" rows="5" placeholder="type inquiry main context" required></textarea><br>
+                <label for="inquiry_content">문의 내용</label>
+                <textarea id="inquiry_content" rows="5" placeholder="type inquiry main context" required></textarea><br>
 
-                <div class="contact-method">
-                    <label><input type="radio" name="contact-method" value="text" required> 문자</label>
-                    <label><input type="radio" name="contact-method" value="email"> e-mail</label>
+                <div id="contact_method" class="contact_method">
+                    <label><input type="radio" name="contact_method" value="text" required> 문자</label>
+                    <label><input type="radio" name="contact_method" value="email"> e-mail</label>
                 </div>
-
-                <input type="submit" value="send button">
+                <button type="submit">문의 보내기</button>
             </form>
+
         </div>
     </div>
 
