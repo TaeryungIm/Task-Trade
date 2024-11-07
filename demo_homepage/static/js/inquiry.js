@@ -1,11 +1,25 @@
 // Define variables globally
-const loginBtn = document.getElementById('login-btn');
-const logoutBtn = document.getElementById('logout-btn');
-const userid = localStorage.getItem("userid");
+const loginBtn = document.getElementById('login_btn');
+const logoutBtn = document.getElementById('logout_btn');
+
+// Utility to manage access token
+const tokenManager = {
+    getToken: function() {
+        return localStorage.getItem("access_token");
+    },
+    setToken: function(token) {
+        localStorage.setItem("access_token", token);
+    },
+    clearToken: function() {
+        localStorage.removeItem("access_token");
+    }
+};
 
 // check status on main page according to login/out states
 window.onload = function() {
-    if (userid) {
+    const accessToken = tokenManager.getToken();
+
+    if (accessToken) {
         // User is logged in
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'block';
@@ -16,22 +30,50 @@ window.onload = function() {
     }
 };
 
-// In order to invoke goth postInquiry and sendInquiry
-function handleInquiry(event) {
+// In order to invoke both postInquiry and sendInquiry
+async function handleInquiry(event) {
     // Prevent default form submission behavior
     event.preventDefault();
 
-    postInquiry();
-    sendInquiry();
+    const accessToken = tokenManager.getToken();
+    if (!accessToken) {
+        alert("로그인이 필요합니다.");
+        return;
+    }
+
+    let userid;
+    try {
+        // Make a request to the protected endpoint to verify the token and get user information
+        const response = await fetch("/login/protected-endpoint", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            userid = data.user_id;
+        } else {
+            throw new Error("Invalid token");
+        }
+    } catch (error) {
+        console.error("Error verifying access token:", error);
+        return;
+    }
+
+    postInquiry(userid);
+    sendInquiry(userid);
 }
 
-function postInquiry() {
+function postInquiry(userid) {
     var inqtitle = document.getElementById('inquiry_title').value;
     var inqcontent = document.getElementById('inquiry_content').value;
     var inqcontact = document.querySelector('input[name="contact_method"]:checked').value;
 
     var inquiry_data = {
-        userid: userid,  // Ensure userid is defined or replace with a valid value
+        userid: userid,
         inquirytitle: inqtitle,
         inquirycontent: inqcontent,
         contactmethod: inqcontact
@@ -59,13 +101,13 @@ function postInquiry() {
     };
 }
 
-function sendInquiry() {
+function sendInquiry(userid) {
     var inqtitle = document.getElementById('inquiry_title').value;
     var inqcontent = document.getElementById('inquiry_content').value;
     var inqcontact = document.querySelector('input[name="contact_method"]:checked').value;
 
     var inquiry_data = {
-        userid: userid,  // Ensure userid is defined or replace with a valid value
+        userid: userid,
         inquirytitle: inqtitle,
         inquirycontent: inqcontent,
         contactmethod: inqcontact

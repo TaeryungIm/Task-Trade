@@ -4,6 +4,19 @@ body {
     margin: 0;
     padding: 0;
 }
+/* 상단 헤더 스타일 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #e0e0e0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.header img {
+    width: 70px;
+    height: 50px;
+}
 .container {
     display: flex;
     width: 100%;
@@ -27,25 +40,8 @@ body {
 .sidebar p {
     margin: 10px 0;
 }
-/* 상단 메뉴바 */
-.top-menu {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-.top-menu button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.top-menu button:hover {
-    background-color: #45a049;
-}
 /* 메인 내용 */
-.main-content {
+.main_content {
     width: 80%; /* 메인 콘텐츠 너비 */
     padding: 20px;
     background-color: #fff;
@@ -53,7 +49,7 @@ body {
     border-radius: 0; /* 둥근 모서리 제거 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.main-content h2 {
+.main_content h2 {
     margin-bottom: 20px;
 }
 input[type="text"], input[type="number"] {
@@ -63,7 +59,7 @@ input[type="text"], input[type="number"] {
     border: 1px solid #ccc;
     border-radius: 0; /* 둥근 모서리 제거 */
 }
-input[type="submit"], input[type="button"] {
+input[type="button"] {
     width: 95%;
     padding: 10px;
     background-color: #008CBA;
@@ -73,25 +69,12 @@ input[type="submit"], input[type="button"] {
     cursor: pointer;
     margin: 10px 0;
 }
-input[type="submit"]:hover, input[type="button"]:hover {
+input[type="button"]:hover {
     background-color: #007B9E;
 }
 label {
     display: block;
     margin-top: 10px;
-}
-/* 상단 헤더 스타일 */
-.header {
-    display: flex;
-    justify-content: space-between;
-    background-color: #e0e0e0;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-}
-.header img {
-    width: 50px;
-    height: 50px;
 }
 .button {
     margin: 5px;
@@ -102,4 +85,17 @@ label {
 }
 .button:hover {
     background-color: #c0c0c0;
+}
+button[type="submit"] {
+    width: 95%;
+    padding: 10px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 0; /* 둥근 모서리 제거 */
+    cursor: pointer;
+    margin: 10px 0;
+}
+button[type="submit"]:hover {
+    background-color: #007B9E;
 }

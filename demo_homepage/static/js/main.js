@@ -5,10 +5,24 @@ const user_info = document.getElementById('state_login');
 const user_login = document.getElementById('login_link');
 let currentPage = 1;
 
+// Utility to manage access token
+const tokenManager = {
+    getToken: function() {
+        return localStorage.getItem("access_token");
+    },
+    setToken: function(token) {
+        localStorage.setItem("access_token", token);
+    },
+    clearToken: function() {
+        localStorage.removeItem("access_token");
+    }
+};
+
 // check status on main page according to login/out states
 window.onload = function() {
-    const userid = localStorage.getItem("userid");
-    if (userid) {
+    const accessToken = tokenManager.getToken();
+
+    if (accessToken) {
         // User is logged in
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'block';
@@ -28,8 +42,7 @@ window.onload = function() {
 // Simulate logout function
 function logout() {
     // Remove the user from localStorage
-    localStorage.removeItem("userid");
-    localStorage.removeItem("access_token");
+    tokenManager.clearToken();
 
     // Update the UI
     alert("로그아웃 되었습니다!");

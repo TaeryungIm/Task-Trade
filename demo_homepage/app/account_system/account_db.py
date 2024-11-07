@@ -11,11 +11,12 @@ def create_user(db: Session, user_create: UserCreate):
     db_user = UserTable(
         userid=user_create.userid,
         username=user_create.username,
-        password=pwd_context.hash(user_create.password1),  # hash password
+        password=pwd_context.hash(user_create.password),  # hash password
         gender=user_create.gender,
         age=user_create.age,
-        contact_number=user_create.contact
+        contact_number=user_create.contact,
     )
+    db_user.balance = user_create.balance
     db.add(db_user)
     try:
         db.commit()
@@ -31,9 +32,9 @@ def update_user(db: Session, user_update: UserUpdate):
         return "User not found"
 
     # 사용자 정보 변경
-    db_user.userid = user_update.modid if user_update.modid else db_user.userid
-    if user_update.modpw1:
-        db_user.password = pwd_context.hash(user_update.modpw1)
+    db_user.userid = user_update.updid if user_update.updid else db_user.userid
+    if user_update.updpw:
+        db_user.password = pwd_context.hash(user_update.updpw)
     try:
         db.commit()
         return f"User {user_update.curid} updated successfully."

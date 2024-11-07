@@ -4,33 +4,35 @@ body {
     padding: 0;
     background-color: #f4f4f4;
 }
+/* 상단 헤더 스타일 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #e0e0e0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.header img {
+    width: 70px;
+    height: 50px;
+}
+.header button {
+    margin: 5px;
+    padding: 10px;
+    background-color: #d0d0d0;
+    border: none;
+    cursor: pointer;
+}
+.header button:hover {
+    background-color: #c0c0c0;
+}
 .container {
     width: 80%;
     margin: 20px auto;
     border: 1px solid #ccc;
     padding: 20px;
     background-color: white;
-}
-/* 상단 메뉴 */
-.top-menu {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    background-color: #e0e0e0;
-    padding: 10px;
-}
-.top-menu button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    background-color: #d0d0d0;
-    color: black;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 0;
-}
-.top-menu button:hover {
-    background-color: #c0c0c0;
 }
 .content {
     display: flex;
