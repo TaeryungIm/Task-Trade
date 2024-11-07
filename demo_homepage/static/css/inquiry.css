@@ -7,14 +7,17 @@ body {
 .container {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 /* 왼쪽 사이드바 */
 .sidebar {
     width: 200px;
     background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
+    box-sizing: border-box;
+    border-radius: 0; /* 둥근 모서리 제거 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .sidebar img {
@@ -25,15 +28,63 @@ body {
 .sidebar p {
     margin: 10px 0;
 }
-/* 상단 메뉴바 */
+/* 메인 내용 */
+.main-content {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 0; /* 둥근 모서리 제거 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.main-content h2 {
+    margin-bottom: 20px;
+}
+input[type="text"], textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 0; /* 둥근 모서리 제거 */
+}
+input[type="button"] {
+    width: 30%;
+    padding: 10px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 0; /* 둥근 모서리 제거 */
+    cursor: pointer;
+    margin: 10px 5px;
+}
+input[type="button"]:hover {
+    background-color: #007B9E;
+}
+label {
+    display: inline-block;
+    margin-top: 10px;
+}
+.contact_method {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.contact_method label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* 상단 헤더 스타일 */
 .header {
     display: flex;
     justify-content: space-between;
     background-color: #e0e0e0;
     padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 .header img {
-    width: 70px;
+    width: 50px;
     height: 50px;
 }
 .button {
@@ -52,50 +103,10 @@ button[type="submit"] {
     background-color: #008CBA;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 0; /* 둥근 모서리 제거 */
     cursor: pointer;
     margin: 10px 5px;
 }
 button[type="submit"]:hover {
     background-color: #007B9E;
-}
-/* 메인 내용 */
-.main-content {
-    width: 100%;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.main-content h2 {
-    margin-bottom: 20px;
-}
-input[type="text"], textarea {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-input[type="button"] {
-    width: 30%;
-    padding: 10px;
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px 5px;
-}
-input[type="button"]:hover {
-    background-color: #007B9E;
-}
-.contact_method {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-}
-.contact_method label {
-    display: inline-block;
-    margin-right: 10px;
 }
