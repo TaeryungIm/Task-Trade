@@ -36,10 +36,10 @@
         <!-- 메인 내용 -->
         <div class="main_content">
             <form class="exchange_form" onsubmit="handleExchange(event)">
-                <h2 id="coin_balance">내 보유 코인: 0&cent;</h2>
+                <h2 id="coin_balance">내 보유 코인: 0 ¢;</h2>
 
                 <label for="coin_input">환전하고 싶은 코인</label>
-                <input type="number" id="coin_input" placeholder="put number in W" required><br>
+                <input type="number" id="coin_input" placeholder="put number in W" required min="1" step="1"><br>
 
                 <label for="wallet_select">결제 수단 선택</label>
                 <input type="button" id="wallet_select" value="결제 수단 선택"><br>

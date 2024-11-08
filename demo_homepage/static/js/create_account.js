@@ -11,8 +11,8 @@ function postAccount(event) {
     var ucontact = document.getElementById('contact').value;
 
     var data = {
-        userid: uid,
-        username: uname,
+        user_id: uid,
+        user_name: uname,
         gender: ugender,
         age: uage,
         contact: ucontact,

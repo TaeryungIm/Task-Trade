@@ -77,18 +77,16 @@ function handlePWCheck(event) {
 function handleAccountCheck(event) {
     event.preventDefault(); // Prevent default form submission
 
-    var curID = localStorage.getItem('userid');
-    var modID = document.getElementById('userID').value;
-    var modEmail = document.getElementById('email').value;
-    var modPW1 = document.getElementById('new_password1').value;
-    var modPW2 = document.getElementById('new_password2').value;
+    var cur_id = localStorage.getItem('userid');
+    var upd_id = document.getElementById('userID').value;
+    var upd_pw = document.getElementById('new_password1').value;
+    var conf_upd_pw = document.getElementById('new_password2').value;
 
     var data = {
-        curid: curID,
-        modid: modID,
-        modemail: modEmail,
-        modpw1: modPW1,
-        modpw2: modPW2
+        cur_id: cur_id,
+        upd_id: upd_id,
+        upd_pw: upd_pw,
+        conf_upd_pw: conf_upd_pw
     };
 
     var jsonstr = JSON.stringify(data);

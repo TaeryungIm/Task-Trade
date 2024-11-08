@@ -68,15 +68,15 @@ async function handleInquiry(event) {
 }
 
 function postInquiry(userid) {
-    var inqtitle = document.getElementById('inquiry_title').value;
-    var inqcontent = document.getElementById('inquiry_content').value;
-    var inqcontact = document.querySelector('input[name="contact_method"]:checked').value;
+    var inq_title = document.getElementById('inquiry_title').value;
+    var inq_content = document.getElementById('inquiry_content').value;
+    var inq_contact = document.querySelector('input[name="contact_method"]:checked').value;
 
     var inquiry_data = {
         userid: userid,
-        inquirytitle: inqtitle,
-        inquirycontent: inqcontent,
-        contactmethod: inqcontact
+        inquiry_title: inq_title,
+        inquiry_content: inq_content,
+        contact_method: inq_contact
     };
 
     var jsonstr = JSON.stringify(inquiry_data);
@@ -102,15 +102,15 @@ function postInquiry(userid) {
 }
 
 function sendInquiry(userid) {
-    var inqtitle = document.getElementById('inquiry_title').value;
-    var inqcontent = document.getElementById('inquiry_content').value;
-    var inqcontact = document.querySelector('input[name="contact_method"]:checked').value;
+    var inq_title = document.getElementById('inquiry_title').value;
+    var inq_content = document.getElementById('inquiry_content').value;
+    var inq_contact = document.querySelector('input[name="contact_method"]:checked').value;
 
     var inquiry_data = {
-        userid: userid,
-        inquirytitle: inqtitle,
-        inquirycontent: inqcontent,
-        contactmethod: inqcontact
+        user_id: userid,
+        inquiry_title: inq_title,
+        inquiry_content: inq_content,
+        contact_method: inq_contact
     };
 
     var jsonstr = JSON.stringify(inquiry_data);

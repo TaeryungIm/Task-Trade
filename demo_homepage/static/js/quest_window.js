@@ -35,9 +35,9 @@ async function postQuest(event) {
     // Prevent default form submission behavior
     event.preventDefault();
 
-    var qtitle = document.getElementById('quest_title').value;
-    var qtype = document.getElementById('quest_type').value;
-    var qcontent = document.getElementById('quest_content').value;
+    var q_title = document.getElementById('quest_title').value;
+    var q_type = document.getElementById('quest_type').value;
+    var q_content = document.getElementById('quest_content').value;
 
     const accessToken = tokenManager.getToken();
     let userid;
@@ -76,10 +76,10 @@ async function postQuest(event) {
     }
 
     var quest_data = {
-        userid: userid,
-        questtitle: qtitle,
-        questtype: qtype,
-        questcontent: qcontent
+        user_id: userid,
+        quest_title: q_title,
+        quest_type: q_type,
+        quest_content: q_content
     };
 
     var jsonstr = JSON.stringify(quest_data);

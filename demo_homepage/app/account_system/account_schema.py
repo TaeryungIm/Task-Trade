@@ -4,8 +4,8 @@ from pydantic_core.core_schema import FieldValidationInfo
 
 # account making 에 사용하는 model
 class UserCreate(BaseModel):
-    userid:         EmailStr
-    username:       str
+    user_id:         EmailStr
+    user_name:       str
     gender:         str
     age:            int
     contact:        str
@@ -13,7 +13,7 @@ class UserCreate(BaseModel):
     conf_password:  str
     balance:        int
 
-    @field_validator('username', 'age', 'gender', 'contact', 'userid', 'password', 'conf_password')
+    @field_validator('user_name', 'age', 'gender', 'contact', 'user_id', 'password', 'conf_password')
     def not_empty(cls, v):
         if isinstance(v, str):  # Only strip if the value is a string
             if not v or not v.strip():
@@ -31,12 +31,12 @@ class UserCreate(BaseModel):
 
 # account_modifying 에 사용하는 model
 class UserUpdate(BaseModel):
-    curid:      EmailStr
-    updid:      EmailStr
-    updpw:      str
-    conf_updpw: str
+    cur_id:      EmailStr
+    upd_id:      EmailStr
+    upd_pw:      str
+    conf_upd_pw: str
 
-    @field_validator('updpw', 'conf_updpw')
+    @field_validator('upd_pw', 'conf_upd_pw')
     def not_empty(cls, v):
         if isinstance(v, str):  # Only strip if the value is a string
             if not v or not v.strip():
@@ -45,8 +45,8 @@ class UserUpdate(BaseModel):
             raise ValueError('빈칸을 채워주세요')
         return v
 
-    @field_validator('conf_updpw')
+    @field_validator('conf_upd_pw')
     def passwords_match(cls, v, info: FieldValidationInfo):
-        if 'updpw' in info.data and v != info.data['updpw']:
+        if 'upd_pw' in info.data and v != info.data['upd_pw']:
             raise ValueError('비밀번호가 일치하지 않습니다')  # "Passwords do not match" in Korean
         return v

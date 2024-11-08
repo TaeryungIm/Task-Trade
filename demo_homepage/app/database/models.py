@@ -1,7 +1,10 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, LargeBinary, Text
 from sqlalchemy.orm import relationship
+from sqlalchemy.types import Enum
 from datetime import datetime
 from app.database.database import Base
+
+from app.exchange_system.exchange_schema import TransactionType
 
 import os
 from cryptography.fernet import Fernet
@@ -87,7 +90,7 @@ class TransactionLogTable(Base):
 
     transaction_id = Column(Integer, primary_key=True, index=True)
     userid = Column(String(50), ForeignKey("demo_users.userid"), nullable=False)
-    transaction_type = Column(String(20), nullable=False)
+    transaction_type = Column(Enum(TransactionType), nullable=False)
     _amount_encrypted = Column(LargeBinary, nullable=False)  # Encrypted amount field
     balance_after = Column(Integer, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)

@@ -1,15 +1,14 @@
-from datetime import datetime
 from pydantic import BaseModel, field_validator, EmailStr
 
 
 # database model for inquiry being made
 class InquiryCreate(BaseModel):
-    userid:         EmailStr
-    inquirytitle:   str
-    inquirycontent: str
-    contactmethod:  str
+    user_id:         EmailStr
+    inquiry_title:   str
+    inquiry_content: str
+    contact_method:  str
 
-    @field_validator('inquirytitle', 'inquirycontent', 'contactmethod')
+    @field_validator('inquiry_title', 'inquiry_content', 'contact_method')
     def not_empty(cls, v):
         if isinstance(v, str):  # Only strip if the value is a string
             if not v or not v.strip():
@@ -22,6 +21,6 @@ class InquiryCreate(BaseModel):
 # email model for inquiry being made
 class InquiryEmail(BaseModel):
     userid:         EmailStr  # Which can work as email account
-    inquirytitle:   str
-    inquirycontent: str
-    contactmethod:  str
+    inquiry_title:   str
+    inquiry_content: str
+    contact_method:  str

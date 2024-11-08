@@ -3,7 +3,7 @@ const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
 const user_info = document.getElementById('state_login');
 const user_login = document.getElementById('login_link');
-let currentPage = 1;
+let current_page = 1;
 
 // Utility to manage access token
 const tokenManager = {
@@ -121,15 +121,15 @@ function showBoxes(page) {
 }
 
 function prevPage() {
-    if (currentPage === 2) {
-        currentPage = 1;
-        showBoxes(currentPage);
+    if (current_page === 2) {
+        current_page = 1;
+        showBoxes(current_page);
     }
 }
 
 function nextPage() {
-    if (currentPage === 1) {
-        currentPage = 2;
-        showBoxes(currentPage);
+    if (current_page === 1) {
+        current_page = 2;
+        showBoxes(current_page);
     }
 }

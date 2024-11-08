@@ -11,10 +11,11 @@ const tokenManager = {
     }
 };
 
+let userid; // Declare globally
+let remainingBalance; // Declare globally
 
 window.onload = async function() {
     const accessToken = tokenManager.getToken();
-    let userid;
 
     if (accessToken) {
         try {
@@ -49,21 +50,48 @@ window.onload = async function() {
         return;
     }
 
-    const remainingBalance = getCoinBalance(userid);
-    document.getElementById('coin_balance').textContent = `내 보유 코인: ${remainingBalance} &cent;`;
+    // Get the user's coin balance
+    remainingBalance = await getCoinBalance(userid);
+    document.getElementById('coin_balance').textContent = `내 보유 코인: ${remainingBalance}¢`;
+};
 
-}
-
-
-function handleExchange(event){
+async function handleExchange(event) {
     // Prevent default form submission behavior
     event.preventDefault();
+    const accessToken = tokenManager.getToken();
 
-    const userid = localStorage.getItem("userid");
+    if(accessToken){
+        try{
+            var coinInput = document.getElementById('coin_input').value;
+            var data = {
+                user_id: userid,
+                update_balance: coinInput,
+            }
 
-    var coinInput = document.getElementById('coin_input').value;
+            var jsonstr = JSON.stringify(data);
 
+            const response = await fetch("/exchange/update/balance", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: jsonstr
+            });
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('coin_balance').textContent = `내 보유 코인: ${data.updated_balance}¢`;
 
+                alert(`총 ${coinInput}¢ 환전했습니다!`);
+                document.getElementById('coin_input').value = '';
+            } else {
+                throw new Error("Invalid response");
+            }
+        } catch (error) {
+            console.error("Error in receiving updated balance:", error);
+            alert("Error in receiving updated balance. Please retry.");
+            return; // Stop the function if there's an error with the token
+        }
+    }
 }
 
 async function getCoinBalance(userid) {
