@@ -39,7 +39,7 @@ async def create_quest_db(quest_create: QuestCreate, db: Session = Depends(get_d
 @quest.post("/display", response_model=QuestResponse)
 async def get_quest_from_db(quest_request: QuestRequest, db: Session = Depends(get_db)):
     # get requested quest by id
-    requested_quest = get_quest_by_id(db, quest_request.id)
+    requested_quest = get_quest_by_id(db, quest_request.quest_index)
 
     if requested_quest is None:
         # Raise a 404 Not Found error if the quest does not exist
@@ -49,6 +49,6 @@ async def get_quest_from_db(quest_request: QuestRequest, db: Session = Depends(g
     return QuestResponse(
         quest_title=requested_quest.quest_title,
         quest_type=requested_quest.quest_type,
-        userid=requested_quest.userid,
+        user_id=requested_quest.userid,
         updated_at=requested_quest.updated_at
     )

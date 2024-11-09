@@ -37,7 +37,7 @@ class QuestUpdate(BaseModel):
 
 
 class QuestRequest(BaseModel):
-    id: int
+    quest_index: int
 
 
 class QuestResponse(BaseModel):

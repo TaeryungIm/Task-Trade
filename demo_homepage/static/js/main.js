@@ -36,7 +36,7 @@ window.onload = function() {
         user_login.style.display = 'block';
     }
 
-    showBoxes(currentPage);
+    showBoxes(current_page);
 };
 
 // Simulate logout function
@@ -95,24 +95,26 @@ function showBoxes(page) {
     const boxRow = document.querySelector('.box-row');
     const boxes = boxRow.querySelectorAll('.box');
     boxes.forEach((box, index) => {
-        const questIndex = 5 * (page - 1) + index + 1;
+        const quest_index = 5 * (page - 1) + index + 1;
 
         fetch('/quest/display', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: questIndex })
+            body: JSON.stringify({ quest_index: quest_index })
         })
         .then(response => {
             if (!response.ok) {
                 // If response status is not 200, throw an error
-                throw new Error(`No quest found with ID: ${questIndex}`);
+                throw new Error(`No quest found with ID: ${quest_index}`);
             }
             return response.json();
         })
         .then(data => {
-            box.textContent = `Title: ${data.quest_title}\nType: ${data.quest_type}\nLast Update: ${data.updated_at}`;
+            box.innerHTML = `Title: ${data.quest_title}<br>
+            Type: ${data.quest_type}<br>
+            Last Update: ${data.updated_at}`;
         })
         .catch(error => {
             box.textContent = "No Quest";
