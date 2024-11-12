@@ -4,7 +4,26 @@ body {
     margin: 0;
     padding: 0;
 }
-/* 상단 헤더 스타일 */
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+/* 왼쪽 사이드바 */
+.sidebar {
+    width: 20%;
+    background-color: #f0f0f0;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+}
+.sidebar p {
+    margin: 10px 0;
+}
+/* 상단 메뉴바 */
 .header {
     display: flex;
     justify-content: space-between;
@@ -14,88 +33,54 @@ body {
     box-sizing: border-box;
 }
 .header img {
-    width: 70px;
-    height: 50px;
-}
-.container {
-    display: flex;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-/* 왼쪽 사이드바 */
-.sidebar {
-    width: 20%; /* 사이드바 너비 */
-    padding: 20px;
-    background-color: #fff;
-    box-sizing: border-box;
-    border-radius: 0; /* 둥근 모서리 제거 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.sidebar img {
     width: 50px;
     height: 50px;
-    cursor: pointer;
 }
-.sidebar p {
-    margin: 10px 0;
-}
-/* 메인 내용 */
-.main_content {
-    width: 80%; /* 메인 콘텐츠 너비 */
-    padding: 20px;
-    background-color: #fff;
-    box-sizing: border-box;
-    border-radius: 0; /* 둥근 모서리 제거 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.main_content h2 {
-    margin-bottom: 20px;
-}
-input[type="text"], input[type="number"] {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 0; /* 둥근 모서리 제거 */
-}
-input[type="button"] {
-    width: 95%;
-    padding: 10px;
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    border-radius: 0; /* 둥근 모서리 제거 */
-    cursor: pointer;
-    margin: 10px 0;
-}
-input[type="button"]:hover {
-    background-color: #007B9E;
-}
-label {
-    display: block;
-    margin-top: 10px;
-}
-.button {
+.header .header_menu button[type="submit"] {
     margin: 5px;
     padding: 10px;
     background-color: #d0d0d0;
     border: none;
     cursor: pointer;
 }
-.button:hover {
+.header_menu {
+    display: flex;
+    gap: 10px; /* Optional: Adds space between buttons */
+    align-items: center; /* Center-aligns buttons vertically if needed */
+}
+.header .header_menu button[type="submit"]:hover {
     background-color: #c0c0c0;
 }
-button[type="submit"] {
+/* 메인 내용 (원래 디자인 유지) */
+.main_content {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.main_content h2 {
+    margin-bottom: 20px;
+}
+.main_content .exchange_form .exchange_submit, input[type="button"]  {
     width: 95%;
     padding: 10px;
     background-color: #008CBA;
     color: white;
     border: none;
-    border-radius: 0; /* 둥근 모서리 제거 */
     cursor: pointer;
     margin: 10px 0;
 }
-button[type="submit"]:hover {
+.main_content .exchange_form .exchange_submit:hover, input[type="button"]:hover {
     background-color: #007B9E;
+}
+label {
+    display: block;
+    margin-top: 10px;
+}
+input[type="number"], textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
 }

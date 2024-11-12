@@ -6,29 +6,29 @@
     <title>Task Trade 문의하기</title>
 
     <!-- Link to external CSS -->
-    <link rel="stylesheet" href="/static/css/inquiry.css?v=1.0.0">
+    <link rel="stylesheet" href="/static/css/inquiry.css?v=1.1.0">
 
-    <script defer src="/static/js/inquiry.js?v=1.0.0"></script>
+    <script defer src="/static/js/inquiry.js?v=1.1.0"></script>
 </head>
 <body>
 
     <!-- 상단 메뉴바 -->
     <div class="header">
         <img src="/static/images/main_logo.png" alt="Main Logo">
-        <div>
+        <div class="header_menu">
             <form action='/quest' method='get'>
-                <button class="button" type="submit">퀘스트 등록</button>
+                <button type="submit">퀘스트 등록</button>
             </form>
             <form action='/inquiry' method='get'>
-                <button class="button" type="submit">문의하기</button>
+                <button type="submit">문의하기</button>
             </form>
             <form action='/exchange' method='get'>
-                <button class="button" type="submit">환전하기</button>
+                <button type="submit">환전하기</button>
             </form>
             <form action='/login' method='get'>
-                <button class="button" id="login_btn" type="submit">로그인</button>
+                <button id="login_btn" type="submit">로그인</button>
             </form>
-            <button class="button" id="logout_btn" onclick="logout()">로그아웃</button>
+            <button id="logout_btn" type="submit" onclick="logout()">로그아웃</button>
         </div>
     </div>
 
@@ -42,9 +42,9 @@
         </div>
 
         <!-- 메인 내용 -->
-        <div class="main-content">
+        <div class="main_content">
             <h2>문의하기</h2>
-            <form class="inquiry-form" onsubmit="handleInquiry(event)">
+            <form class="inquiry_form" onsubmit="handleInquiry(event)">
                 <label for="inquiry_title">문의 제목</label>
                 <input type="text" id="inquiry_title" placeholder="type inquiry title" required><br>
 
@@ -55,7 +55,7 @@
                     <label><input type="radio" name="contact_method" value="text" required> 문자</label>
                     <label><input type="radio" name="contact_method" value="email"> e-mail</label>
                 </div>
-                <button type="submit">문의 보내기</button>
+                <button class="inquiry_submit" type="submit">문의 보내기</button>
             </form>
 
         </div>

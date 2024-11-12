@@ -6,67 +6,66 @@
     <title>Quest Window</title>
 
     <!-- Link to external CSS -->
-    <link rel="stylesheet" href="/static/css/quest_window.css?v=1.0.0">
+    <link rel="stylesheet" href="/static/css/quest_window.css?v=1.1.0">
 
-    <script defer src="/static/js/quest_window.js?v=1.0.0"></script>
+    <script defer src="/static/js/quest_window.js?v=1.1.0"></script>
 
 </head>
 <body>
+
+    <!-- 상단 메뉴바 -->
     <div class="header">
-        <!-- 상단 메뉴 -->
-        <form action='/quest' method='get'>
-            <button class="button" type="submit">퀘스트 등록</button>
-        </form>
-        <form action='/inquiry' method='get'>
-            <button class="button" type="submit">문의하기</button>
-        </form>
-        <form action='/exchange' method='get'>
-            <button class="button" type="submit">환전하기</button>
-        </form>
-        <form action='/login' method='get'>
-            <button class="button" id="login_btn" type="submit">로그인</button>
-        </form>
-        <button class="button" id="logout_btn" onclick="logout()">로그아웃</button>
+        <img src="/static/images/main_logo.png" alt="Main Logo">
+        <div class="header_menu">
+            <form action='/quest' method='get'>
+                <button type="submit">퀘스트 등록</button>
+            </form>
+            <form action='/inquiry' method='get'>
+                <button type="submit">문의하기</button>
+            </form>
+            <form action='/exchange' method='get'>
+                <button type="submit">환전하기</button>
+            </form>
+            <form action='/login' method='get'>
+                <button id="login_btn" type="submit">로그인</button>
+            </form>
+            <button id="logout_btn" type="submit" onclick="logout()">로그아웃</button>
+        </div>
     </div>
 
+    <!-- Main Container with Sidebar on the Left and Content on the Right -->
     <div class="container">
-        <!-- 메인 -->
-        <div class="content">
-            <!-- Left Panel -->
-            <div class="left-panel">
-                <p>name: TT</p>
-                <p>coin: 100c</p>
-                <p>friend: 40</p>
-                <p>inquiry: n</p>
-            </div>
+        <!-- Sidebar Section on the left side -->
+        <div class="sidebar">
+            <p>name: TT</p>
+            <p>coin: 100c</p>
+            <p>friend: 40</p>
+            <p>inquiry: n</p>
+        </div>
 
-            <!-- 오른쪽 -->
-            <div class="right-panel">
-                <!-- Quest Form -->
-                <form class="quest-form" onsubmit="postQuest(event)">
-                    <input id="quest_title" type="text" placeholder="quest title">
-                    <textarea id="quest_type" placeholder="type of quest"></textarea>
-                    <input id="quest_content" type="text" placeholder="quest specific contents">
-                    <div class="buttons">
-                        <button>button to add image</button>
-                        <button type="submit">button to save quest</button>
-                    </div>
-                </form>
-
-                <!-- Title and Quest List -->
-                <div class="title-box">
-                    <p>title - 리워드 신청목록</p>
+        <!-- Main Content Section on the right side -->
+        <div class="main_content">
+            <!-- Quest Form Section -->
+            <form class="quest_form" onsubmit="postQuest(event)">
+                <input id="quest_title" type="text" placeholder="quest title">
+                <textarea id="quest_type" placeholder="type of quest"></textarea>
+                <input id="quest_content" type="text" placeholder="quest specific contents">
+                <div class="buttons">
+                    <button>button to add image</button>
+                    <button type="submit">button to save quest</button>
                 </div>
-
-                <div class="quest-list">
-                    <div class="fixed-boxes">
-                        <div>quest 1</div>
-                        <div>name participant</div>
-                    </div>
+            </form>
+            <!-- Title and Quest List Section -->
+            <div class="title_box">
+                <p>title - 리워드 신청목록</p>
+            </div>
+            <div class="quest_list">
+                <div class="fixed_boxes">
+                    <div>quest 1</div>
+                    <div>name participant</div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>

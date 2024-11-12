@@ -1,3 +1,7 @@
+// Define variables globally
+const loginBtn = document.getElementById('login_btn');
+const logoutBtn = document.getElementById('logout_btn');
+
 // Utility to manage access token
 const tokenManager = {
     getToken: function() {
@@ -18,6 +22,10 @@ window.onload = async function() {
     const accessToken = tokenManager.getToken();
 
     if (accessToken) {
+        // User is logged in
+        loginBtn.style.display = 'none';
+        logoutBtn.style.display = 'block';
+
         try {
             // Make a request to the protected endpoint to verify the token and get user information
             const response = await fetch("/login/protected-endpoint", {
@@ -40,6 +48,10 @@ window.onload = async function() {
             return; // Stop the function if there's an error with the token
         }
     } else {
+        // User is logged out
+        loginBtn.style.display = 'block';
+        logoutBtn.style.display = 'none';
+
         alert("Access token not found. Please log in.");
         return; // Stop the function if no access token is available
     }
