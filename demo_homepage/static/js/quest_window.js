@@ -1,12 +1,25 @@
 // Define variables globally
-const loginBtn = document.getElementById('login-btn');
-const logoutBtn = document.getElementById('logout-btn');
+const loginBtn = document.getElementById('login_btn');
+const logoutBtn = document.getElementById('logout_btn');
+
+// Utility to manage access token
+const tokenManager = {
+    getToken: function() {
+        return localStorage.getItem("access_token");
+    },
+    setToken: function(token) {
+        localStorage.setItem("access_token", token);
+    },
+    clearToken: function() {
+        localStorage.removeItem("access_token");
+    }
+};
 
 // check status on main page according to login/out states
 window.onload = function() {
-    const userid = localStorage.getItem("userid");
+    const accessToken = tokenManager.getToken();
 
-    if (userid) {
+    if (accessToken) {
         // User is logged in
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'block';
@@ -18,21 +31,55 @@ window.onload = function() {
 };
 
 // this function is for posting quest data to the database
-function postQuest() {
+async function postQuest(event) {
     // Prevent default form submission behavior
     event.preventDefault();
 
-    const userid = localStorage.getItem("userid");
+    var q_title = document.getElementById('quest_title').value;
+    var q_type = document.getElementById('quest_type').value;
+    var q_content = document.getElementById('quest_content').value;
 
-    var qtitle = document.getElementById('quest_title').value;
-    var qtype = document.getElementById('quest_type').value;
-    var qcontent = document.getElementById('quest_content').value;
+    const accessToken = tokenManager.getToken();
+    let userid;
+
+    if (accessToken) {
+        try {
+            // Make a request to the protected endpoint to verify the token and get user information
+            const response = await fetch("/login/protected-endpoint", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${accessToken}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                userid = data.user_id; // Assign userid if the token is valid
+            } else {
+                throw new Error("Invalid token");
+            }
+        } catch (error) {
+            console.error("Error verifying access token:", error);
+            alert("Error verifying access token. Please log in again.");
+            return; // Stop the function if there's an error with the token
+        }
+    } else {
+        alert("Access token not found. Please log in.");
+        return; // Stop the function if no access token is available
+    }
+
+    // Ensure userid was successfully retrieved
+    if (!userid) {
+        alert("Unable to retrieve user information. Please try again.");
+        return;
+    }
 
     var quest_data = {
-        userid: userid,
-        questtitle: qtitle,
-        questtype: qtype,
-        questcontent: qcontent
+        user_id: userid,
+        quest_title: q_title,
+        quest_type: q_type,
+        quest_content: q_content
     };
 
     var jsonstr = JSON.stringify(quest_data);

@@ -7,20 +7,18 @@ body {
 .container {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 /* 왼쪽 사이드바 */
 .sidebar {
-    width: 200px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.sidebar img {
-    width: 55px;
-    height: 40px;
-    cursor: pointer;
+    width: 20%;
+    background-color: #f0f0f0;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
 }
 .sidebar p {
     margin: 10px 0;
@@ -31,53 +29,58 @@ body {
     justify-content: space-between;
     background-color: #e0e0e0;
     padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 .header img {
-    width: 70px;
+    width: 50px;
     height: 50px;
 }
-.button {
+.header .header_menu button[type="submit"] {
     margin: 5px;
     padding: 10px;
     background-color: #d0d0d0;
     border: none;
     cursor: pointer;
 }
-.button:hover {
+.header_menu {
+    display: flex;
+    gap: 10px; /* Optional: Adds space between buttons */
+    align-items: center; /* Center-aligns buttons vertically if needed */
+}
+.header .header_menu button[type="submit"]:hover {
     background-color: #c0c0c0;
 }
-/* 메인 내용 */
-.main-content {
+/* 메인 내용 (원래 디자인 유지) */
+.main_content {
     width: 100%;
     background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
+    box-sizing: border-box;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.main-content h2 {
+.main_content h2 {
     margin-bottom: 20px;
 }
-input[type="text"], input[type="number"] {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-input[type="submit"], input[type="button"] {
+.main_content .exchange_form .exchange_submit, input[type="button"]  {
     width: 95%;
     padding: 10px;
     background-color: #008CBA;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     margin: 10px 0;
 }
-input[type="submit"]:hover, input[type="button"]:hover {
+.main_content .exchange_form .exchange_submit:hover, input[type="button"]:hover {
     background-color: #007B9E;
 }
 label {
     display: block;
     margin-top: 10px;
+}
+input[type="number"], textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
 }

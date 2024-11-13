@@ -1,7 +1,24 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, LargeBinary, Text
 from sqlalchemy.orm import relationship
+from sqlalchemy.types import Enum
 from datetime import datetime
-from .database import Base
+from app.database.database import Base
+
+from app.exchange_system.exchange_schema import TransactionType
+
+import os
+from cryptography.fernet import Fernet
+from dotenv import load_dotenv
+
+# Load environment variables from the .env file
+load_dotenv()
+
+# Now the ENCRYPTION_KEY will be available in the environment
+encryption_key = os.getenv("ENCRYPTION_KEY")
+if encryption_key is None:
+    raise ValueError("ENCRYPTION_KEY is not set in the environment")
+
+cipher = Fernet(encryption_key)
 
 
 class UserTable(Base):
@@ -14,10 +31,23 @@ class UserTable(Base):
     password = Column(String(100), nullable=False)  # VARCHAR with length
     gender = Column(String(10), nullable=False)
     age = Column(Integer, nullable=False)
+    contact_number = Column(String(15), nullable=True)
+
+    _balance_encrypted = Column(LargeBinary, nullable=False)  # Encrypted balance field
 
     # connection with other tables
     demo_inquiry = relationship("InquiryTable", back_populates="demo_user", cascade="all, delete")
     demo_quest = relationship("QuestTable", back_populates="demo_user", cascade="all, delete")
+    demo_transaction = relationship("TransactionLogTable", back_populates="demo_user", cascade="all, delete")
+
+    # Encrypt the balance when setting
+    @property
+    def balance(self):
+        return int(cipher.decrypt(self._balance_encrypted).decode())
+
+    @balance.setter
+    def balance(self, value):
+        self._balance_encrypted = cipher.encrypt(str(value).encode())
 
 
 class InquiryTable(Base):
@@ -30,7 +60,7 @@ class InquiryTable(Base):
     userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE"))
 
     # time info
-    created_at = Column(DateTime, default=datetime.utcnow())
+    created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow(), onupdate=datetime.utcnow())
 
     # connection with UserTable
@@ -48,8 +78,30 @@ class QuestTable(Base):
     userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE"))
 
     # time info
-    created_at = Column(DateTime, default=datetime.utcnow())
+    created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow(), onupdate=datetime.utcnow())
 
     # connection with UserTable
     demo_user = relationship("UserTable", back_populates="demo_quest")
+
+
+class TransactionLogTable(Base):
+    __tablename__ = "demo_transaction_log"
+
+    transaction_id = Column(Integer, primary_key=True, index=True)
+    userid = Column(String(50), ForeignKey("demo_users.userid"), nullable=False)
+    transaction_type = Column(Enum(TransactionType), nullable=False)
+    _amount_encrypted = Column(LargeBinary, nullable=False)  # Encrypted amount field
+    balance_after = Column(Integer, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    notes = Column(Text, nullable=True)
+
+    demo_user = relationship("UserTable", back_populates="demo_transaction")
+
+    @property
+    def amount(self):
+        return int(cipher.decrypt(self._amount_encrypted).decode())
+
+    @amount.setter
+    def amount(self, value):
+        self._amount_encrypted = cipher.encrypt(str(value).encode())

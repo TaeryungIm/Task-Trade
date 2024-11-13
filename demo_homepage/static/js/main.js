@@ -3,12 +3,26 @@ const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
 const user_info = document.getElementById('state_login');
 const user_login = document.getElementById('login_link');
-let currentPage = 1;
+let current_page = 1;
+
+// Utility to manage access token
+const tokenManager = {
+    getToken: function() {
+        return localStorage.getItem("access_token");
+    },
+    setToken: function(token) {
+        localStorage.setItem("access_token", token);
+    },
+    clearToken: function() {
+        localStorage.removeItem("access_token");
+    }
+};
 
 // check status on main page according to login/out states
 window.onload = function() {
-    const userid = localStorage.getItem("userid");
-    if (userid) {
+    const accessToken = tokenManager.getToken();
+
+    if (accessToken) {
         // User is logged in
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'block';
@@ -22,14 +36,13 @@ window.onload = function() {
         user_login.style.display = 'block';
     }
 
-    showBoxes(currentPage);
+    showBoxes(current_page);
 };
 
 // Simulate logout function
 function logout() {
     // Remove the user from localStorage
-    localStorage.removeItem("userid");
-    localStorage.removeItem("access_token");
+    tokenManager.clearToken();
 
     // Update the UI
     alert("로그아웃 되었습니다!");
@@ -82,35 +95,43 @@ function showBoxes(page) {
     const boxRow = document.querySelector('.box-row');
     const boxes = boxRow.querySelectorAll('.box');
     boxes.forEach((box, index) => {
-        const questIndex = 5 * (page - 1) + index + 1;
+        const quest_index = 5 * (page - 1) + index + 1;
+
         fetch('/quest/display', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: questIndex })
+            body: JSON.stringify({ quest_index: quest_index })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                // If response status is not 200, throw an error
+                throw new Error(`No quest found with ID: ${quest_index}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            box.textContent
-                = `Title: ${data.quest_title} \nType: ${data.quest_type} \nLast Update: ${data.updated_at}`;
+            box.innerHTML = `Title: ${data.quest_title}<br>
+            Type: ${data.quest_type}<br>
+            Last Update: ${data.updated_at}`;
         })
         .catch(error => {
-            box.textContent = `No Quest`;
+            box.textContent = "No Quest";
         });
     });
 }
 
 function prevPage() {
-    if (currentPage === 2) {
-        currentPage = 1;
-        showBoxes(currentPage);
+    if (current_page === 2) {
+        current_page = 1;
+        showBoxes(current_page);
     }
 }
 
 function nextPage() {
-    if (currentPage === 1) {
-        currentPage = 2;
-        showBoxes(currentPage);
+    if (current_page === 1) {
+        current_page = 2;
+        showBoxes(current_page);
     }
 }

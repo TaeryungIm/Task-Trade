@@ -4,60 +4,73 @@ body {
     padding: 0;
     background-color: #f4f4f4;
 }
-.container {
-    width: 80%;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: white;
-}
-/* 상단 메뉴 */
-.top-menu {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    background-color: #e0e0e0;
-    padding: 10px;
-}
-.top-menu button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    background-color: #d0d0d0;
-    color: black;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 0;
-}
-.top-menu button:hover {
-    background-color: #c0c0c0;
-}
-.content {
+/* 상단 메뉴바 */
+.header {
     display: flex;
     justify-content: space-between;
+    background-color: #e0e0e0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
-.left-panel {
+.header img {
+    width: 50px;
+    height: 50px;
+}
+.header .header_menu button[type="submit"] {
+    margin: 5px;
+    padding: 10px;
+    background-color: #d0d0d0;
+    border: none;
+    cursor: pointer;
+}
+.header_menu {
+    display: flex;
+    gap: 10px; /* Optional: Adds space between buttons */
+    align-items: center; /* Center-aligns buttons vertically if needed */
+}
+.header .header_menu button[type="submit"]:hover {
+    background-color: #c0c0c0;
+}
+.button {
+    margin: 5px;
+    padding: 10px;
+    background-color: #d0d0d0;
+    border: none;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #c0c0c0;
+}
+/* 전체 레이아웃 설정 */
+.container {
+    display: flex;
+    width: 100%; /* 너비를 100%로 변경 */
+    margin: 0;
+    padding: 0; /* 내부 여백을 없앰 */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+/* Sidebar 위치를 왼쪽에 밀착 */
+.sidebar {
     width: 20%;
-    border: 1px solid #000;
     padding: 10px;
-    background-color: #fff;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
 }
-.left-panel p {
-    margin: 5px 0;
-}
-.right-panel {
-    width: 75%;
-    border: 1px solid #000;
+.main_content {
+    width: 80%;
     padding: 10px;
-    background-color: #fff;
+    box-sizing: border-box;
 }
-.quest-form input, .quest-form textarea {
-    width: calc(100% - 20px); /* Ensures padding and border stay within the box */
+.quest_form input, .quest_form textarea {
+    width: calc(100% - 20px);
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Includes padding and border in element's width/height */
+    box-sizing: border-box;
 }
 .buttons {
     display: flex;
@@ -75,21 +88,8 @@ body {
 .buttons button:hover {
     background-color: #007B9E;
 }
-.quest-list {
-    margin-top: 20px;
-}
-.fixed-boxes {
-    display: flex;
-    justify-content: space-between;
+.title_box {
     margin-bottom: 10px;
-}
-.fixed-boxes div {
-    width: 48%;
-    border: 1px solid #000;
     padding: 10px;
-}
-.title-box {
-    margin-bottom: 10px;
-    border: 1px solid #000;
-    padding: 10px;
+    border: 1px solid #ddd;
 }

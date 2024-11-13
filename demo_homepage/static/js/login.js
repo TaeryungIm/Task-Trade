@@ -21,8 +21,6 @@ function loginAccount(event) {
 
             // Store the access token in localStorage for future requests
             localStorage.setItem("access_token", response.access_token);
-            localStorage.setItem("username", response.username);
-            localStorage.setItem("userid", response.userid);
 
             alert("로그인 되었습니다!");
 

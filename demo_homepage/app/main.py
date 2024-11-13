@@ -5,7 +5,8 @@ from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
 from app.database.database import Base, engine
-from app.account_system import account_router, login_router
+from app.account_system import account_router
+from app.login_system import login_router
 from app.quest_system import quest_router
 from app.inquiry_system import inquiry_router
 from app.exchange_system import exchange_router

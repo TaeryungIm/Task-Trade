@@ -1,15 +1,16 @@
-from fastapi import APIRouter, HTTPException
-from fastapi import Depends, Form
+from fastapi import APIRouter, HTTPException, Depends, Form
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import scoped_session
 from starlette.templating import Jinja2Templates
 from starlette.responses import JSONResponse
 
-from app.database.database import get_db
-from app.account_system.account_schema import UserCreate, UserUpdate
-from app.account_system.account_add_db import get_existing_user, get_user_by_id, pwd_context
-from app.account_system.account_add_db import create_user, update_user
+from app.database.database import get_db, SessionLocal
 
+from app.account_system.account_schema import UserCreate, UserUpdate
+from app.account_system.account_db import get_existing_user, get_user_by_id, pwd_context
+from app.account_system.account_db import create_user, update_user
+
+session = scoped_session(SessionLocal)
 templates = Jinja2Templates(directory="app/templates")
 
 account = APIRouter(
@@ -18,7 +19,7 @@ account = APIRouter(
 
 
 @account.post("/create/create")
-async def create_account_db(user_create: UserCreate, db: Session = Depends(get_db)):
+async def create_account_db(user_create: UserCreate, db: session = Depends(get_db)):
     try:
         existing_user = get_existing_user(db, user_create)
         if existing_user:
@@ -32,8 +33,23 @@ async def create_account_db(user_create: UserCreate, db: Session = Depends(get_d
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
+@account.get("/balance")
+async def get_current_balance(userid: str, db: session = Depends(get_db)):
+    try:
+        existing_user = get_user_by_id(db, userid)
+        if not existing_user:
+            return JSONResponse(status_code=400, content={"success": False, "balance": "존재하지 않는 아이디입니다!"})
+
+        return JSONResponse(status_code=200, content={"success": True, "balance": existing_user.balance})
+
+    except IntegrityError as e:
+        db.rollback()
+        print(f"Error occurred: {str(e)}")
+        return JSONResponse(status_code=500, content={"success": False, "balance": "error!"})
+
+
 @account.post("/update/idcheck")
-async def id_check_exist(userid: str = Form(...), db: Session = Depends(get_db)):
+async def id_check_exist(userid: str = Form(...), db: session = Depends(get_db)):
     try:
         existing_user = get_user_by_id(db, userid)
         if existing_user:
@@ -48,7 +64,7 @@ async def id_check_exist(userid: str = Form(...), db: Session = Depends(get_db))
 
 
 @account.post("/update/pwcheck")
-async def pw_check_exist(userid: str = Form(...), userpw: str = Form(...), db: Session = Depends(get_db)):
+async def pw_check_exist(userid: str = Form(...), userpw: str = Form(...), db: session = Depends(get_db)):
     try:
         existing_user = get_user_by_id(db, userid)
         if not existing_user or not pwd_context.verify(userpw, existing_user.password):
@@ -63,7 +79,7 @@ async def pw_check_exist(userid: str = Form(...), userpw: str = Form(...), db: S
 
 
 @account.post("/update/userdata")
-async def upd_user_data(userdata: UserUpdate, db: Session = Depends(get_db)):
+async def upd_user_data(userdata: UserUpdate, db: session = Depends(get_db)):
     try:
         existing_user = get_user_by_id(db, userdata.curid)
         if not existing_user:

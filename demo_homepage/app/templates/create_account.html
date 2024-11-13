@@ -6,10 +6,10 @@
     <title>Create Account</title>
 
     <!-- Link to external CSS -->
-    <link rel="stylesheet" href="/static/css/create_account.css">
+    <link rel="stylesheet" href="/static/css/create_account.css?v=1.0.0">
 
     <!-- Link to external JavaScript -->
-    <script defer src="/static/js/create_account.js"></script>
+    <script defer src="/static/js/create_account.js?v=1.0.0"></script>
 </head>
 <body>
     <!-- Form for account creation inside a lightbox -->
@@ -19,6 +19,10 @@
             <div class="form-group">
                 <label for="username">사용자 이름</label>
                 <input type="text" id="username" name="username" placeholder="사용자명" required>
+            </div>
+            <div class="form-group">
+                <label for="userid">아이디(이메일 입력)</label>
+                <input type="text" id="userid" name="userid" placeholder="user@example.com" required>
             </div>
             <div class="form-group">
                 <label>성별</label>
@@ -32,8 +36,8 @@
                 <input type="number" id="age" name="age" placeholder="나이" required>
             </div>
             <div class="form-group">
-                <label for="userid">아이디(이메일 입력)</label>
-                <input type="text" id="userid" name="userid" placeholder="user@example.com" required>
+                <label for="contact">전화번호(숫자만 입력)</label>
+                <input type="text" id="contact" name="contact" placeholder="01012345678" required>
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>

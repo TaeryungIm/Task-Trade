@@ -12,8 +12,9 @@ from dotenv import load_dotenv
 import os
 
 from app.database.database import get_db, SessionLocal
-from app.account_system.account_schema import Token
-from app.account_system.account_add_db import pwd_context, get_user_by_id
+from app.login_system.login_schema import Token
+from app.login_system.login_db import get_current_user
+from app.account_system.account_db import pwd_context, get_user_by_id
 
 templates = Jinja2Templates(directory="app/templates")
 session = scoped_session(SessionLocal)
@@ -46,7 +47,7 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
 
     # make access token
     data = {
-        "sub": user.username,
+        "sub": user.userid,
         "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     }
     header = {"alg": ALGORITHM}
@@ -54,8 +55,11 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
 
     return Token(
         access_token=access_token,
-        token_type="bearer",
-        username=user.username,
-        userid=user.userid
+        token_type="bearer"
     )
 
+
+# Sample endpoint using get_current_user as a dependency
+@login.get("/protected-endpoint")
+async def protected_route(userid: str = Depends(get_current_user)):
+    return {"user_id": userid, "message": "This is a protected route."}
