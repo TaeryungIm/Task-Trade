@@ -11,6 +11,18 @@ body {
     align-items: center;
     height: 100vh;
 }
+/* Styling for the title */
+.title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Adjust image size within the title */
+.title img {
+    width: 100px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
 .container {
     width: 100%;
     max-width: 500px;
