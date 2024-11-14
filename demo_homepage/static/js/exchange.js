@@ -20,6 +20,8 @@ let remainingBalance; // Declare globally
 
 window.onload = async function() {
     const accessToken = tokenManager.getToken();
+    const exchange_button = document.getElementById('button_exchange');
+    exchange_button.style.backgroundColor = '#1E1F22';
 
     if (accessToken) {
         // User is logged in

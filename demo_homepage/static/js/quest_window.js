@@ -18,6 +18,8 @@ const tokenManager = {
 // check status on main page according to login/out states
 window.onload = function() {
     const accessToken = tokenManager.getToken();
+    const quest_button = document.getElementById('button_quest');
+    quest_button.style.backgroundColor = '#1E1F22';
 
     if (accessToken) {
         // User is logged in

@@ -45,10 +45,10 @@ async def send_inquiry_email(email_data: InquiryEmail, bg_tasks: BackgroundTasks
         # Add the email-sending task to the background
         # userid stands for from-email address
         bg_tasks.add_task(send_email,
-                          email_data.userid,
-                          email_data.inquirytitle,
-                          email_data.inquirycontent,
-                          email_data.contactmethod)
+                          email_data.user_id,
+                          email_data.inquiry_title,
+                          email_data.inquiry_content,
+                          email_data.contact_method)
         return {"message": "Email sent successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to send email: " + str(e))

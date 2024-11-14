@@ -18,6 +18,8 @@ const tokenManager = {
 // check status on main page according to login/out states
 window.onload = function() {
     const accessToken = tokenManager.getToken();
+    const inquiry_button = document.getElementById('button_inquiry');
+    inquiry_button.style.backgroundColor = '#1E1F22';
 
     if (accessToken) {
         // User is logged in
@@ -67,13 +69,14 @@ async function handleInquiry(event) {
     sendInquiry(userid);
 }
 
+// post inquiry to the db
 function postInquiry(userid) {
     var inq_title = document.getElementById('inquiry_title').value;
     var inq_content = document.getElementById('inquiry_content').value;
     var inq_contact = document.querySelector('input[name="contact_method"]:checked').value;
 
     var inquiry_data = {
-        userid: userid,
+        user_id: userid,
         inquiry_title: inq_title,
         inquiry_content: inq_content,
         contact_method: inq_contact
@@ -101,6 +104,7 @@ function postInquiry(userid) {
     };
 }
 
+// send posted inquiry to the designated email
 function sendInquiry(userid) {
     var inq_title = document.getElementById('inquiry_title').value;
     var inq_content = document.getElementById('inquiry_content').value;
