@@ -20,7 +20,7 @@ class InquiryCreate(BaseModel):
 
 # email model for inquiry being made
 class InquiryEmail(BaseModel):
-    userid:         EmailStr  # Which can work as email account
+    user_id:         EmailStr  # Which can work as email account
     inquiry_title:   str
     inquiry_content: str
     contact_method:  str
