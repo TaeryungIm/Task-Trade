@@ -1,4 +1,4 @@
-from django.utils.datetime_safe import datetime
+from datetime import datetime
 from sqlalchemy.orm import scoped_session
 
 from app.quest_system.quest_schema import QuestCreate, QuestUpdate

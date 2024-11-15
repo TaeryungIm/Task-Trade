@@ -1,4 +1,4 @@
-from django.utils.datetime_safe import datetime
+from datetime import datetime
 from sqlalchemy.orm import scoped_session
 
 from app.inquiry_system.inquiry_schema import InquiryCreate
