@@ -45,21 +45,15 @@
         </div>
 
         <div class="main">
-            <!-- Dropdown for sorting positioned between header and box row -->
-            <div class="sort-dropdown">
-                <select id="sortOrder">
-                    <option>일일 인기순</option>
-                    <option>주간 인기순</option>
-                    <option>월간 인기순</option>
-                </select>
-            </div>
-
             <!-- New Box Row Section under Header -->
             <div class="box-row">
-                <!-- Pagination buttons above Box 5 -->
+                <!-- 드롭다운 메뉴 유지 -->
                 <div class="pagination-buttons">
-                    <button onclick="prevPage()"><</button>
-                    <button onclick="nextPage()">></button>
+                    <select id="sortOrder">
+                        <option>일일 인기순</option>
+                        <option>주간 인기순</option>
+                        <option>월간 인기순</option>
+                    </select>
                 </div>
 
                 <!-- Boxes (initially showing 1-5) -->
@@ -68,6 +62,12 @@
                 <div class="box" id="box3">Box 3</div>
                 <div class="box" id="box4">Box 4</div>
                 <div class="box" id="box5">Box 5</div>
+
+                <!-- 페이지 네비게이션 버튼 위치 변경 -->
+                <div class="sort-dropdown">
+                    <button onclick="prevPage()"><</button>
+                    <button onclick="nextPage()">></button>
+                </div>
             </div>
 
             <!-- Quest and Popular Topic Section -->

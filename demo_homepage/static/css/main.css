@@ -78,7 +78,7 @@ body {
 .pagination-buttons {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     display: flex;
     gap: 5px;
 }
@@ -92,8 +92,8 @@ body {
 /* Dropdown for sorting */
 .sort-dropdown {
     position: absolute;
-    top: -30px;
-    left: 0;
+    top: 110px; /* Box5 바로 위에 위치하도록 조정 */
+    right: 0;
 }
 .fixed-boxes {
     display: flex;
