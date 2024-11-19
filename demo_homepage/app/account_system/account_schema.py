@@ -32,7 +32,6 @@ class UserCreate(BaseModel):
 # account_modifying 에 사용하는 model
 class UserUpdate(BaseModel):
     cur_id:      EmailStr
-    upd_id:      EmailStr
     upd_pw:      str
     conf_upd_pw: str
 

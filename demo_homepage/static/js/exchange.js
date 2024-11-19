@@ -15,14 +15,24 @@ const tokenManager = {
     }
 };
 
-let userid; // Declare globally
-let remainingBalance; // Declare globally
-
 window.onload = async function() {
     const accessToken = tokenManager.getToken();
     const exchange_button = document.getElementById('button_exchange');
     exchange_button.style.backgroundColor = '#1E1F22';
 
+    const userid = await getUserId(accessToken); // Await here to ensure `userid` is retrieved before proceeding
+    if (!userid) {
+        return; // Stop if `userid` couldn't be retrieved
+    }
+
+    // Get the user's coin balance
+    const remainingBalance = await getCoinBalance(userid); // No global declaration
+    if (remainingBalance !== undefined) {
+        document.getElementById('coin_balance').textContent = `내 보유 코인: ${remainingBalance}¢`;
+    }
+};
+
+async function getUserId(accessToken){
     if (accessToken) {
         // User is logged in
         loginBtn.style.display = 'none';
@@ -40,7 +50,7 @@ window.onload = async function() {
 
             if (response.ok) {
                 const data = await response.json();
-                userid = data.user_id; // Assign userid if the token is valid
+                return data.user_id; // Return userid if the token is valid
             } else {
                 throw new Error("Invalid token");
             }
@@ -57,43 +67,36 @@ window.onload = async function() {
         alert("Access token not found. Please log in.");
         return; // Stop the function if no access token is available
     }
-
-    // Ensure userid was successfully retrieved
-    if (!userid) {
-        alert("Unable to retrieve user information. Please try again.");
-        return;
-    }
-
-    // Get the user's coin balance
-    remainingBalance = await getCoinBalance(userid);
-    document.getElementById('coin_balance').textContent = `내 보유 코인: ${remainingBalance}¢`;
-};
+}
 
 async function handleExchange(event) {
     // Prevent default form submission behavior
     event.preventDefault();
     const accessToken = tokenManager.getToken();
+    const userid = await getUserId(accessToken); // Await here to ensure `userid` is retrieved before proceeding
+    if (!userid) {
+        return; // Stop if `userid` couldn't be retrieved
+    }
 
-    if(accessToken){
-        try{
-            var coinInput = document.getElementById('coin_input').value;
-            var data = {
+    if (accessToken) {
+        try {
+            const coinInput = document.getElementById('coin_input').value;
+            const data = {
                 user_id: userid,
                 update_balance: coinInput,
-            }
-
-            var jsonstr = JSON.stringify(data);
+            };
 
             const response = await fetch("/exchange/update/balance", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: jsonstr
+                body: JSON.stringify(data)
             });
+
             if (response.ok) {
-                const data = await response.json();
-                document.getElementById('coin_balance').textContent = `내 보유 코인: ${data.updated_balance}¢`;
+                const responseData = await response.json();
+                document.getElementById('coin_balance').textContent = `내 보유 코인: ${responseData.updated_balance}¢`;
 
                 alert(`총 ${coinInput}¢ 환전했습니다!`);
                 document.getElementById('coin_input').value = '';
@@ -103,7 +106,6 @@ async function handleExchange(event) {
         } catch (error) {
             console.error("Error in receiving updated balance:", error);
             alert("Error in receiving updated balance. Please retry.");
-            return; // Stop the function if there's an error with the token
         }
     }
 }
@@ -123,13 +125,13 @@ async function getCoinBalance(userid) {
 
         if (response.ok) {
             const data = await response.json();
-            return data.balance;
+            return data.balance; // Return balance
         } else {
             throw new Error("Invalid userid");
         }
     } catch (error) {
         console.error("Error getting balance:", error);
         alert("Error getting balance. Please log in again.");
-        return; // Stop the function if there's an error
+        return undefined; // Explicitly return undefined in case of error
     }
 }

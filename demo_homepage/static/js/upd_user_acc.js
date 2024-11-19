@@ -1,52 +1,85 @@
-// Block the inputs initially
-window.onload = function() {
-    document.getElementById('email').disabled = true;
-    document.getElementById('current_password').disabled = true;
-    document.getElementById('new_password1').disabled = true;
-    document.getElementById('new_password2').disabled = true;
-}
+// Utility to manage access token
+const tokenManager = {
+    getToken: function() {
+        return localStorage.getItem("access_token");
+    },
+    setToken: function(token) {
+        localStorage.setItem("access_token", token);
+    },
+    clearToken: function() {
+        localStorage.removeItem("access_token");
+    }
+};
 
-function handleIdCheck(event) {
-    event.preventDefault(); // Prevent default form submission
+// Block the inputs initially and check login status on page load
+window.onload = async function() {
+    document.getElementById('password').disabled = true;
+    document.getElementById('password_confirm').disabled = true;
 
-    var userID = document.getElementById('userID').value;
-    var formData = new URLSearchParams(); // Use URLSearchParams for form data
-    formData.append('userid', userID);
+    const accessToken = tokenManager.getToken();
+    if (!accessToken) {
+        alert("Please log in.");
+        window.location.replace("/login");
+    }
 
-    fetch('/account/update/idcheck', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded' // Explicitly set the content type
-        },
-        body: formData
-    })
-    .then(response => response.json()) // Parse JSON from response
-    .then(data => {
-        if (data.success) {
-            // ID is valid, enable the other fields
-            document.getElementById('email').disabled = false;
-            document.getElementById('current_password').disabled = false;
-            alert(data.message); // Show success message
+    // Optional: You could validate the token on load
+    const userid = await getUserId(accessToken);
+    if (!userid) {
+        alert("Failed to verify user. Please log in again.");
+        tokenManager.clearToken();
+        window.location.replace("/login");
+    }
+};
+
+// Get user ID from access token by calling the server
+async function getUserId(accessToken) {
+    if (!accessToken) {
+        alert("Access token not found. Please log in.");
+        return null;
+    }
+
+    try {
+        const response = await fetch("/login/protected-endpoint", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            return data.user_id; // Return user ID if valid
+        } else if (response.status === 401) {
+            alert("Your session has expired. Please log in again.");
+            tokenManager.clearToken();
+            window.location.replace("/login");
         } else {
-            // ID check failed, show error message
-            alert(data.message); // Show failure message
+            throw new Error("Failed to verify token.");
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred: ' + error.message);
-    });
+    } catch (error) {
+        console.error("Error verifying access token:", error);
+        alert("An error occurred while verifying your session. Please log in again.");
+        return null;
+    }
 }
 
-
-function handlePWCheck(event) {
+// Handle password verification
+async function handlePWCheck(event) {
     event.preventDefault(); // Prevent default form submission
 
-    var userPW = document.getElementById('current_password').value;
-    var formData = new URLSearchParams(); // Use URLSearchParams for form data
-    formData.append('userid', localStorage.getItem('userid'));
-    formData.append('userpw', userPW);
+    const accessToken = tokenManager.getToken();
+    const userid = await getUserId(accessToken);
+    if (!userid) {
+        alert("Failed to retrieve user ID. Please log in again.");
+        return;
+    }
 
+    const userPW = document.getElementById('current_password').value;
+
+    const formData = new URLSearchParams();
+    formData.append('userid', userid);
+    formData.append('userpw', userPW);
 
     fetch('/account/update/pwcheck', {
         method: 'POST',
@@ -55,65 +88,71 @@ function handlePWCheck(event) {
         },
         body: formData
     })
-    .then(response => response.json()) // Parse JSON from response
-    .then(data => {
-        if (data.success) {
-            // ID is valid, enable the other fields
-            document.getElementById('new_password1').disabled = false;
-            document.getElementById('new_password2').disabled = false;
-            alert(data.message); // Show success message
-        } else {
-            // ID check failed, show error message
-            alert(data.message); // Show failure message
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred: ' + error.message);
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // ID is valid, enable the other fields
+                document.getElementById('password').disabled = false;
+                document.getElementById('password_confirm').disabled = false;
+                alert(data.message); // Show success message
+            } else {
+                alert(data.message); // Show failure message
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred: ' + error.message);
+        });
 }
 
-
-function handleAccountCheck(event) {
+// Handle account update
+async function handleAccountUpdate(event) {
     event.preventDefault(); // Prevent default form submission
 
-    var cur_id = localStorage.getItem('userid');
-    var upd_id = document.getElementById('userID').value;
-    var upd_pw = document.getElementById('new_password1').value;
-    var conf_upd_pw = document.getElementById('new_password2').value;
+    const accessToken = tokenManager.getToken();
+    const userid = await getUserId(accessToken);
+    if (!userid) {
+        alert("Failed to retrieve user ID. Please log in again.");
+        return;
+    }
 
-    var data = {
-        cur_id: cur_id,
-        upd_id: upd_id,
+    const upd_pw = document.getElementById('password').value;
+    const conf_upd_pw = document.getElementById('password_confirm').value;
+
+    if (upd_pw !== conf_upd_pw) {
+        alert("Passwords do not match. Please try again.");
+        return;
+    }
+
+    const data = {
+        cur_id: userid,
         upd_pw: upd_pw,
         conf_upd_pw: conf_upd_pw
     };
-
-    var jsonstr = JSON.stringify(data);
 
     fetch('/account/update/userdata', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: jsonstr
+        body: JSON.stringify(data)
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert(data.message); // Show success message
-            document.getElementById('userID').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('current_password').value = '';
-            document.getElementById('new_password1').value = '';
-            document.getElementById('new_password2').value = '';
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message); // Show success message
+                document.getElementById('current_password').value = '';
+                document.getElementById('password').value = '';
+                document.getElementById('password_confirm').value = '';
 
-            // Redirect to main page
-            window.location.href = "/";
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred: ' + error.message);
-    });
+                // Redirect to main page
+                window.location.replace("/");
+            } else {
+                alert(data.message); // Show failure message
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred: ' + error.message);
+        });
 }

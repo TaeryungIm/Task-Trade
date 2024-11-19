@@ -35,7 +35,6 @@ def update_user(db: session, user_update: UserUpdate):
         return "User not found"
 
     # 사용자 정보 변경
-    db_user.userid = user_update.upd_id if user_update.upd_id else db_user.userid
     if user_update.upd_pw:
         db_user.password = pwd_context.hash(user_update.upd_pw)
     try:
