@@ -57,7 +57,7 @@ class InquiryTable(Base):
     id = Column(Integer, primary_key=True, index=True)
     inquiry_title = Column(String(50), nullable=False)
     inquiry_content = Column(String(500), nullable=False)
-    userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE"))
+    userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE", onupdate="CASCADE"))
 
     # time info
     created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
@@ -75,7 +75,7 @@ class QuestTable(Base):
     quest_title = Column(String(50), nullable=False)
     quest_type = Column(String(50), nullable=False)
     quest_content = Column(String(500), nullable=False)
-    userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE"))
+    userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE", onupdate="CASCADE"))
 
     # time info
     created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
@@ -89,7 +89,7 @@ class TransactionLogTable(Base):
     __tablename__ = "demo_transaction_log"
 
     transaction_id = Column(Integer, primary_key=True, index=True)
-    userid = Column(String(50), ForeignKey("demo_users.userid"), nullable=False)
+    userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE", onupdate="CASCADE"))
     transaction_type = Column(Enum(TransactionType), nullable=False)
     _amount_encrypted = Column(LargeBinary, nullable=False)  # Encrypted amount field
     balance_after = Column(Integer, nullable=False)

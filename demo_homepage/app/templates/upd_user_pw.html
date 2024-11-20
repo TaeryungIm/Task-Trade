@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 정보 변경</title>
+    <title>비밀번호 변경</title>
 
     <!-- Link to external CSS -->
-    <link rel="stylesheet" href="/static/css/upd_user_acc.css?v=1.0.1">
+    <link rel="stylesheet" href="/static/css/upd_user_pw.css?v=1.0.1">
 
-    <script defer src="/static/js/upd_user_acc.js?v=1.0.0"></script>
+    <script defer src="/static/js/upd_user_pw.js?v=1.0.0"></script>
 
 </head>
 <body>
     <div class="title">
         <img src="/static/images/main_logo.png" alt="Main Logo"><br>
-        <h2>내 정보</h2>
+        <h2>비밀번호 변경</h2>
     </div>
     <div class="container">
-        <form id="accountCheckForm">
+        <form id="passwordUpdateForm">
             <div class="form-group">
                 <label for="current_password">기존 비밀번호</label>
                 <input type="password" id="current_password" name="current_password" placeholder="기존 비밀번호 입력" required>
@@ -32,7 +32,7 @@
                 <input type="password" id="password_confirm" name="password_confirm" placeholder="새 비밀번호 확인">
             </div>
             <div class="form-group">
-                <button type="submit" onclick="handleAccountUpdate(event)">비밀번호 수정</button>
+                <button type="submit" onclick="handlePasswordUpdate(event)">비밀번호 수정</button>
             </div>
         </form>
     </div>

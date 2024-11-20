@@ -13,8 +13,7 @@ const tokenManager = {
 
 // Block the inputs initially and check login status on page load
 window.onload = async function() {
-    document.getElementById('password').disabled = true;
-    document.getElementById('password_confirm').disabled = true;
+    document.getElementById('userid_update').disabled = true;
 
     const accessToken = tokenManager.getToken();
     if (!accessToken) {
@@ -23,8 +22,8 @@ window.onload = async function() {
     }
 
     // Optional: You could validate the token on load
-    const userid = await getUserId(accessToken);
-    if (!userid) {
+    const user = await getUser(accessToken);
+    if (!user) {
         alert("Failed to verify user. Please log in again.");
         tokenManager.clearToken();
         window.location.replace("/login");
@@ -32,7 +31,7 @@ window.onload = async function() {
 };
 
 // Get user ID from access token by calling the server
-async function getUserId(accessToken) {
+async function getUser(accessToken) {
     if (!accessToken) {
         alert("Access token not found. Please log in.");
         return null;
@@ -49,7 +48,7 @@ async function getUserId(accessToken) {
 
         if (response.ok) {
             const data = await response.json();
-            return data.user_id; // Return user ID if valid
+            return data;
         } else if (response.status === 401) {
             alert("Your session has expired. Please log in again.");
             tokenManager.clearToken();
@@ -69,19 +68,19 @@ async function handlePWCheck(event) {
     event.preventDefault(); // Prevent default form submission
 
     const accessToken = tokenManager.getToken();
-    const userid = await getUserId(accessToken);
-    if (!userid) {
-        alert("Failed to retrieve user ID. Please log in again.");
+    const user = await getUser(accessToken);
+    if (!user) {
+        alert("Failed to retrieve user. Please log in again.");
         return;
     }
 
     const userPW = document.getElementById('current_password').value;
 
     const formData = new URLSearchParams();
-    formData.append('userid', userid);
+    formData.append('userid', user.user_id);
     formData.append('userpw', userPW);
 
-    fetch('/account/update/pwcheck', {
+    fetch('/account/pwcheck', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -92,8 +91,7 @@ async function handlePWCheck(event) {
         .then(data => {
             if (data.success) {
                 // ID is valid, enable the other fields
-                document.getElementById('password').disabled = false;
-                document.getElementById('password_confirm').disabled = false;
+                document.getElementById('userid_update').disabled = false;
                 alert(data.message); // Show success message
             } else {
                 alert(data.message); // Show failure message
@@ -106,28 +104,31 @@ async function handlePWCheck(event) {
 }
 
 // Handle account update
-async function handleAccountUpdate(event) {
+async function handleUseridUpdate(event) {
     event.preventDefault(); // Prevent default form submission
 
     const accessToken = tokenManager.getToken();
-    const userid = await getUserId(accessToken);
-    if (!userid) {
-        alert("Failed to retrieve user ID. Please log in again.");
+    const user = await getUser(accessToken);
+    if (!user) {
+        alert("Failed to retrieve user. Please log in again.");
         return;
     }
 
-    const upd_pw = document.getElementById('password').value;
-    const conf_upd_pw = document.getElementById('password_confirm').value;
-
-    if (upd_pw !== conf_upd_pw) {
-        alert("Passwords do not match. Please try again.");
+    const userid_upd = document.getElementById('userid_update').value;
+    if (!userid_upd.trim()) {
+        alert("Email address cannot be empty.");
         return;
     }
 
-    const data = {
-        cur_id: userid,
-        upd_pw: upd_pw,
-        conf_upd_pw: conf_upd_pw
+    // confirm new updated username
+    if (user.user_id === userid_upd) {
+        alert("Userid is not changed. Please try again.");
+        return;
+    }
+
+    const upd_data = {
+        cur_id: user.user_id,
+        upd_id: userid_upd
     };
 
     fetch('/account/update/userdata', {
@@ -135,24 +136,23 @@ async function handleAccountUpdate(event) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(upd_data)
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(data.message); // Show success message
-                document.getElementById('current_password').value = '';
-                document.getElementById('password').value = '';
-                document.getElementById('password_confirm').value = '';
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message); // Show success message
+            document.getElementById('current_password').value = '';
+            document.getElementById('userid_update').value = '';
 
-                // Redirect to main page
-                window.location.replace("/");
-            } else {
-                alert(data.message); // Show failure message
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred: ' + error.message);
-        });
+            // Redirect to main page
+            window.location.replace("/account/profile");
+        } else {
+            alert(data.message); // Show failure message
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred: ' + error.message);
+    });
 }

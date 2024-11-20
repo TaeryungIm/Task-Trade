@@ -1,5 +1,6 @@
 from pydantic import BaseModel, field_validator, EmailStr
 from pydantic_core.core_schema import FieldValidationInfo
+from typing import Optional
 
 
 # account making 에 사용하는 model
@@ -32,20 +33,15 @@ class UserCreate(BaseModel):
 # account_modifying 에 사용하는 model
 class UserUpdate(BaseModel):
     cur_id:      EmailStr
-    upd_pw:      str
-    conf_upd_pw: str
+    upd_id:      Optional[EmailStr] = None
+    upd_pw:      Optional[str] = None
+    upd_name:    Optional[str] = None
 
-    @field_validator('upd_pw', 'conf_upd_pw')
+    @field_validator('cur_id')
     def not_empty(cls, v):
         if isinstance(v, str):  # Only strip if the value is a string
             if not v or not v.strip():
                 raise ValueError('빈칸을 채워주세요')  # "Please fill in the blank" in Korean
         elif v is None:  # Handle the case where the field is None
             raise ValueError('빈칸을 채워주세요')
-        return v
-
-    @field_validator('conf_upd_pw')
-    def passwords_match(cls, v, info: FieldValidationInfo):
-        if 'upd_pw' in info.data and v != info.data['upd_pw']:
-            raise ValueError('비밀번호가 일치하지 않습니다')  # "Passwords do not match" in Korean
         return v
