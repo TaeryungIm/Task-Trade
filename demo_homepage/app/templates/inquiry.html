@@ -15,7 +15,7 @@
     <!-- 상단 메뉴바 -->
     <div class="header">
         <img src="/static/images/main_logo.png" alt="Main Logo">
-        <div class="header_menu">
+        <div class="header-menu">
             <form action='/quest' method='get'>
                 <button type="submit">퀘스트 등록</button>
             </form>
@@ -42,9 +42,9 @@
         </div>
 
         <!-- 메인 내용 -->
-        <div class="main_content">
+        <div class="main-content">
             <h2>문의하기</h2>
-            <form class="inquiry_form" onsubmit="handleInquiry(event)">
+            <form class="inquiry-form" onsubmit="handleInquiry(event)">
                 <label for="inquiry_title">문의 제목</label>
                 <input type="text" id="inquiry_title" placeholder="type inquiry title" required><br>
 
@@ -55,7 +55,7 @@
                     <label><input type="radio" name="contact_method" value="text" required> 문자</label>
                     <label><input type="radio" name="contact_method" value="email"> e-mail</label>
                 </div>
-                <button class="inquiry_submit" type="submit">문의 보내기</button>
+                <button class="inquiry-submit" type="submit">문의 보내기</button>
             </form>
 
         </div>

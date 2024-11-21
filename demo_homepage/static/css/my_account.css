@@ -1,0 +1,174 @@
+/* General Reset */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+}
+
+/* Container for Sidebar and Main Content */
+.container {
+    display: flex; /* Use flexbox for horizontal alignment */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 20%;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space out elements vertically */
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Optional: Add height for vertical centering */
+    background-color: #f9f9f9; /* Optional: Add a background to visualize */
+}
+
+.logo img {
+    width: 70px;
+    height: 50px;
+    margin: 20px;
+}
+
+.logo h1 {
+    font-size: 1.5em;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 40%; /* Profile picture will be 20% of the container's width */
+    aspect-ratio: 1 / 1; /* Maintain a 1:1 aspect ratio for a perfect square */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensure the image fits within the circle */
+    margin-bottom: 10px; /* Add space below the image */
+    border: 2px solid #eaeaea; /* Optional: Add a light border for styling */
+}
+
+.menu ul {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0; /* Optional: Remove any default margins */
+}
+
+.menu li {
+    padding: 10px 0;
+    cursor: pointer;
+    color: #333;
+    border-bottom: 1px solid #eaeaea;
+    text-align: center; /* Center the text within each item */
+    width: 100%; /* Optional: Ensures full width for border alignment */
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1; /* Take up the remaining space */
+    padding: 20px;
+    overflow-y: auto; /* Scrollable if content overflows */
+}
+
+.section-title {
+    font-size: 1.2em;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.card-item:last-child {
+    border-bottom: none;
+}
+
+.btn {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Switch Toggle */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #007bff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}

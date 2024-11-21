@@ -32,7 +32,7 @@ login = APIRouter(
 
 @login.post("/login", response_model=Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
-                           db: Session = Depends(get_db)):
+                           db: session = Depends(get_db)):
 
     # check user and password
     if not SECRET_KEY:
@@ -61,5 +61,7 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
 
 # Sample endpoint using get_current_user as a dependency
 @login.get("/protected-endpoint")
-async def protected_route(userid: str = Depends(get_current_user)):
-    return {"user_id": userid, "message": "This is a protected route."}
+async def protected_route(userid: str = Depends(get_current_user), db: session = Depends(get_db)):
+    user = get_user_by_id(db, userid)
+    return {"user_id": userid, "user_name": user.username,
+            "user_contact": user.contact_number, "message": "This is a protected route."}

@@ -16,7 +16,7 @@
     <!-- 상단 메뉴바 -->
     <div class="header">
         <img src="/static/images/main_logo.png" alt="Main Logo">
-        <div class="header_menu">
+        <div class="header-menu">
             <form action='/quest' method='get'>
                 <button type="submit">퀘스트 등록</button>
             </form>
@@ -43,8 +43,8 @@
         </div>
 
         <!-- 메인 내용 -->
-        <div class="main_content">
-            <form class="exchange_form" onsubmit="handleExchange(event)">
+        <div class="main-content">
+            <form class="exchange-form" onsubmit="handleExchange(event)">
                 <h2 id="coin_balance">내 보유 코인: 0 ¢;</h2>
 
                 <label for="coin_input">환전하고 싶은 코인</label>
@@ -56,7 +56,7 @@
                 <label><input id="caution_check" type="checkbox" required> 환전시 주의사항을 모두 읽었습니다.</label><br>
                 <label><input id="term_condition_check" type="checkbox" required> 배정 약관에 모두 동의합니다.</label><br>
 
-                <button class="exchange_submit" type="submit">환전하기</button>
+                <button class="exchange-submit" type="submit">환전하기</button>
             </form>
         </div>
     </div>

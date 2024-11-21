@@ -1,8 +1,10 @@
-from fastapi import APIRouter, HTTPException, Depends, Form
+from sys import prefix
+
+from fastapi import APIRouter, HTTPException, Depends, Form, Request
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import scoped_session
 from starlette.templating import Jinja2Templates
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, HTMLResponse
 
 from app.database.database import get_db, SessionLocal
 
@@ -15,6 +17,10 @@ templates = Jinja2Templates(directory="app/templates")
 
 account = APIRouter(
     prefix="/account",
+)
+
+update = APIRouter(
+    prefix="/account/update",
 )
 
 
@@ -48,22 +54,7 @@ async def get_current_balance(userid: str, db: session = Depends(get_db)):
         return JSONResponse(status_code=500, content={"success": False, "balance": "error!"})
 
 
-@account.post("/update/idcheck")
-async def id_check_exist(userid: str = Form(...), db: session = Depends(get_db)):
-    try:
-        existing_user = get_user_by_id(db, userid)
-        if existing_user:
-            return JSONResponse(status_code=400, content={"success": False, "message": "사용할 수 없는 아이디입니다!"})
-
-        return JSONResponse(status_code=200, content={"success": True, "message": "사용 가능한 아이디입니다!"})
-
-    except IntegrityError as e:
-        db.rollback()
-        print(f"Error occurred: {str(e)}")
-        return JSONResponse(status_code=500, content={"success": False, "message": "Internal server error"})
-
-
-@account.post("/update/pwcheck")
+@account.post("/pwcheck")
 async def pw_check_exist(userid: str = Form(...), userpw: str = Form(...), db: session = Depends(get_db)):
     try:
         existing_user = get_user_by_id(db, userid)
@@ -78,15 +69,30 @@ async def pw_check_exist(userid: str = Form(...), userpw: str = Form(...), db: s
         return JSONResponse(status_code=500, content={"success": False, "message": "Internal server error"})
 
 
-@account.post("/update/userdata")
+@update.get("/password", response_class=HTMLResponse)
+async def open_password_upd(request: Request):
+    return templates.TemplateResponse("upd_user_pw.html", {'request': request})
+
+
+@update.get("/name", response_class=HTMLResponse)
+async def open_username_upd(request: Request):
+    return templates.TemplateResponse("upd_user_name.html", {'request': request})
+
+
+@update.get("/id", response_class=HTMLResponse)
+async def open_userid_upd(request: Request):
+    return templates.TemplateResponse("upd_user_id.html", {'request': request})
+
+
+@update.post("/userdata")
 async def upd_user_data(userdata: UserUpdate, db: session = Depends(get_db)):
     try:
-        existing_user = get_user_by_id(db, userdata.curid)
+        existing_user = get_user_by_id(db, userdata.cur_id)
         if not existing_user:
             raise HTTPException(status_code=400, detail="User not exists")
 
-        update_user(db, userdata)
-        return JSONResponse(status_code=200, content={"success": True, "message": "성공적으로 정보가 변경되었습니다!"})
+        message = update_user(db, userdata)
+        return JSONResponse(status_code=200, content={"success": True, "message": message})
 
     except IntegrityError as e:
         db.rollback()

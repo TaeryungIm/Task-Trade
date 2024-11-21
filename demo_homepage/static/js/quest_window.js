@@ -32,17 +32,12 @@ window.onload = function() {
     }
 };
 
-// this function is for posting quest data to the database
-async function postQuest(event) {
-    // Prevent default form submission behavior
-    event.preventDefault();
-
-    var q_title = document.getElementById('quest_title').value;
-    var q_type = document.getElementById('quest_type').value;
-    var q_content = document.getElementById('quest_content').value;
-
-    const accessToken = tokenManager.getToken();
-    let userid;
+// receiving userid api
+async function getUserId(accessToken){
+    if (!accessToken) {
+        alert("Access token not found. Please log in.");
+        return null;
+    }
 
     if (accessToken) {
         try {
@@ -74,6 +69,23 @@ async function postQuest(event) {
     // Ensure userid was successfully retrieved
     if (!userid) {
         alert("Unable to retrieve user information. Please try again.");
+        return;
+    }
+}
+
+// this function is for posting quest data to the database
+async function postQuest(event) {
+    // Prevent default form submission behavior
+    event.preventDefault();
+
+    var q_title = document.getElementById('quest_title').value;
+    var q_type = document.getElementById('quest_type').value;
+    var q_content = document.getElementById('quest_content').value;
+
+    const accessToken = tokenManager.getToken();
+    var userid = getUserId(accessToken);
+    if (!userid) {
+        alert("Failed to retrieve user ID. Please log in again.");
         return;
     }
 

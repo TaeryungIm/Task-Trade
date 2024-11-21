@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 정보</title>
+
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="/static/css/my_account.css?v=1.0.0">
+    <!-- Link to external JS -->
+    <script defer src="/static/js/my_account.js?v=1.0.0"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="/static/images/main_logo.png" alt="Main Logo">
+                <h1>TaskTrade</h1>
+            </div>
+            <div class="profile-section">
+                <img src="/static/images/taeyun329.png" alt="Profile" class="profile-pic">
+                <h2 id="username_profile">사용자</h2>
+                <p id="userid_profile">tasktrade911@gmail.com</p>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li>내프로필</li>
+                    <li>보안설정</li>
+                </ul>
+            </nav>
+            <div class="footer">
+                <p>회원탈퇴</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Profile Section -->
+            <section class="section">
+                <h2 class="section-title">내프로필</h2>
+                <div class="card">
+                    <form class="card-item" action='/account/update/id' method='get'>
+                        <p id="userid_section">tasktrade911@gmail.com</p>
+                        <button class="btn" type="submit">아이디 수정</button>
+                    </form>
+                    <form class="card-item" action='/account/update/name' method='get'>
+                        <p id="username_section">사용자</p>
+                        <button class="btn" type="submit">실명 수정</button>
+                    </form>
+                    <div class="card-item">
+                        <p id="user_contact_section">010-1***-5***</p>
+                        <button class="btn">전화번호 수정</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Section -->
+            <section class="section">
+                <h2 class="section-title">보안설정</h2>
+                <div class="card">
+                    <form class="card-item" action='/account/update/password' method='get'>
+                        <p>비밀번호</p>
+                        <button class="btn" type="submit">비밀번호 수정</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
