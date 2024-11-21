@@ -4,7 +4,7 @@ from sqlalchemy.types import Enum
 from datetime import datetime
 from app.database.database import Base
 
-from app.exchange_system.exchange_schema import TransactionType
+from app.coin_system.coin_schema import TransactionType
 
 import os
 from cryptography.fernet import Fernet

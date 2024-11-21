@@ -17,8 +17,8 @@ const tokenManager = {
 
 window.onload = async function() {
     const accessToken = tokenManager.getToken();
-    const exchange_button = document.getElementById('button_exchange');
-    exchange_button.style.backgroundColor = '#1E1F22';
+    const charge_button = document.getElementById('button_charge');
+    charge_button.style.backgroundColor = '#1E1F22';
 
     const userid = await getUserId(accessToken); // Await here to ensure `userid` is retrieved before proceeding
     if (!userid) {
@@ -69,7 +69,7 @@ async function getUserId(accessToken){
     }
 }
 
-async function handleExchange(event) {
+async function handleCoinCharge(event) {
     // Prevent default form submission behavior
     event.preventDefault();
     const accessToken = tokenManager.getToken();
@@ -86,7 +86,7 @@ async function handleExchange(event) {
                 update_balance: coinInput,
             };
 
-            const response = await fetch("/exchange/update/balance", {
+            const response = await fetch("/charge/update/balance", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -98,7 +98,7 @@ async function handleExchange(event) {
                 const responseData = await response.json();
                 document.getElementById('coin_balance').textContent = `내 보유 코인: ${responseData.updated_balance}¢`;
 
-                alert(`총 ${coinInput}¢ 환전했습니다!`);
+                alert(`총 ${coinInput}¢ 충전했습니다!`);
                 document.getElementById('coin_input').value = '';
             } else {
                 throw new Error("Invalid response");

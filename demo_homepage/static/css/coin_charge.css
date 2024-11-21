@@ -62,7 +62,7 @@ body {
 .main-content h2 {
     margin-bottom: 20px;
 }
-.main-content .exchange-form .exchange-submit, input[type="button"]  {
+.main-content .coin-charge-form .coin-charge-submit, input[type="button"]  {
     width: 95%;
     padding: 10px;
     background-color: #008CBA;
@@ -71,7 +71,7 @@ body {
     cursor: pointer;
     margin: 10px 0;
 }
-.main-content .exchange-form .exchange-submit:hover, input[type="button"]:hover {
+.main-content .coin-charge-form .coin-charge-submit:hover, input[type="button"]:hover {
     background-color: #007B9E;
 }
 label {

@@ -79,7 +79,7 @@ function link_inquiry() {
 }
 
 // Link API function to exchange page
-function link_exchange() {
+function link_coin_charge() {
     // If not logged in, link to login page
     if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
         alert("로그인 해주세요!");
@@ -87,7 +87,7 @@ function link_exchange() {
     }
     // If logged in, link to exchange page
     else {
-        window.location.href = '/exchange';
+        window.location.href = '/charge';
     }
 }
 

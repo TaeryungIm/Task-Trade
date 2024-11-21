@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 from app.database.models import TransactionLogTable
 from app.database.database import SessionLocal
 
-from app.exchange_system.exchange_schema import TransactionRecord, TransactionType
+from app.coin_system.coin_schema import TransactionRecord, TransactionType
 
 session = scoped_session(SessionLocal)
 

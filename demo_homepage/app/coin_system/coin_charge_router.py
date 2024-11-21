@@ -8,26 +8,26 @@ from app.database.database import SessionLocal, get_db
 
 from app.account_system.account_db import get_user_by_id
 
-from app.exchange_system.exchange_db import create_transaction, get_transaction_type
-from app.exchange_system.exchange_schema import UpdateBalance, TransactionRecord
+from app.coin_system.coin_db import create_transaction, get_transaction_type
+from app.coin_system.coin_schema import UpdateBalance, TransactionRecord
 
 templates = Jinja2Templates(directory="app/templates")
 session = scoped_session(SessionLocal)
 
-exchange = APIRouter(
-    prefix="/exchange",
+charge = APIRouter(
+    prefix="/charge",
 )
 
 
 # Handle POST request for creating an account
-@exchange.get("/", response_class=HTMLResponse)
+@charge.get("/", response_class=HTMLResponse)
 async def exchange_coin(request: Request):
     context = {'request': request}
-    return templates.TemplateResponse("exchange.html", context)
+    return templates.TemplateResponse("coin_charge.html", context)
 
 
 # Used for updating the balance
-@exchange.post("/update/balance")
+@charge.post("/update/balance")
 async def upd_user_balance(update_balance: UpdateBalance, db: session = Depends(get_db)):
     try:
         userid = update_balance.user_id
