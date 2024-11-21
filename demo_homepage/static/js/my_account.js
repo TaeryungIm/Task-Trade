@@ -16,6 +16,7 @@ window.onload = async function() {
 
     if (!accessToken) {
         alert("Access token not found. Please log in.");
+        tokenManager.clearToken(); // assure clearing the inaccurate token
         window.location.replace("/login"); // Redirect to login page
         return;
     }

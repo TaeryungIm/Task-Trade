@@ -145,7 +145,9 @@ async function handleUseridUpdate(event) {
             document.getElementById('current_password').value = '';
             document.getElementById('userid_update').value = '';
 
-            // Redirect to main page
+            // Redirect to profile page
+            // and clear the remaining token
+            tokenManager.clearToken();
             window.location.replace("/account/profile");
         } else {
             alert(data.message); // Show failure message

@@ -36,33 +36,33 @@ body {
     width: 50px;
     height: 50px;
 }
-.header .header_menu button[type="submit"] {
+.header .header-menu button[type="submit"] {
     margin: 5px;
     padding: 10px;
     background-color: #d0d0d0;
     border: none;
     cursor: pointer;
 }
-.header_menu {
+.header-menu {
     display: flex;
     gap: 10px; /* Optional: Adds space between buttons */
     align-items: center; /* Center-aligns buttons vertically if needed */
 }
-.header .header_menu button[type="submit"]:hover {
+.header .header-menu button[type="submit"]:hover {
     background-color: #c0c0c0;
 }
 /* 메인 내용 (원래 디자인 유지) */
-.main_content {
+.main-content {
     width: 100%;
     background-color: #fff;
     padding: 20px;
     box-sizing: border-box;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.main_content h2 {
+.main-content h2 {
     margin-bottom: 20px;
 }
-.main_content .inquiry_form .inquiry_submit {
+.main-content .inquiry-form .inquiry-submit {
     width: 30%;
     padding: 10px;
     background-color: #008CBA;
@@ -72,7 +72,7 @@ body {
     margin: 10px 5px;
 }
 
-.main_content .inquiry_form .inquiry_submit:hover {
+.main-content .inquiry-form .inquiry-submit:hover {
     background-color: #007B9E;
 }
 input[type="text"], textarea {

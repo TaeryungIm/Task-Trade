@@ -145,8 +145,10 @@ async function handlePasswordUpdate(event) {
             document.getElementById('password').value = '';
             document.getElementById('password_confirm').value = '';
 
-            // Redirect to main page
-            window.location.replace("/");
+            // Redirect to profile page
+            // and clear the remaining token
+            tokenManager.clearToken();
+            window.location.replace("/account/profile");
         } else {
             alert(data.message); // Show failure message
         }
