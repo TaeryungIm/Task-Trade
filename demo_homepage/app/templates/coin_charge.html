@@ -6,9 +6,9 @@
     <title>Task Trade 충전 페이지</title>
 
     <!-- Link to external CSS -->
-    <link rel="stylesheet" href="/static/css/coin_charge.css?v=1.1.0">
-
-    <script defer src="/static/js/coin_charge.js?v=1.1.0"></script>
+    <link rel="stylesheet" href="/static/css/coin_charge.css?v=1.1.1">
+    <!-- Link to external JS -->
+    <script defer src="/static/js/coin_charge.js?v=1.1.1"></script>
 
 </head>
 <body>
@@ -24,12 +24,12 @@
                 <button type="submit">문의하기</button>
             </form>
             <form action='/charge' method='get'>
-                <button id="button_charge" type="submit">충전하기</button>
+                <button id="button-charge" type="submit">충전하기</button>
             </form>
             <form action='/login' method='get'>
-                <button id="login_btn" type="submit">로그인</button>
+                <button id="login-btn" type="submit">로그인</button>
             </form>
-            <button id="logout_btn" type="submit" onclick="logout()">로그아웃</button>
+            <button id="logout-btn" type="submit" onclick="logout()">로그아웃</button>
         </div>
     </div>
 
@@ -45,16 +45,16 @@
         <!-- 메인 내용 -->
         <div class="main-content">
             <form class="coin-charge-form" onsubmit="handleCoinCharge(event)">
-                <h2 id="coin_balance">내 보유 코인: 0 ¢;</h2>
+                <h2 id="coin-balance">내 보유 코인: 0 ¢;</h2>
 
-                <label for="coin_input">충전하고 싶은 코인</label>
-                <input type="number" id="coin_input" placeholder="put number in W" required min="1" step="1"><br>
+                <label for="coin-input">충전하고 싶은 코인</label>
+                <input type="number" id="coin-input" placeholder="100¢ 단위로 입력해 주세요" required min="100" step="100"><br>
 
-                <label for="wallet_select">결제 수단 선택</label>
-                <input type="button" id="wallet_select" value="결제 수단 선택"><br>
+                <label for="deposit-select">충전 수단 선택</label>
+                <input type="button" id="deposit-select" value="충전 수단 선택"><br>
 
-                <label><input id="caution_check" type="checkbox" required> 충전시 주의사항을 모두 읽었습니다.</label><br>
-                <label><input id="term_condition_check" type="checkbox" required> 배정 약관에 모두 동의합니다.</label><br>
+                <label><input id="caution-check" type="checkbox" required> 충전시 주의사항을 모두 읽었습니다.</label><br>
+                <label><input id="term-condition-check" type="checkbox" required> 배정 약관에 모두 동의합니다.</label><br>
 
                 <button class="coin-charge-submit" type="submit">충전하기</button>
             </form>

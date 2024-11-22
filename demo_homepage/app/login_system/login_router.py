@@ -1,9 +1,10 @@
 from fastapi import APIRouter, HTTPException
-from fastapi import Depends
+from fastapi import Depends, Request
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session, scoped_session
 
 from starlette import status
+from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
 from datetime import timedelta, datetime
@@ -28,6 +29,13 @@ ALGORITHM = "HS256"
 login = APIRouter(
     prefix="/login",
 )
+
+
+# Handle POST request for creating an account
+@login.get("/", response_class=HTMLResponse)
+async def open_login(request: Request):
+    context = {'request': request}
+    return templates.TemplateResponse("login.html", context)
 
 
 @login.post("/login", response_model=Token)

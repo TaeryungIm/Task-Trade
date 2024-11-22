@@ -9,7 +9,7 @@ from app.account_system import account_router
 from app.login_system import login_router
 from app.quest_system import quest_router
 from app.inquiry_system import inquiry_router
-from app.coin_system import coin_charge_router
+from app.coin_system import coin_charge_router, coin_exchange_router
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
@@ -29,6 +29,7 @@ app.include_router(account_router.update)
 app.include_router(quest_router.quest)
 app.include_router(inquiry_router.inquiry)
 app.include_router(coin_charge_router.charge)
+app.include_router(coin_exchange_router.exchange)
 app.include_router(login_router.login)
 
 
@@ -42,18 +43,3 @@ def on_startup():
 @app.get("/", response_class=HTMLResponse)
 async def root_home(request: Request):
     return templates.TemplateResponse("main.html", {'request': request})
-
-
-@app.get("/login", response_class=HTMLResponse)
-async def login_page(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
-
-
-@app.get("/account/create", response_class=HTMLResponse)
-async def open_account_cre(request: Request):
-    return templates.TemplateResponse("create_account.html", {'request': request})
-
-
-@app.get("/account/profile", response_class=HTMLResponse)
-async def open_profile(request: Request):
-    return templates.TemplateResponse("my_account.html", {'request': request})

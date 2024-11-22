@@ -24,6 +24,16 @@ update = APIRouter(
 )
 
 
+@account.get("/create", response_class=HTMLResponse)
+async def open_account_cre(request: Request):
+    return templates.TemplateResponse("create_account.html", {'request': request})
+
+
+@account.get("/profile", response_class=HTMLResponse)
+async def open_profile(request: Request):
+    return templates.TemplateResponse("my_account.html", {'request': request})
+
+
 @account.post("/create/create")
 async def create_account_db(user_create: UserCreate, db: session = Depends(get_db)):
     try:
