@@ -1,5 +1,4 @@
 // Define variables globally
-const loginBtn = document.getElementById('login_btn');
 const logoutBtn = document.getElementById('logout_btn');
 
 // Utility to manage access token
@@ -18,17 +17,13 @@ const tokenManager = {
 // check status on main page according to login/out states
 window.onload = function() {
     const accessToken = tokenManager.getToken();
-    const inquiry_button = document.getElementById('button_inquiry');
-    inquiry_button.style.backgroundColor = '#1E1F22';
+    const inquiry_button = document.getElementById('inquiry-btn');
+    inquiry_button.style.color = '#007bff';
 
-    if (accessToken) {
-        // User is logged in
-        loginBtn.style.display = 'none';
-        logoutBtn.style.display = 'block';
-    } else {
+    if (!accessToken) {
         // User is logged out
-        loginBtn.style.display = 'block';
-        logoutBtn.style.display = 'none';
+        alert("please log in!");
+        window.location.replace("/login");
     }
 };
 
@@ -43,37 +38,103 @@ async function handleInquiry(event) {
         return;
     }
 
-    let userid;
-    try {
-        // Make a request to the protected endpoint to verify the token and get user information
-        const response = await fetch("/login/protected-endpoint", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${accessToken}`,
-                "Content-Type": "application/json"
-            }
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            userid = data.user_id;
-        } else {
-            throw new Error("Invalid token");
-        }
-    } catch (error) {
-        console.error("Error verifying access token:", error);
-        return;
+    const userid = await getUserId(accessToken); // Await here to ensure `userid` is retrieved before proceeding
+    if (!userid) {
+        return; // Stop if `userid` couldn't be retrieved
     }
 
     postInquiry(userid);
     sendInquiry(userid);
 }
 
+async function getUserId(accessToken){
+    if (!accessToken) {
+        alert("Access token not found. Please log in.");
+        return null;
+    }
+
+    if (accessToken) {
+        try {
+            // Make a request to the protected endpoint to verify the token and get user information
+            const response = await fetch("/login/protected-endpoint", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${accessToken}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.user_id; // Return userid if the token is valid
+            } else {
+                throw new Error("Invalid token");
+            }
+        } catch (error) {
+            console.error("Error verifying access token:", error);
+            alert("Error verifying access token. Please log in again.");
+            return; // Stop the function if there's an error with the token
+        }
+    } else {
+        alert("Access token not found. Please log in.");
+        return; // Stop the function if no access token is available
+    }
+}
+
+// Simulate logout function
+function logout() {
+    // Remove the user from localStorage
+    tokenManager.clearToken();
+
+    // Go back to main page
+    alert("로그아웃 되었습니다!");
+    window.location.replace("/");
+}
+
+// Link API function to quest_window page
+function link_quest() {
+    // If not logged in, link to login page
+    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
+        alert("로그인 해주세요!");
+        window.location.replace("/login");
+    }
+    // If logged in, link to quest page
+    else {
+        window.location.replace("/quest");
+    }
+}
+
+// Link API function to coin charge page
+function link_coin_charge() {
+    // If not logged in, link to login page
+    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
+        alert("로그인 해주세요!");
+        window.location.replace("/login");
+    }
+    // If logged in, link to coin charge page
+    else {
+        window.location.replace("/charge");
+    }
+}
+
+// Link API function to coin exchange page
+function link_coin_exchange() {
+    // If not logged in, link to login page
+    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
+        alert("로그인 해주세요!");
+        window.location.replace("/login");
+    }
+    // If logged in, link to coin exchange page
+    else {
+        window.location.replace("/exchange");
+    }
+}
+
 // post inquiry to the db
 function postInquiry(userid) {
-    var inq_title = document.getElementById('inquiry_title').value;
-    var inq_content = document.getElementById('inquiry_content').value;
-    var inq_contact = document.querySelector('input[name="contact_method"]:checked').value;
+    var inq_title = document.getElementById('inquiry-title').value;
+    var inq_content = document.getElementById('inquiry-content').value;
+    var inq_contact = document.querySelector('input[name="contact-method"]:checked').value;
 
     var inquiry_data = {
         user_id: userid,
@@ -106,9 +167,9 @@ function postInquiry(userid) {
 
 // send posted inquiry to the designated email
 function sendInquiry(userid) {
-    var inq_title = document.getElementById('inquiry_title').value;
-    var inq_content = document.getElementById('inquiry_content').value;
-    var inq_contact = document.querySelector('input[name="contact_method"]:checked').value;
+    var inq_title = document.getElementById('inquiry-title').value;
+    var inq_content = document.getElementById('inquiry-content').value;
+    var inq_contact = document.querySelector('input[name="contact-method"]:checked').value;
 
     var inquiry_data = {
         user_id: userid,
@@ -130,9 +191,9 @@ function sendInquiry(userid) {
             alert("메일이 성공적으로 전송 되었습니다!");
 
             // Clear the form fields
-            document.getElementById('inquiry_title').value = '';
-            document.getElementById('inquiry_content').value = '';
-            document.querySelector('input[name="contact_method"]:checked').checked = false;
+            document.getElementById('inquiry-title').value = '';
+            document.getElementById('inquiry-content').value = '';
+            document.querySelector('input[name="contact-method"]:checked').checked = false;
         } else if (xhr.status === 422) {  // Handle validation errors
             let response = JSON.parse(xhr.responseText);
             let errorMessages = response.detail.map(error => error.msg).join("\n");

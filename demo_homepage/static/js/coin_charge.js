@@ -17,8 +17,14 @@ const tokenManager = {
 
 window.onload = async function() {
     const accessToken = tokenManager.getToken();
-    const charge_button = document.getElementById('button-charge');
-    charge_button.style.backgroundColor = '#1E1F22';
+    const charge_button = document.getElementById('charge-btn');
+    charge_button.style.color = '#007bff';
+
+    if (!accessToken) {
+        // User is logged out
+        alert("please log in!");
+        window.location.replace("/login");
+    }
 
     const userid = await getUserId(accessToken); // Await here to ensure `userid` is retrieved before proceeding
     if (!userid) {
@@ -33,11 +39,12 @@ window.onload = async function() {
 };
 
 async function getUserId(accessToken){
-    if (accessToken) {
-        // User is logged in
-        loginBtn.style.display = 'none';
-        logoutBtn.style.display = 'block';
+    if (!accessToken) {
+        alert("Access token not found. Please log in.");
+        return null;
+    }
 
+    if (accessToken) {
         try {
             // Make a request to the protected endpoint to verify the token and get user information
             const response = await fetch("/login/protected-endpoint", {
@@ -66,6 +73,56 @@ async function getUserId(accessToken){
 
         alert("Access token not found. Please log in.");
         return; // Stop the function if no access token is available
+    }
+}
+
+
+// Simulate logout function
+function logout() {
+    // Remove the user from localStorage
+    tokenManager.clearToken();
+
+    // Go back to main page
+    alert("로그아웃 되었습니다!");
+    window.location.replace("/");
+}
+
+// Link API function to quest_window page
+function link_quest() {
+    // If not logged in, link to login page
+    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
+        alert("로그인 해주세요!");
+        window.location.replace("/login");
+    }
+    // If logged in, link to quest page
+    else {
+        window.location.replace("/quest");
+    }
+}
+
+// Link API function to inquiry page
+function link_inquiry() {
+    // If not logged in, link to login page
+    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
+        alert("로그인 해주세요!");
+        window.location.replace("/login");
+    }
+    // If logged in, link to inquiry page
+    else {
+        window.location.replace("/inquiry");
+    }
+}
+
+// Link API function to coin exchange page
+function link_coin_exchange() {
+    // If not logged in, link to login page
+    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
+        alert("로그인 해주세요!");
+        window.location.replace("/login");
+    }
+    // If logged in, link to coin exchange page
+    else {
+        window.location.replace("/exchange");
     }
 }
 

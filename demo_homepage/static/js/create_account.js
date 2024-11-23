@@ -32,6 +32,7 @@ function postAccount(event) {
     xhr.onload = function() {
         if (xhr.status === 200) {
             alert("회원가입 되었습니다!");
+            alert("로그인페이지로 이동합니다");
 
             // Clear the form fields
             document.getElementById('username').value = '';
@@ -43,7 +44,7 @@ function postAccount(event) {
             document.querySelector('input[name="gender"]:checked').checked = false;
 
             // After creating the account, return to the login page
-            window.location.replace("/");
+            window.location.replace("/login");
 
         } else if (xhr.status === 422) {  // Handle validation errors
             let response = JSON.parse(xhr.responseText);

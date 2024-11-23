@@ -29,7 +29,7 @@ function loginAccount(event) {
             document.getElementById('password').value = '';
 
             // Redirect to main page
-            window.location.href = "/";
+            window.location.replace("/");
         } else if (xhr.status === 422) {  // Handle validation errors
             let response = JSON.parse(xhr.responseText);
             let errorMessages = response.detail.map(error => error.msg).join("\n");

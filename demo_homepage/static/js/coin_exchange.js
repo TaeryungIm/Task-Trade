@@ -21,6 +21,8 @@ const tokenManager = {
 // check status on main page according to login/out states
 window.onload = async function() {
     const accessToken = tokenManager.getToken();
+    const exchange_button = document.getElementById('exchange-btn');
+    exchange_button.style.color = '#007bff';
 
     if (!accessToken) {
         // User is logged out
@@ -41,6 +43,11 @@ window.onload = async function() {
 };
 
 async function getUserId(accessToken){
+    if (!accessToken) {
+        alert("Access token not found. Please log in.");
+        return null;
+    }
+
     if (accessToken) {
         try {
             // Make a request to the protected endpoint to verify the token and get user information
@@ -84,11 +91,11 @@ function link_quest() {
     // If not logged in, link to login page
     if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
         alert("로그인 해주세요!");
-        window.location.href = '/login';
+        window.location.replace("/login");
     }
     // If logged in, link to quest page
     else {
-        window.location.href = '/quest';
+        window.location.replace("/quest");
     }
 }
 
@@ -97,11 +104,11 @@ function link_inquiry() {
     // If not logged in, link to login page
     if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
         alert("로그인 해주세요!");
-        window.location.href = '/login';
+        window.location.replace("/login");
     }
     // If logged in, link to inquiry page
     else {
-        window.location.href = '/inquiry';
+        window.location.replace("/inquiry");
     }
 }
 
@@ -110,11 +117,11 @@ function link_coin_charge() {
     // If not logged in, link to login page
     if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
         alert("로그인 해주세요!");
-        window.location.href = '/login';
+        window.location.replace("/login");
     }
-    // If logged in, link to exchange page
+    // If logged in, link to coin charge page
     else {
-        window.location.href = '/charge';
+        window.location.replace("/charge");
     }
 }
 

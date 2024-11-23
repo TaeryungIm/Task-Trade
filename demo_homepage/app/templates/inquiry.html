@@ -16,19 +16,11 @@
     <div class="header">
         <img src="/static/images/main_logo.png" alt="Main Logo">
         <div class="header-menu">
-            <form action='/quest' method='get'>
-                <button type="submit">퀘스트 등록</button>
-            </form>
-            <form action='/inquiry' method='get'>
-                <button id="button_inquiry" type="submit">문의하기</button>
-            </form>
-            <form action='/exchange' method='get'>
-                <button type="submit">환전하기</button>
-            </form>
-            <form action='/login' method='get'>
-                <button id="login_btn" type="submit">로그인</button>
-            </form>
-            <button id="logout_btn" type="submit" onclick="logout()">로그아웃</button>
+            <button id="quest-btn" onclick="link_quest()">퀘스트 등록</button>
+            <button id="inquiry-btn">문의하기</button>
+            <button id="charge-btn" onclick="link_coin_charge()">충전하기</button>
+            <button id="exchange-btn" onclick="link_coin_exchange()">환전하기</button>
+            <button id="logout-btn" onclick="logout()">로그아웃</button>
         </div>
     </div>
 
@@ -45,15 +37,15 @@
         <div class="main-content">
             <h2>문의하기</h2>
             <form class="inquiry-form" onsubmit="handleInquiry(event)">
-                <label for="inquiry_title">문의 제목</label>
-                <input type="text" id="inquiry_title" placeholder="type inquiry title" required><br>
+                <label for="inquiry-title">문의 제목</label>
+                <input type="text" id="inquiry-title" placeholder="type inquiry title" required><br>
 
-                <label for="inquiry_content">문의 내용</label>
-                <textarea id="inquiry_content" rows="5" placeholder="type inquiry main context" required></textarea><br>
+                <label for="inquiry-content">문의 내용</label>
+                <textarea id="inquiry-content" rows="5" placeholder="type inquiry main context" required></textarea><br>
 
-                <div id="contact_method" class="contact_method">
-                    <label><input type="radio" name="contact_method" value="text" required> 문자</label>
-                    <label><input type="radio" name="contact_method" value="email"> e-mail</label>
+                <div id="contact-method" class="contact-method">
+                    <label><input type="radio" name="contact-method" value="text" required> 문자</label>
+                    <label><input type="radio" name="contact-method" value="email"> e-mail</label>
                 </div>
                 <button class="inquiry-submit" type="submit">문의 보내기</button>
             </form>

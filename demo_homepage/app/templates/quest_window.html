@@ -17,19 +17,11 @@
     <div class="header">
         <img src="/static/images/main_logo.png" alt="Main Logo">
         <div class="header-menu">
-            <form action='/quest' method='get'>
-                <button id="button_quest" type="submit">퀘스트 등록</button>
-            </form>
-            <form action='/inquiry' method='get'>
-                <button type="submit">문의하기</button>
-            </form>
-            <form action='/exchange' method='get'>
-                <button type="submit">환전하기</button>
-            </form>
-            <form action='/login' method='get'>
-                <button id="login_btn" type="submit">로그인</button>
-            </form>
-            <button id="logout_btn" type="submit" onclick="logout()">로그아웃</button>
+            <button id="quest-btn">퀘스트 등록</button>
+            <button id="inquiry-btn" onclick="link_inquiry()">문의하기</button>
+            <button id="charge-btn" onclick="link_coin_charge()">충전하기</button>
+            <button id="exchange-btn" onclick="link_coin_exchange()">환전하기</button>
+            <button id="logout-btn" onclick="logout()">로그아웃</button>
         </div>
     </div>
 
@@ -47,9 +39,9 @@
         <div class="main-content">
             <!-- Quest Form Section -->
             <form class="quest-form" onsubmit="postQuest(event)">
-                <input id="quest_title" type="text" placeholder="quest title">
-                <textarea id="quest_type" placeholder="type of quest"></textarea>
-                <input id="quest_content" type="text" placeholder="quest specific contents">
+                <input id="quest-title" type="text" placeholder="quest title">
+                <textarea id="quest-type" placeholder="type of quest"></textarea>
+                <input id="quest-content" type="text" placeholder="quest specific contents">
                 <div class="buttons">
                     <button>button to add image</button>
                     <button type="submit">button to save quest</button>
