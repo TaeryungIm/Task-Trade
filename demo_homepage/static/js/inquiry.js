@@ -82,7 +82,8 @@ async function getUserId(accessToken){
 }
 
 // Simulate logout function
-function logout() {
+function logout(event) {
+    event.preventDefault();
     // Remove the user from localStorage
     tokenManager.clearToken();
 
@@ -92,42 +93,21 @@ function logout() {
 }
 
 // Link API function to quest_window page
-function link_quest() {
-    // If not logged in, link to login page
-    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
-        alert("로그인 해주세요!");
-        window.location.replace("/login");
-    }
-    // If logged in, link to quest page
-    else {
-        window.location.replace("/quest");
-    }
+function link_quest(event) {
+    event.preventDefault();
+    window.location.replace("/quest");
 }
 
 // Link API function to coin charge page
-function link_coin_charge() {
-    // If not logged in, link to login page
-    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
-        alert("로그인 해주세요!");
-        window.location.replace("/login");
-    }
-    // If logged in, link to coin charge page
-    else {
-        window.location.replace("/charge");
-    }
+function link_coin_charge(event) {
+    event.preventDefault();
+    window.location.replace("/charge");
 }
 
 // Link API function to coin exchange page
-function link_coin_exchange() {
-    // If not logged in, link to login page
-    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
-        alert("로그인 해주세요!");
-        window.location.replace("/login");
-    }
-    // If logged in, link to coin exchange page
-    else {
-        window.location.replace("/exchange");
-    }
+function link_coin_exchange(event) {
+    event.preventDefault();
+    window.location.replace("/exchange");
 }
 
 // post inquiry to the db

@@ -24,6 +24,9 @@ window.onload = async function() {
     const exchange_button = document.getElementById('exchange-btn');
     exchange_button.style.color = '#007bff';
 
+    // disable the exchange button
+    document.querySelector('.coin-exchange-submit').disabled = true;
+
     if (!accessToken) {
         // User is logged out
         alert("please log in!");
@@ -77,7 +80,8 @@ async function getUserId(accessToken){
 }
 
 // Simulate logout function
-function logout() {
+function logout(event) {
+    event.preventDefault();
     // Remove the user from localStorage
     tokenManager.clearToken();
 
@@ -87,42 +91,21 @@ function logout() {
 }
 
 // Link API function to quest_window page
-function link_quest() {
-    // If not logged in, link to login page
-    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
-        alert("로그인 해주세요!");
-        window.location.replace("/login");
-    }
-    // If logged in, link to quest page
-    else {
-        window.location.replace("/quest");
-    }
+function link_quest(event) {
+    event.preventDefault();
+    window.location.replace("/quest");
 }
 
 // Link API function to inquiry page
-function link_inquiry() {
-    // If not logged in, link to login page
-    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
-        alert("로그인 해주세요!");
-        window.location.replace("/login");
-    }
-    // If logged in, link to inquiry page
-    else {
-        window.location.replace("/inquiry");
-    }
+function link_inquiry(event) {
+    event.preventDefault();
+    window.location.replace("/inquiry");
 }
 
 // Link API function to coin charge page
-function link_coin_charge() {
-    // If not logged in, link to login page
-    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
-        alert("로그인 해주세요!");
-        window.location.replace("/login");
-    }
-    // If logged in, link to coin charge page
-    else {
-        window.location.replace("/charge");
-    }
+function link_coin_charge(event) {
+    event.preventDefault();
+    window.location.replace("/charge");
 }
 
 function increaseCoinStatus(amount, event) {
@@ -135,6 +118,14 @@ function increaseCoinStatus(amount, event) {
 
     // Update the input field with the new value
     document.getElementById('coin-input').value = newCoinValue;
+}
+
+async function selectWithdrawMethod(event){
+    event.preventDefault();
+    alert("환전수단이 선택되었습니다!");
+
+    // disable the exchange button
+    document.querySelector('.coin-exchange-submit').disabled = false;
 }
 
 async function handleCoinExchange(event){
@@ -169,6 +160,8 @@ async function handleCoinExchange(event){
 
                 alert(`총 ${coinInput}¢ 환전했습니다!`);
                 document.getElementById('coin-input').value = '';
+                document.getElementById("caution-check").checked = false;
+                document.getElementById("term-condition-check").checked = false;
             } else {
                 throw new Error("Invalid response");
             }

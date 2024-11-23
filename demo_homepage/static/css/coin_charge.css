@@ -65,14 +65,14 @@ body {
 .main-content .coin-charge-form .coin-charge-submit, input[type="button"]  {
     width: 95%;
     padding: 10px;
-    background-color: #008CBA;
+    background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
     margin: 10px 0;
 }
 .main-content .coin-charge-form .coin-charge-submit:hover, input[type="button"]:hover {
-    background-color: #007B9E;
+    background-color: #0056b3;
 }
 label {
     display: block;
