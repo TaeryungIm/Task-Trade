@@ -51,6 +51,7 @@ body {
 .header .header-menu button:hover {
     background-color: #c0c0c0;
 }
+
 /* 메인 내용 (원래 디자인 유지) */
 .main-content {
     width: 100%;
@@ -68,21 +69,25 @@ body {
     background-color: #007bff;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     margin: 10px 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
 }
 .coin-charge-form button:hover {
     background-color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly prominent shadow */
 }
 .ccf-active-background {
     background-color: #0056b3 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly prominent shadow */
 }
 
 label {
     display: block;
     margin-top: 10px;
 }
-input[type="number"], textarea {
+input[type="number"] {
     width: 90%;
     padding: 10px;
     margin: 10px 0;

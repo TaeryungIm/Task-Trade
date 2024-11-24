@@ -6,9 +6,8 @@ class InquiryCreate(BaseModel):
     user_id:         EmailStr
     inquiry_title:   str
     inquiry_content: str
-    contact_method:  str
 
-    @field_validator('inquiry_title', 'inquiry_content', 'contact_method')
+    @field_validator('inquiry_title', 'inquiry_content')
     def not_empty(cls, v):
         if isinstance(v, str):  # Only strip if the value is a string
             if not v or not v.strip():
@@ -23,4 +22,3 @@ class InquiryEmail(BaseModel):
     user_id:         EmailStr  # Which can work as email account
     inquiry_title:   str
     inquiry_content: str
-    contact_method:  str

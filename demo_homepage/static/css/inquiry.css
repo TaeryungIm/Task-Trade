@@ -51,7 +51,8 @@ body {
 .header .header-menu button:hover {
     background-color: #c0c0c0;
 }
-/* 메인 내용 (원래 디자인 유지) */
+
+/* 메인 내용 (디자인 변경) */
 .main-content {
     width: 100%;
     background-color: #fff;
@@ -59,25 +60,55 @@ body {
     box-sizing: border-box;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+/* Form title */
 .main-content h2 {
+    font-size: 1.8rem; /* Larger title */
+    color: #333; /* Darker text for emphasis */
+    text-align: center; /* Center-align the title */
     margin-bottom: 20px;
 }
-.main-content .inquiry-form .inquiry-submit {
-    width: 30%;
-    padding: 10px;
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 10px 5px;
+
+/* Input and Textarea Styling */
+input[type="text"], textarea {
+    width: 100%; /* Full width within the container */
+    padding: 12px; /* Internal spacing */
+    margin-bottom: 15px; /* Space between elements */
+    border: 1px solid #ddd; /* Softer border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem;
+    font-family: inherit;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth focus interaction */
+    box-sizing: border-box; /* Include padding and border in the width */
+    resize: vertical; /* Allow resizing only vertically */
 }
 
-.main-content .inquiry-form .inquiry-submit:hover {
-    background-color: #007B9E;
+/* Focus effect for inputs */
+input[type="text"]:focus, textarea:focus {
+    border-color: #007bff; /* Highlight border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Subtle glow */
+    outline: none; /* Remove default outline */
 }
-input[type="text"], textarea {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
+
+/* Submit button */
+.inquiry-submit {
+    width: 50%; /* Full width button */
+    margin: 0 auto;
+    display: block;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    text-align: center; /* Center-align the text */
+}
+
+/* Hover effect for submit button */
+.inquiry-submit:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly prominent shadow */
 }

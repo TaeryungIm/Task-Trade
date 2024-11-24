@@ -15,13 +15,12 @@ EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD_DEFAULT")
 
 
 # Email-sending function
-def send_email(from_email: str, subject: str, message: str, contact_method: str):
+def send_email(from_email: str, subject: str, message: str):
     # Create the email message
     msg = MIMEMultipart()
     msg["From"] = from_email
     msg["To"] = EMAIL_TARGET
     msg["Subject"] = subject
-    msg["Contact method"] = contact_method
     msg.attach(MIMEText(message, "plain"))
 
     # Send the email using SMTP

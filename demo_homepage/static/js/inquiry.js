@@ -114,13 +114,11 @@ function link_coin_exchange(event) {
 function postInquiry(userid) {
     var inq_title = document.getElementById('inquiry-title').value;
     var inq_content = document.getElementById('inquiry-content').value;
-    var inq_contact = document.querySelector('input[name="contact-method"]:checked').value;
 
     var inquiry_data = {
         user_id: userid,
         inquiry_title: inq_title,
-        inquiry_content: inq_content,
-        contact_method: inq_contact
+        inquiry_content: inq_content
     };
 
     var jsonstr = JSON.stringify(inquiry_data);
@@ -149,13 +147,11 @@ function postInquiry(userid) {
 function sendInquiry(userid) {
     var inq_title = document.getElementById('inquiry-title').value;
     var inq_content = document.getElementById('inquiry-content').value;
-    var inq_contact = document.querySelector('input[name="contact-method"]:checked').value;
 
     var inquiry_data = {
         user_id: userid,
         inquiry_title: inq_title,
-        inquiry_content: inq_content,
-        contact_method: inq_contact
+        inquiry_content: inq_content
     };
 
     var jsonstr = JSON.stringify(inquiry_data);
@@ -173,7 +169,6 @@ function sendInquiry(userid) {
             // Clear the form fields
             document.getElementById('inquiry-title').value = '';
             document.getElementById('inquiry-content').value = '';
-            document.querySelector('input[name="contact-method"]:checked').checked = false;
         } else if (xhr.status === 422) {  // Handle validation errors
             let response = JSON.parse(xhr.responseText);
             let errorMessages = response.detail.map(error => error.msg).join("\n");
