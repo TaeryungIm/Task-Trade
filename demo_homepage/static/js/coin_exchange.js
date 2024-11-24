@@ -26,6 +26,7 @@ window.onload = async function() {
 
     // disable the exchange button
     document.querySelector('.coin-exchange-submit').disabled = true;
+    document.querySelector('.coin-exchange-submit').classList.add('cef-active-background');
 
     if (!accessToken) {
         // User is logged out
@@ -126,6 +127,7 @@ async function selectWithdrawMethod(event){
 
     // disable the exchange button
     document.querySelector('.coin-exchange-submit').disabled = false;
+    document.querySelector('.coin-exchange-submit').classList.remove('cef-active-background');
 }
 
 async function handleCoinExchange(event){

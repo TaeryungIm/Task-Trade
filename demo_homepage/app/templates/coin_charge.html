@@ -43,7 +43,7 @@
                 <input type="number" id="coin-input" placeholder="100¢ 단위로 입력해 주세요" required min="100" step="100"><br>
 
                 <label for="deposit-select">충전 수단 선택</label>
-                <input type="button" id="deposit-select" value="충전 수단 선택"><br>
+                <button id="deposit-select" onclick="selectDepositMethod(event)">충전 수단 선택하기</button>
 
                 <label><input id="caution-check" type="checkbox" required> 충전시 주의사항을 모두 읽었습니다.</label><br>
                 <label><input id="term-condition-check" type="checkbox" required> 배정 약관에 모두 동의합니다.</label><br>

@@ -20,6 +20,10 @@ window.onload = async function() {
     const charge_button = document.getElementById('charge-btn');
     charge_button.style.color = '#007bff';
 
+    // disable the charge button
+    document.querySelector('.coin-charge-submit').disabled = true;
+    document.querySelector('.coin-charge-submit').classList.add('ccf-active-background');
+
     if (!accessToken) {
         // User is logged out
         alert("please log in!");
@@ -104,6 +108,15 @@ function link_inquiry(event) {
 function link_coin_exchange(event) {
     event.preventDefault();
     window.location.replace("/exchange");
+}
+
+async function selectDepositMethod(event){
+    event.preventDefault();
+    alert("충전수단이 선택되었습니다!");
+
+    // disable the charge button
+    document.querySelector('.coin-charge-submit').disabled = false;
+    document.querySelector('.coin-charge-submit').classList.remove('ccf-active-background');
 }
 
 async function handleCoinCharge(event) {

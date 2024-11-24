@@ -62,7 +62,7 @@ body {
 .main-content h2 {
     margin-bottom: 20px;
 }
-.main-content .coin-charge-form .coin-charge-submit, input[type="button"]  {
+.coin-charge-form button {
     width: 95%;
     padding: 10px;
     background-color: #007bff;
@@ -71,9 +71,13 @@ body {
     cursor: pointer;
     margin: 10px 0;
 }
-.main-content .coin-charge-form .coin-charge-submit:hover, input[type="button"]:hover {
+.coin-charge-form button:hover {
     background-color: #0056b3;
 }
+.ccf-active-background {
+    background-color: #0056b3 !important;
+}
+
 label {
     display: block;
     margin-top: 10px;
