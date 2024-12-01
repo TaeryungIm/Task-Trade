@@ -1,6 +1,7 @@
-from sys import prefix
+from smtplib import SMTPException
 
 from fastapi import APIRouter, HTTPException, Depends, Form, Request
+from pydantic import EmailStr
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import scoped_session
 from starlette.templating import Jinja2Templates
@@ -8,9 +9,10 @@ from starlette.responses import JSONResponse, HTMLResponse
 
 from app.database.database import get_db, SessionLocal
 
-from app.account_system.account_schema import UserCreate, UserUpdate
+from app.account_system.account_schema import UserCreate, UserUpdate, UserIDRequest
 from app.account_system.account_db import get_existing_user, get_user_by_id, pwd_context
 from app.account_system.account_db import create_user, update_user
+from app.account_system.account_email import send_verification_email_userid
 
 session = scoped_session(SessionLocal)
 templates = Jinja2Templates(directory="app/templates")
@@ -21,6 +23,10 @@ account = APIRouter(
 
 update = APIRouter(
     prefix="/account/update",
+)
+
+verify = APIRouter(
+    prefix="/account/verify"
 )
 
 
@@ -107,4 +113,19 @@ async def upd_user_data(userdata: UserUpdate, db: session = Depends(get_db)):
     except IntegrityError as e:
         db.rollback()
         print(f"Error occurred: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@verify.post("/userid")
+async def open_verify_id(request: UserIDRequest):
+    try:
+        # Call the email sending function
+        verify_code = send_verification_email_userid(request.user_id)
+
+        return {"verification_code": verify_code, "message": "Verification email sent successfully."}
+    except SMTPException as e:
+        print(f"SMTP Error occurred: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to send verification email.")
+    except Exception as e:
+        print(f"Unexpected Error occurred: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
