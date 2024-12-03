@@ -22,14 +22,17 @@
             </div>
             <div class="form-group">
                 <label for="userid">아이디(이메일 입력)</label>
-                <div class="input-group">
+                <div class="input-group" id="input-email-form">
                     <input type="email" id="userid" name="userid" placeholder="user@example.com" required>
                     <button id="verify-email-popup" onclick="verifyEmail(event)">이메일 인증</button>
                     <button id="re-verify-email-popup" onclick="reVerifyEmail(event)">다시 인증하기</button>
                 </div>
-                <div class="input-group">
+                <div class="input-group" id="input-code-form">
                     <input type="text" id="id_verify" name="id_verify" placeholder="인증번호를 입력해주세요" maxlength="6" required>
                     <button id="submit-email-code" onclick="submitCode(event)">인증번호 입력</button>
+                </div>
+                <div id="timer-container">
+                    <span id="timer-display">남은 시간: 00:00</span>
                 </div>
             </div>
             <div class="form-group">

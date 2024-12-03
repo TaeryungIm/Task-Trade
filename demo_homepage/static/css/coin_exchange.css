@@ -79,10 +79,6 @@ body {
     background-color: #0056b3;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-.cef-active-background {
-    background-color: #0056b3 !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly prominent shadow */
-}
 
 label {
     display: block;

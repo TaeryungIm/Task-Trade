@@ -36,7 +36,7 @@
 
         <!-- 메인 내용 -->
         <div class="main-content">
-            <form class="coin-exchange-form" onsubmit="handleCoinExchange(event)">
+            <form class="coin-exchange-form">
                 <h2 id="coin-balance">내 환전가능 코인: 0 ¢</h2>
 
                 <label for="coin-input">환전할 코인</label>
@@ -48,13 +48,11 @@
                     <button id="amount-5000" onclick="increaseCoinStatus(5000, event)">5000¢</button>
                 </div>
 
-                <label for="withdraw-select">환전 수단</label>
-                <button id="withdraw-select" onclick="selectWithdrawMethod(event)">환전 수단 선택하기</button>
-
                 <label><input id="caution-check" type="checkbox" required> 환전시 주의사항을 모두 읽었습니다.</label><br>
                 <label><input id="term-condition-check" type="checkbox" required> 배정 약관에 모두 동의합니다.</label><br>
 
-                <button class="coin-exchange-submit" type="submit">환전하기</button>
+                <label for="withdraw-select">환전 수단</label>
+                <button id="withdraw-select" onclick="selectWithdrawMethod(event)">환전 수단 선택하기</button>
             </form>
         </div>
     </div>
