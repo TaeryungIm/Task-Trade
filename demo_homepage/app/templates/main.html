@@ -10,6 +10,32 @@
 
     <script defer src="/static/js/main.js?v=1.1.0"></script>
 
+    <style>
+        .premium-title {
+            text-align: center; /* 중앙 정렬 */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .dropdown-container {
+            display: flex;
+            justify-content: center; /* 중앙 정렬 */
+            margin-bottom: 20px;
+        }
+
+        .profile-photo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            height: 100px;
+            width: 100px;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 
@@ -27,16 +53,36 @@
     </div>
 
     <div class="container">
+        <!-- Sidebar Section -->
         <div class="sidebar">
-            <div id="state_login" class="state-login">
-                <p>name: TT</p>
-                <p>coin: 100c</p>
-                <p>friend: 40</p>
-                <p>inquiry: n</p>
+            <!-- 프로필 정보 -->
+            <div class="profile-box">
+                <div class="profile-photo">프로필사진</div>
+                <div>
+                    <p>name: TT</p>
+                    <p>coin: 100c</p>
+                    <p>friend: 40</p>
+                </div>
+            </div>
+            <button class="profile-button" onclick="alert('내 정보 변경 페이지로 이동')">내 정보 변경</button>
 
-                <form action='/account/profile' method='get'>
-                    <button type="submit">내 프로필</button>
-                </form>
+            <div class="list-section">
+                <h3>내 퀘스트 목록</h3>
+                <ul>
+                    <li>내 퀘스트 1</li>
+                    <li>내 퀘스트 2</li>
+                    <li>내 퀘스트 3</li>
+                </ul>
+            </div>
+
+            <!-- 관심 퀘스트 목록 -->
+            <div class="list-section">
+                <h3>관심 퀘스트 목록</h3>
+                <ul>
+                    <li>관심 퀘스트 1</li>
+                    <li>관심 퀘스트 2</li>
+                    <li>관심 퀘스트 3</li>
+                </ul>
             </div>
 
             <!-- This is the clickable text styled as a link -->
@@ -45,48 +91,71 @@
 
         <div class="main">
             <!-- New Box Row Section under Header -->
-            <div class="box-row">
-                <!-- 드롭다운 메뉴 유지 -->
-                <div class="pagination-buttons">
-                    <select id="sortOrder">
-                        <option>일일 인기순</option>
-                        <option>주간 인기순</option>
-                        <option>월간 인기순</option>
-                    </select>
-                </div>
+            <div class="premium-title">프리미엄 미션 목록</div>
 
-                <!-- Boxes (initially showing 1-5) -->
+            <div class="box-row">
                 <div class="box" id="box1">Box 1</div>
                 <div class="box" id="box2">Box 2</div>
                 <div class="box" id="box3">Box 3</div>
                 <div class="box" id="box4">Box 4</div>
                 <div class="box" id="box5">Box 5</div>
-
-                <!-- 페이지 네비게이션 버튼 위치 변경 -->
-                <div class="sort-dropdown">
-                    <button onclick="prevPage()"><</button>
-                    <button onclick="nextPage()">></button>
-                </div>
             </div>
 
+            <!-- 드롭다운 메뉴 중앙 정렬 -->
+            <div class="dropdown-container">
+                <select id="sortOrder">
+                    <option>일일 인기순</option>
+                    <option>주간 인기순</option>
+                    <option>월간 인기순</option>
+                </select>
+            </div>
+            
             <!-- Quest and Popular Topic Section -->
             <div class="fixed-boxes">
-                <div>
-                    <h3>퀘스트 목록</h3>
-                    <button class="button">퀘스트 1</button>
-                    <button class="button">퀘스트 2</button>
-                </div>
-                <div>
-                    <h3>실시간 인기 퀘스트 주제</h3>
-                    <ul>
-                        <li>tiktok lite</li>
-                        <li>google</li>
-                        <li>instagram follow</li>
-                    </ul>
+                <div style="width: 100%; text-align: center;">
+                    <!-- 번호 / 제목 / 이름 / 날짜 / 조회 / 추천 테이블 -->
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                        <thead>
+                            <tr style="background-color: #f0f0f0; border-bottom: 1px solid #ddd;">
+                                <th style="padding: 10px; border-right: 1px solid #ddd;">번호</th>
+                                <th style="padding: 10px; border-right: 1px solid #ddd;">제목</th>
+                                <th style="padding: 10px; border-right: 1px solid #ddd;">이름</th>
+                                <th style="padding: 10px; border-right: 1px solid #ddd;">날짜</th>
+                                <th style="padding: 10px; border-right: 1px solid #ddd;">조회</th>
+                                <th style="padding: 10px;">추천</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Example rows (you can dynamically populate this with JS or backend data) -->
+                            <tr>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">1</td>
+                                <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">퀘스트 제목 1</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">사용자1</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">2024.12.01</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">100</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">10</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">2</td>
+                                <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">퀘스트 제목 2</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">사용자2</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">2024.12.01</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">80</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">8</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">3</td>
+                                <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">퀘스트 제목 3</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">사용자3</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">2024.12.01</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">60</td>
+                                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">6</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-            <!-- 추가 페이지 내용을 여기에 표시 -->
         </div>
     </div>
 
