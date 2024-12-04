@@ -44,7 +44,7 @@ async function handleInquiry(event) {
     }
 
     postInquiry(userid);
-    sendInquiry(userid);
+//    sendInquiry(userid);
 }
 
 async function getUserId(accessToken){
@@ -144,37 +144,37 @@ function postInquiry(userid) {
 }
 
 // send posted inquiry to the designated email
-function sendInquiry(userid) {
-    var inq_title = document.getElementById('inquiry-title').value;
-    var inq_content = document.getElementById('inquiry-content').value;
-
-    var inquiry_data = {
-        user_id: userid,
-        inquiry_title: inq_title,
-        inquiry_content: inq_content
-    };
-
-    var jsonstr = JSON.stringify(inquiry_data);
-
-    // Make the AJAX request
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/inquiry/send_email");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(jsonstr);
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            alert("메일이 성공적으로 전송 되었습니다!");
-
-            // Clear the form fields
-            document.getElementById('inquiry-title').value = '';
-            document.getElementById('inquiry-content').value = '';
-        } else if (xhr.status === 422) {  // Handle validation errors
-            let response = JSON.parse(xhr.responseText);
-            let errorMessages = response.detail.map(error => error.msg).join("\n");
-            alert("Validation Error: " + errorMessages);
-        } else {
-            alert("Error posting quest: " + xhr.responseText);
-        }
-    };
-}
+//function sendInquiry(userid) {
+//    var inq_title = document.getElementById('inquiry-title').value;
+//    var inq_content = document.getElementById('inquiry-content').value;
+//
+//    var inquiry_data = {
+//        user_id: userid,
+//        inquiry_title: inq_title,
+//        inquiry_content: inq_content
+//    };
+//
+//    var jsonstr = JSON.stringify(inquiry_data);
+//
+//    // Make the AJAX request
+//    var xhr = new XMLHttpRequest();
+//    xhr.open("POST", "/inquiry/send_email");
+//    xhr.setRequestHeader("Content-Type", "application/json");
+//    xhr.send(jsonstr);
+//
+//    xhr.onload = function() {
+//        if (xhr.status === 200) {
+//            alert("메일이 성공적으로 전송 되었습니다!");
+//
+//            // Clear the form fields
+//            document.getElementById('inquiry-title').value = '';
+//            document.getElementById('inquiry-content').value = '';
+//        } else if (xhr.status === 422) {  // Handle validation errors
+//            let response = JSON.parse(xhr.responseText);
+//            let errorMessages = response.detail.map(error => error.msg).join("\n");
+//            alert("Validation Error: " + errorMessages);
+//        } else {
+//            alert("Error posting quest: " + xhr.responseText);
+//        }
+//    };
+//}

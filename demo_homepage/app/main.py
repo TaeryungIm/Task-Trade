@@ -26,6 +26,7 @@ app.add_middleware(
 
 app.include_router(account_router.account)
 app.include_router(account_router.update)
+app.include_router(account_router.verify)
 app.include_router(quest_router.quest)
 app.include_router(inquiry_router.inquiry)
 app.include_router(coin_charge_router.charge)

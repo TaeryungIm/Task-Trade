@@ -24,10 +24,6 @@ window.onload = async function() {
     const exchange_button = document.getElementById('exchange-btn');
     exchange_button.style.color = '#007bff';
 
-    // disable the exchange button
-    document.querySelector('.coin-exchange-submit').disabled = true;
-    document.querySelector('.coin-exchange-submit').classList.add('cef-active-background');
-
     if (!accessToken) {
         // User is logged out
         alert("please log in!");
@@ -125,9 +121,8 @@ async function selectWithdrawMethod(event){
     event.preventDefault();
     alert("환전수단이 선택되었습니다!");
 
-    // disable the exchange button
-    document.querySelector('.coin-exchange-submit').disabled = false;
-    document.querySelector('.coin-exchange-submit').classList.remove('cef-active-background');
+    // generate coin exchanging function
+    handleCoinExchange(event);
 }
 
 async function handleCoinExchange(event){

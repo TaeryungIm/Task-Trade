@@ -45,3 +45,7 @@ class UserUpdate(BaseModel):
         elif v is None:  # Handle the case where the field is None
             raise ValueError('빈칸을 채워주세요')
         return v
+
+
+class UserIDRequest(BaseModel):
+    user_id: str
