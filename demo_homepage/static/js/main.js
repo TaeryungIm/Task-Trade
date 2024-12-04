@@ -1,11 +1,5 @@
 // Define variables globally
-const questBtn = document.getElementById('quest-btn');
-const inquiryBtn = document.getElementById('inquiry-btn');
-const chargeBtn = document.getElementById('charge-btn');
-const exchangeBtn = document.getElementById('exchange-btn');
-const loginBtn = document.getElementById('login-btn');
-const logoutBtn = document.getElementById('logout-btn');
-const user_info = document.getElementById('state_login');
+const user_section = document.getElementById('user-section');
 const sidebar_login = document.getElementById('sidebar-login');
 let current_page = 1;
 
@@ -26,25 +20,18 @@ const tokenManager = {
 window.onload = function() {
     const accessToken = tokenManager.getToken();
 
+
     if (accessToken) {
         // User is logged in
-        loginBtn.style.display = 'none';
-        questBtn.style.display = 'block';
-        inquiryBtn.style.display = 'block';
-        chargeBtn.style.display = 'block';
-        exchangeBtn.style.display = 'block';
-        logoutBtn.style.display = 'block';
-        user_info.style.display = 'block';
+        document.getElementById('logged-in-headers').style.display = 'block';
+        document.getElementById('logged-out-headers').style.display = 'none';
+        user_section.style.display = 'block';
         sidebar_login.style.display = 'none';
     } else {
         // User is logged out
-        loginBtn.style.display = 'block';
-        questBtn.style.display = 'none';
-        inquiryBtn.style.display = 'none';
-        chargeBtn.style.display = 'none';
-        exchangeBtn.style.display = 'none';
-        logoutBtn.style.display = 'none';
-        user_info.style.display = 'none';
+        document.getElementById('logged-in-headers').style.display = 'none';
+        document.getElementById('logged-out-headers').style.display = 'block';
+        user_section.style.display = 'none';
         sidebar_login.style.display = 'block';
     }
 
@@ -70,18 +57,16 @@ function logout() {
 
     // Update the UI
     alert("로그아웃 되었습니다!");
-    loginBtn.style.display = 'block';
-    questBtn.style.display = 'none';
-    inquiryBtn.style.display = 'none';
-    chargeBtn.style.display = 'none';
-    exchangeBtn.style.display = 'none';
-    logoutBtn.style.display = 'none';
-    user_info.style.display = 'none';
+    document.getElementById('logged-in-headers').style.display = 'none';
+    document.getElementById('logged-out-headers').style.display = 'block';
+    user_section.style.display = 'none';
     sidebar_login.style.display = 'block';
 }
 
 // Link API function to quest_window page
 function link_quest() {
+    const loginBtn = document.getElementById('login-btn');
+
     // If not logged in, link to login page
     if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
         alert("로그인 해주세요!");
@@ -95,6 +80,8 @@ function link_quest() {
 
 // Link API function to inquiry page
 function link_inquiry() {
+    const loginBtn = document.getElementById('login-btn');
+
     // If not logged in, link to login page
     if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
         alert("로그인 해주세요!");
@@ -108,6 +95,8 @@ function link_inquiry() {
 
 // Link API function to coin charge page
 function link_coin_charge() {
+    const loginBtn = document.getElementById('login-btn');
+
     // If not logged in, link to login page
     if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
         alert("로그인 해주세요!");
@@ -121,6 +110,8 @@ function link_coin_charge() {
 
 // Link API function to coin exchange page
 function link_coin_exchange() {
+    const loginBtn = document.getElementById('login-btn');
+
     // If not logged in, link to login page
     if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
         alert("로그인 해주세요!");

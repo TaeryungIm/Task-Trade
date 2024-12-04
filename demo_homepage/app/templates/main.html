@@ -16,51 +16,57 @@
         <img src="/static/images/main_logo.png" alt="Main Logo">
 
         <div class="header-buttons">
-            <button id="quest-btn" onclick="link_quest()">퀘스트 등록</button>
-            <button id="inquiry-btn" onclick="link_inquiry()">문의하기</button>
-            <button id="charge-btn" onclick="link_coin_charge()">충전하기</button>
-            <button id="exchange-btn" onclick="link_coin_exchange()">환전하기</button>
-            <button id="login-btn" onclick="login()">로그인</button>
-            <button id="logout-btn" onclick="logout()">로그아웃</button>
+            <div id="logged-in-headers">
+                <button id="quest-btn" onclick="link_quest()">퀘스트 등록</button>
+                <button id="inquiry-btn" onclick="link_inquiry()">문의하기</button>
+                <button id="charge-btn" onclick="link_coin_charge()">충전하기</button>
+                <button id="exchange-btn" onclick="link_coin_exchange()">환전하기</button>
+                <button id="logout-btn" onclick="logout()">로그아웃</button>
+            </div>
+            <div id="logged-out-headers">
+                <button id="login-btn" onclick="login()">로그인</button>
+            </div>
         </div>
     </div>
 
     <div class="container">
         <!-- Sidebar Section -->
         <div class="sidebar">
-            <!-- Profile Section -->
-            <div class="profile-box">
-                <div class="profile-photo">프로필사진</div>
-                <div>
-                    <p>name: TT</p>
-                    <p>coin: 100c</p>
-                    <p>friend: 40</p>
+            <div id="user-section">
+                <!-- Profile Section -->
+                <div class="profile-box">
+                    <div class="profile-photo">
+                        <img src="/static/images/taeyun329.png" alt="프로필사진">
+                    </div>
+                    <p id="user-name">name: TT</p>
+                    <p id="user-coin">coin: 100c</p>
+                    <p id="user-friend">friend: 40</p>
+                </div>
+
+                <form action='/account/profile' method='get'>
+                    <button type="submit">내 프로필</button>
+                </form>
+
+                <!-- My Quest List -->
+                <div class="list-section" id="my-quest">
+                    <h3>내 퀘스트 목록</h3>
+                    <ul>
+                        <li>내 퀘스트 1</li>
+                        <li>내 퀘스트 2</li>
+                        <li>내 퀘스트 3</li>
+                    </ul>
+                </div>
+
+                <!-- Favorite Quest List -->
+                <div class="list-section" id="like-quest">
+                    <h3>관심 퀘스트 목록</h3>
+                    <ul>
+                        <li>관심 퀘스트 1</li>
+                        <li>관심 퀘스트 2</li>
+                        <li>관심 퀘스트 3</li>
+                    </ul>
                 </div>
             </div>
-            <form action='/account/profile' method='get'>
-                <button type="submit">내 프로필</button>
-            </form>
-
-            <!-- My Quest List -->
-            <div class="list-section">
-                <h3>내 퀘스트 목록</h3>
-                <ul>
-                    <li>내 퀘스트 1</li>
-                    <li>내 퀘스트 2</li>
-                    <li>내 퀘스트 3</li>
-                </ul>
-            </div>
-
-            <!-- Favorite Quest List -->
-            <div class="list-section">
-                <h3>관심 퀘스트 목록</h3>
-                <ul>
-                    <li>관심 퀘스트 1</li>
-                    <li>관심 퀘스트 2</li>
-                    <li>관심 퀘스트 3</li>
-                </ul>
-            </div>
-
             <!-- Login Prompt -->
             <span id="sidebar-login" class="submit-text" onclick="login()">로그인을 하세요</span>
         </div>

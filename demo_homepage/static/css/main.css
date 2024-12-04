@@ -77,9 +77,17 @@ body {
     color: #666;
 }
 
+.profile-photo img {
+    width: 100%; /* Ensure the image fills the container */
+    height: 100%; /* Ensure the image fills the container */
+    object-fit: cover; /* Maintain aspect ratio and fill container */
+}
+
 .profile-box p {
     margin: 0;
-    font-size: 14px;
+    font-size: 18px; /* Increase text size */
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Ensure good contrast */
 }
 
 .profile-button {
