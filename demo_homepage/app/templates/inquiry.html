@@ -11,26 +11,24 @@
     <script defer src="/static/js/inquiry.js?v=1.1.0"></script>
 </head>
 <body>
-
     <!-- 상단 메뉴바 -->
     <div class="header">
         <img src="/static/images/main_logo.png" alt="Main Logo">
         <div class="header-menu">
-            <button id="quest-btn" onclick="link_quest(event)">퀘스트 등록</button>
+            <button id="quest-btn" onclick="link_quest()">퀘스트 등록</button>
             <button id="inquiry-btn">문의하기</button>
-            <button id="charge-btn" onclick="link_coin_charge(event)">충전하기</button>
-            <button id="exchange-btn" onclick="link_coin_exchange(event)">환전하기</button>
-            <button id="logout-btn" onclick="logout(event)">로그아웃</button>
+            <button id="coin-account-btn" onclick="link_coin_account()">내 계좌</button>
+            <button id="logout-btn" onclick="logout()">로그아웃</button>
         </div>
     </div>
 
     <div class="container">
         <!-- 왼쪽 사이드바 -->
         <div class="sidebar">
-            <p>name: TT</p>
-            <p>coin: 100c</p>
-            <p>friend: 40</p>
-            <p>inquiry: n</p>
+            <p>이름: TT</p>
+            <p>코인: 100c</p>
+            <p>친구: 40</p>
+            <p>문의: n</p>
         </div>
 
         <!-- 메인 내용 -->
@@ -45,9 +43,7 @@
 
                 <button class="inquiry-submit" type="submit">문의 보내기</button>
             </form>
-
         </div>
     </div>
-
 </body>
 </html>

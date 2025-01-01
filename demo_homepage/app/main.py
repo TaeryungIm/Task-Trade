@@ -9,7 +9,7 @@ from app.account_system import account_router
 from app.login_system import login_router
 from app.quest_system import quest_router
 from app.inquiry_system import inquiry_router
-from app.coin_system import coin_charge_router, coin_exchange_router
+from app.coin_system import coin_router, coin_charge_router, coin_exchange_router, coin_history_router
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
@@ -29,8 +29,10 @@ app.include_router(account_router.update)
 app.include_router(account_router.verify)
 app.include_router(quest_router.quest)
 app.include_router(inquiry_router.inquiry)
+app.include_router(coin_router.coin)
 app.include_router(coin_charge_router.charge)
 app.include_router(coin_exchange_router.exchange)
+app.include_router(coin_history_router.history)
 app.include_router(login_router.login)
 
 

@@ -20,7 +20,6 @@ const tokenManager = {
 window.onload = function() {
     const accessToken = tokenManager.getToken();
 
-
     if (accessToken) {
         // User is logged in
         document.getElementById('logged-in-headers').style.display = 'block';
@@ -93,8 +92,8 @@ function link_inquiry() {
     }
 }
 
-// Link API function to coin charge page
-function link_coin_charge() {
+// Link API function to coin account page
+function link_coin_account() {
     const loginBtn = document.getElementById('login-btn');
 
     // If not logged in, link to login page
@@ -104,22 +103,7 @@ function link_coin_charge() {
     }
     // If logged in, link to exchange page
     else {
-        window.location.href = '/charge';
-    }
-}
-
-// Link API function to coin exchange page
-function link_coin_exchange() {
-    const loginBtn = document.getElementById('login-btn');
-
-    // If not logged in, link to login page
-    if (loginBtn.style.display === 'block') {  // Assuming loginBtn is visible when not logged in
-        alert("로그인 해주세요!");
-        window.location.href = '/login';
-    }
-    // If logged in, link to exchange page
-    else {
-        window.location.href = '/exchange';
+        window.location.href = '/coin';
     }
 }
 

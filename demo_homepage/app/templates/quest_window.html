@@ -7,27 +7,23 @@
 
     <!-- Link to external CSS -->
     <link rel="stylesheet" href="/static/css/quest_window.css?v=1.1.0">
-
     <script defer src="/static/js/quest_window.js?v=1.1.0"></script>
-
 </head>
 <body>
-
     <!-- 상단 메뉴바 -->
     <div class="header">
         <img src="/static/images/main_logo.png" alt="Main Logo">
         <div class="header-menu">
             <button id="quest-btn">퀘스트 등록</button>
-            <button id="inquiry-btn" onclick="link_inquiry(event)">문의하기</button>
-            <button id="charge-btn" onclick="link_coin_charge(event)">충전하기</button>
-            <button id="exchange-btn" onclick="link_coin_exchange(event)">환전하기</button>
-            <button id="logout-btn" onclick="logout(event)">로그아웃</button>
+            <button id="inquiry-btn" onclick="link_inquiry()">문의하기</button>
+            <button id="coin-account-btn" onclick="link_coin_account()">내 계좌</button>
+            <button id="logout-btn" onclick="logout()">로그아웃</button>
         </div>
     </div>
 
-    <!-- Main Container with Sidebar on the Left and Content on the Right -->
+    <!-- Main Container -->
     <div class="container">
-        <!-- Sidebar Section on the left side -->
+        <!-- Sidebar Section -->
         <div class="sidebar">
             <p>name: TT</p>
             <p>coin: 100c</p>
@@ -35,26 +31,27 @@
             <p>inquiry: n</p>
         </div>
 
-        <!-- Main Content Section on the right side -->
+        <!-- Main Content Section -->
         <div class="main-content">
-            <!-- Quest Form Section -->
+            <!-- Quest Form -->
             <form class="quest-form" onsubmit="postQuest(event)">
-                <input id="quest-title" type="text" placeholder="quest title">
-                <textarea id="quest-type" placeholder="type of quest"></textarea>
-                <input id="quest-content" type="text" placeholder="quest specific contents">
+                <input id="quest-title" type="text" placeholder="Quest Title" required>
+                <textarea id="quest-type" placeholder="Type of Quest" required></textarea>
+                <textarea id="quest-content" placeholder="Quest Specific Content" required></textarea>
                 <div class="buttons">
-                    <button>button to add image</button>
-                    <button type="submit">button to save quest</button>
+                    <button type="button">Add Image</button>
+                    <button type="submit">Save Quest</button>
                 </div>
             </form>
-            <!-- Title and Quest List Section -->
+
+            <!-- Quest List Section -->
             <div class="title-box">
-                <p>title - 리워드 신청목록</p>
+                <p>Title - 리워드 신청목록</p>
             </div>
             <div class="quest-list">
                 <div class="fixed-boxes">
-                    <div>quest 1</div>
-                    <div>name participant</div>
+                    <div>Quest 1</div>
+                    <div>Name Participant</div>
                 </div>
             </div>
         </div>

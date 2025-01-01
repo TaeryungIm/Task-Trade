@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Dashboard</title>
+
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="/static/css/coin_main.css?v=1.0.0">
+
+    <!-- Link to external JS -->
+    <script defer src="/static/js/coin_main.js?v=1.0.0"></script>
+</head>
+<body>
+    <div class="header">
+        <img src="/static/images/main_logo.png" alt="Main Logo">
+
+        <div class="header-buttons">
+            <div id="logged-in-headers">
+                <button id="quest-btn" onclick="link_quest()">퀘스트 등록</button>
+                <button id="inquiry-btn" onclick="link_inquiry()">문의하기</button>
+                <button id="coin-account-btn">내 계좌</button>
+                <button id="logout-btn" onclick="logout()">로그아웃</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Total Assets Section -->
+        <div class="total-assets">
+            <h2>총 보유자산</h2>
+            <p id="coin-balance">0 COIN</p>
+        </div>
+
+        <!-- Transaction History Section -->
+        <div class="transaction">
+            <div class="tabs">
+                <button class="tab-btn active" role="tab" aria-selected="true"
+                        aria-controls="history" onclick="showTab('history')">내역</button>
+                <button class="tab-btn" role="tab" aria-selected="false"
+                        aria-controls="charge" onclick="showTab('charge')">입금</button>
+                <button class="tab-btn" role="tab" aria-selected="false"
+                        aria-controls="exchange" onclick="showTab('exchange')">출금</button>
+            </div>
+
+            <div class="tab-content" id="history">
+                <div class="transaction-list">
+                    <h2 id="transaction-default">거래내역이 없습니다</h2>
+                </div>
+            </div>
+
+            <div class="tab-content hidden" id="charge" aria-hidden="true">
+                <div id="charge-account">
+                    <p id="registered-account">등록된 계좌: 12345678**** 카카오뱅크</p>
+                    <button id="change-account" onclick="selectChargeMethod(event)">계좌 변경하기</button>
+                </div>
+                <input type="number" min="0" placeholder="입금 금액 (최소 5,000원)" id="charge-input" />
+
+                <p class="alert-message" id="charge-message"></p>
+                <h3 id="charged-coin-amount">총 입금 코인: 0 COIN</h3>
+
+                <button class="transaction-btn" id="charge-btn" onclick="charge(event)">충전하기</button>
+            </div>
+
+            <div class="tab-content hidden" id="exchange" aria-hidden="true">
+                <h3 id="exchange-possible">최대 환전가능 코인: 0 COIN</h3>
+                <input type="number" min="0" placeholder="출금 금액 (최소 1000 COIN)" id="exchange-input"/>
+
+                <div class="exchange-amount-selection">
+                    <button id="amount-100" onclick="increaseCoinStatus(100, event)">100¢</button>
+                    <button id="amount-500" onclick="increaseCoinStatus(500, event)">500¢</button>
+                    <button id="amount-1000" onclick="increaseCoinStatus(1000, event)">1000¢</button>
+                    <button id="amount-5000" onclick="increaseCoinStatus(5000, event)">5000¢</button>
+                </div>
+
+                <p class="alert-message" id="exchange-message"></p>
+                <h3 id="exchanged-coin-amount">총 환전 금액: 0 원</h3>
+
+                <button class="transaction-btn" id="exchange-btn" onclick="exchange(event)">환전하기</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

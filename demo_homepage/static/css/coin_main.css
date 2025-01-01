@@ -1,0 +1,288 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header img {
+    width: 70px;
+    height: 50px;
+}
+
+.header-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.header-buttons button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #d0d0d0;
+    border: none;
+    cursor: pointer;
+}
+
+.header-buttons button:hover {
+    background-color: #c0c0c0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.total-assets {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+}
+
+.total-assets h2 {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.transaction {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Ensures padding is included in width calculations */
+}
+
+.transaction input[type="number"] {
+    width: 100%; /* Ensures input spans the full width of its container */
+    padding: 10px 15px; /* Internal padding */
+    font-size: 16px; /* Font size */
+    color: #333; /* Text color */
+    background-color: #f9f9f9; /* Light gray background */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+    appearance: none; /* Hides spinners (modern browsers) */
+    -moz-appearance: textfield; /* Hides spinners (Firefox) */
+    transition: all 0.3s ease; /* Smooth hover and focus effects */
+    box-sizing: border-box; /* Includes padding/borders in the width */
+}
+
+.transaction input[type="number"]:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Removes default focus outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow on focus */
+}
+
+#transaction-default {
+    text-align: center; /* Center align the text */
+    color: gray; /* Gray text color */
+    font-weight: bold; /* Bold text */
+    margin: 20px 0; /* Add some spacing around the text */
+    font-size: 18px; /* Adjust font size if necessary */
+}
+
+/* transaction tabs */
+.tabs {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    border: none;
+    border-bottom: 2px solid transparent;
+    text-align: center;
+    font-size: 16px;
+}
+
+.tab-btn.active {
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+    background-color: #fafafa;
+    font-weight: bold; /* Bold text */
+}
+
+.tab-content {
+    display: block;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .transaction .tabs {
+        flex-wrap: wrap;
+    }
+}
+
+/* Transaction List */
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between each transaction item */
+    margin-top: 20px;
+}
+
+/* Transaction Item */
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Date Column */
+.transaction-date {
+    font-size: 14px;
+    color: #666;
+    flex: 1; /* Takes space based on content */
+}
+
+/* Details Column */
+.transaction-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 2; /* Takes more space compared to the date */
+}
+
+.transaction-status.deposit {
+    font-size: 16px;
+    color: #28a745; /* Green for deposit */
+    font-weight: bold;
+}
+
+.transaction-status.withdraw {
+    font-size: 16px;
+    color: #dc3545; /* Red for withdraw */
+    font-weight: bold;
+}
+
+.transaction-time {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Amount Column */
+.transaction-amount {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+    flex: 1; /* Takes space based on content */
+}
+
+#charge-account {
+    display: flex; /* Enable flexbox */
+    align-items: center; /* Vertically center items */
+    gap: 10px; /* Add space between the items */
+    margin-bottom: 10px;
+}
+
+#charge-account p {
+    margin: 0; /* Remove default paragraph margin */
+}
+
+#charge-account button {
+    padding: 10px 15px; /* Adjust button padding */
+    background-color: #f9f9f9;
+    font-weight: bold; /* Make text easier to read */
+    text-align: center; /* Center text within the button */
+    border: 1px solid #ccc; /* Add a border for definition */
+    color: #333; /* Darker text color for contrast */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Smooth rounded corners */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#charge-account button:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-color: #bbb; /* Enhance border contrast on hover */
+}
+
+.exchange-amount-selection {
+    display: flex; /* Enable flexbox for horizontal alignment */
+    justify-content: flex-start; /* Align buttons to the left */
+    gap: 8px; /* Add spacing between buttons */
+    margin-top: 10px; /* Add spacing above the button container */
+}
+
+.exchange-amount-selection button {
+    width: 80px; /* Fixed width to prevent long horizontal boxes */
+    height: 40px; /* Set a consistent height for buttons */
+    padding: 5px; /* Reduced padding */
+    font-size: 0.95rem; /* Ensure text is visible */
+    font-weight: bold; /* Make text easier to read */
+    text-align: center; /* Center text within the button */
+    border: 1px solid #ccc; /* Add a border for definition */
+    background-color: #f9f9f9; /* Light background for better visibility */
+    color: #333; /* Darker text color for contrast */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Smooth rounded corners */
+}
+
+.exchange-amount-selection button:hover {
+    background-color: #e0e0e0; /* Slightly darker background on hover */
+    border-color: #bbb; /* Enhance border contrast on hover */
+}
+
+.transaction-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.transaction-btn:hover:not(.disabled) {
+    background-color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Disable button styling */
+.transaction-btn.disabled {
+    background-color: #ccc;
+    color: #999;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.alert-message {
+    color: red;
+}
