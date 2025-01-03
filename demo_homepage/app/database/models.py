@@ -70,18 +70,22 @@ class InquiryTable(Base):
 class QuestTable(Base):
     __tablename__ = "demo_quests"  # Quest Table name
 
-    # quest info
+    # Quest info
     id = Column(Integer, primary_key=True, index=True)
     quest_title = Column(String(50), nullable=False)
     quest_type = Column(String(50), nullable=False)
-    quest_content = Column(String(500), nullable=False)
+    quest_specifics = Column(String(500), nullable=False)  # Specifics are stored here
+    quest_conditions = Column(String(200), nullable=False)  # Comma-separated list of conditions
+    quest_budget = Column(Integer, nullable=False)  # Budget in integer value
+    quest_personnel = Column(Integer, nullable=False)  # Number of participants
+    quest_period = Column(Integer, nullable=False)  # Period in days
     userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE", onupdate="CASCADE"))
 
-    # time info
-    created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
-    updated_at = Column(DateTime, default=datetime.utcnow(), onupdate=datetime.utcnow())
+    # Time info
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    # connection with UserTable
+    # Connection with UserTable
     demo_user = relationship("UserTable", back_populates="demo_quest")
 
 

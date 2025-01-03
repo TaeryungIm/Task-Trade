@@ -31,29 +31,56 @@
             <p>inquiry: n</p>
         </div>
 
-        <!-- Main Content Section -->
         <div class="main-content">
+            <div class="main-content-title">
+                <h2>Task Trade 신규 퀘스트</h2>
+            </div>
             <!-- Quest Form -->
             <form class="quest-form" onsubmit="postQuest(event)">
-                <input id="quest-title" type="text" placeholder="Quest Title" required>
-                <textarea id="quest-type" placeholder="Type of Quest" required></textarea>
-                <textarea id="quest-content" placeholder="Quest Specific Content" required></textarea>
+                <!-- Task Type Selection -->
+                <label for="task-type">퀘스트 타입:</label>
+                <div class="task-type" id="task-type">
+                    <button type="button" value="홍보" onclick="taskTypeSpecifics(1, this)" class="active">홍보</button>
+                    <button type="button" value="리뷰" onclick="taskTypeSpecifics(2, this)">리뷰</button>
+                    <button type="button" value="컨텐츠 사용" onclick="taskTypeSpecifics(3, this)">컨텐츠 사용</button>
+                    <button type="button" value="기타" onclick="taskTypeSpecifics(4, this)">기타</button>
+                </div>
+                <div id="task-specifics" class="task-specifics"></div>
+
+                <!-- Task Title -->
+                <label for="quest-title">퀘스트 제목:</label>
+                <input id="quest-title" type="text" placeholder="50자 이내의 제목을 적어주세요" required>
+
+                <!-- Task Specifics -->
+                <label for="quest-content">퀘스트 세부사항:</label>
+                <textarea id="quest-content" placeholder="500자 이내로 세부사항을 적어주세요" required></textarea>
+
+                <!-- Conditions -->
+                <label for="conditions">수행자 조건 여부:</label>
+                <select id="conditions" multiple required>
+                    <option value="나이">나이</option>
+                    <option value="성별">성별</option>
+                    <option value="지역">지역</option>
+                    <option value="기타">기타</option>
+                </select>
+
+                <!-- Budget and Personnel -->
+                <label for="task-budget">총 예산 (COIN):</label>
+                <input id="task-budget" type="number" min="0" placeholder="Enter Budget" required>
+                <label for="task-personnel">Personnel:</label>
+                <input id="task-personnel" type="number" min="1" placeholder="Number of Participants" required>
+
+                <!-- Task Period -->
+                <label for="task-period">Task Period:</label>
+                <input id="task-period" type="range" min="1" max="30" value="7" id="period-range" oninput="updatePeriodLabel()">
+                <span id="period-label">7 Days</span>
+
+                <!-- Buttons -->
                 <div class="buttons">
                     <button type="button">Add Image</button>
-                    <button type="submit">Save Quest</button>
+                    <button type="submit">Save Task</button>
                 </div>
             </form>
-
-            <!-- Quest List Section -->
-            <div class="title-box">
-                <p>Title - 리워드 신청목록</p>
-            </div>
-            <div class="quest-list">
-                <div class="fixed-boxes">
-                    <div>Quest 1</div>
-                    <div>Name Participant</div>
-                </div>
-            </div>
         </div>
     </div>
 </body>

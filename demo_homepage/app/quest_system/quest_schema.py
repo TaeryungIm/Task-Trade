@@ -1,39 +1,56 @@
 from datetime import datetime
-from pydantic import BaseModel, field_validator, EmailStr
+from typing import Optional
+from pydantic import BaseModel, field_validator, EmailStr, Field, root_validator
 
 
-# quest model for quest making
 class QuestCreate(BaseModel):
-    user_id:         EmailStr
-    quest_title:     str
-    quest_type:      str
-    quest_content:   str
+    user_id: EmailStr
+    quest_type: str = Field(..., max_length=50, description="Type of the quest")  # Limit length for safety
+    quest_title: str = Field(..., max_length=50, description="Title of the quest")
+    quest_specifics: str = Field(..., max_length=500, description="Details of the quest")
+    quest_conditions: str = Field(..., max_length=200, description="Conditions for participation")
+    quest_budget: int = Field(..., ge=0, description="Budget for the quest, must be >= 0")
+    quest_personnel: int = Field(..., ge=1, description="Number of participants, must be >= 1")
+    quest_period: int = Field(..., ge=1, le=365, description="Period in days, 1-365 days allowed")
 
-    @field_validator('quest_title', 'quest_content', 'quest_type')
-    def not_empty(cls, v):
-        if isinstance(v, str):  # Only strip if the value is a string
-            if not v or not v.strip():
-                raise ValueError('빈칸을 채워주세요')  # "Please fill in the blank" in Korean
-        elif v is None:  # Handle the case where the field is None
-            raise ValueError('빈칸을 채워주세요')
+    @field_validator('quest_type', 'quest_title', 'quest_specifics', 'quest_conditions', mode='after')
+    def not_empty_string(cls, v):
+        if not v.strip():
+            raise ValueError('빈칸을 채워주세요')  # "Please fill in the blank" in Korean
+        return v
+
+    @field_validator('quest_budget', 'quest_personnel', 'quest_period', mode='after')
+    def positive_values(cls, v):
+        if v is None or v < 0:
+            raise ValueError('빈칸을 채워주세요')  # Handle invalid numeric fields as well
         return v
 
 
-# quest model for quest update
 class QuestUpdate(BaseModel):
-    user_id:            EmailStr
-    quest_title_upd:    str | None = None
-    quest_type_upd:     str | None = None
-    quest_content_upd:  str | None = None
-    update_time:        datetime | None = None
+    user_id: EmailStr
+    quest_type_upd: Optional[str] = Field(None, max_length=50, description="Type of the quest")
+    quest_title_upd: Optional[str] = Field(None, max_length=50, description="Title of the quest")
+    quest_specifics_upd: Optional[str] = Field(None, max_length=500, description="Details of the quest")
+    quest_conditions_upd: Optional[str] = Field(None, max_length=200, description="Conditions for participation")
+    quest_budget_upd: Optional[int] = Field(None, ge=0, description="Budget for the quest, must be >= 0")
+    quest_personnel_upd: Optional[int] = Field(None, ge=1, description="Number of participants, must be >= 1")
+    quest_period_upd: Optional[int] = Field(None, ge=1, le=365, description="Period in days, 1-365 days allowed")
+    update_time: Optional[datetime] = Field(None, description="Time of the update")
 
-    @field_validator('quest_title_upd', 'quest_type_upd', 'quest_content_upd', mode="before")
-    @staticmethod
-    def check_not_all_fields_empty(v, values):
-        # Ensure at least one of the fields is provided
-        if not any([values.get('quest_title_upd'), values.get('quest_type_upd'), values.get('quest_content_up')]):
-            raise ValueError("At least one field must be provided!")
-        return v
+    @root_validator(pre=True)
+    def check_not_all_fields_empty(cls, values):
+        # Ensure at least one of the update fields is provided
+        if not any([
+            values.get('quest_type_upd'),
+            values.get('quest_title_upd'),
+            values.get('quest_specifics_upd'),
+            values.get('quest_conditions_upd'),
+            values.get('quest_budget_upd'),
+            values.get('quest_personnel_upd'),
+            values.get('quest_period_upd')
+        ]):
+            raise ValueError("At least one field must be provided for the update!")
+        return values
 
 
 class QuestRequest(BaseModel):
@@ -41,8 +58,8 @@ class QuestRequest(BaseModel):
 
 
 class QuestResponse(BaseModel):
-    quest_title:    str
     quest_type:     str
+    quest_title:    str
     user_id:        EmailStr
     updated_at:     datetime
 

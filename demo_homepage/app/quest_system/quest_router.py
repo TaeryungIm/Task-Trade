@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from fastapi import Depends, Request
+from pydantic import ValidationError
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from starlette.responses import HTMLResponse
@@ -29,6 +30,8 @@ async def create_quest_db(quest_create: QuestCreate, db: Session = Depends(get_d
     try:
         create_quest(db, quest_create)
         return {"message": "Quest created successfully!"}
+    except ValidationError as ve:
+        raise HTTPException(status_code=422, detail=ve.errors())
     except IntegrityError as e:
         db.rollback()
         print(f"Error occurred: {str(e)}")
