@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, LargeBinary, Text
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, LargeBinary, Text, Date
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Enum
 from datetime import datetime
@@ -78,7 +78,7 @@ class QuestTable(Base):
     quest_conditions = Column(String(200), nullable=False)  # Comma-separated list of conditions
     quest_budget = Column(Integer, nullable=False)  # Budget in integer value
     quest_personnel = Column(Integer, nullable=False)  # Number of participants
-    quest_period = Column(Integer, nullable=False)  # Period in days
+    quest_period = Column(Date, nullable=False)  # Period in days
     userid = Column(String(50), ForeignKey("demo_users.userid", ondelete="CASCADE", onupdate="CASCADE"))
 
     # Time info

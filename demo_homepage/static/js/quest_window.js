@@ -39,19 +39,73 @@ const tokenManager = {
 // Ensure login status on page load
 window.onload = async function () {
     const accessToken = tokenManager.getToken();
-    const questButton = document.getElementById("quest-btn");
-    questButton.style.color = "#007bff";
-
     if (!accessToken) {
         alert("Please log in!");
         window.location.replace("/login");
+        return;
     }
 
+    // Highlight quest button
+    document.getElementById("quest-btn").style.color = "#007bff";
+
+    // Activate the default task type button
     const defaultButton = document.querySelector(".task-type button.active");
-    if (defaultButton) {
-        taskTypeSpecifics(1, defaultButton); // Activate the default task type
-    }
+    if (defaultButton) taskTypeSpecifics(1, defaultButton);
+
+    // Setup checkbox behavior for conditions
+    setupConditionHandlers();
+
+    // Set today's date as default for task period
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("task-period").value = today;
 };
+
+// Setup condition checkboxes behavior
+function setupConditionHandlers() {
+    document.querySelectorAll("#conditions-container input[type='checkbox']").forEach((checkbox) => {
+        checkbox.addEventListener("change", handleConditionChange);
+    });
+}
+
+// Handle checkbox selection logic
+function handleConditionChange() {
+    const noConditionCheckbox = document.getElementById("condition-none");
+    const conditionMessage = document.querySelector(".condition-message");
+    const selectedCheckboxes = Array.from(
+        document.querySelectorAll("#conditions-container input[type='checkbox']:checked")
+    );
+
+    // Update the message based on the number of selected checkboxes
+    conditionMessage.textContent = selectedCheckboxes.length === 0
+        ? "Please select at least one condition!"
+        : "";
+
+    document.querySelectorAll("#conditions-container .condition-item").forEach((item) => {
+        const checkbox = item.querySelector("input[type='checkbox']");
+        const input = item.querySelector(".condition-input");
+
+        if (noConditionCheckbox.checked) {
+            // Uncheck all other checkboxes before disabling
+            if (checkbox.id !== "condition-none") {
+                checkbox.checked = false;
+                checkbox.disabled = true;
+                if (input) {
+                    input.disabled = true;
+                    input.value = ""; // Clear input field
+                }
+            }
+        } else {
+            // Enable all checkboxes and associated inputs
+            checkbox.disabled = false;
+            if (checkbox.checked && checkbox.id !== "condition-none") {
+                if (input) input.disabled = false; // Enable associated input if checkbox is checked
+            } else if (input) {
+                input.disabled = true;
+                input.value = ""; // Clear input field
+            }
+        }
+    });
+}
 
 // Fetch user ID
 async function getUserId(accessToken) {
@@ -130,7 +184,6 @@ function taskTypeSpecifics(selection, button) {
     taskSpecificsDiv.textContent = taskDescriptions[selection];
 }
 
-// Collect data and send via postQuest
 async function postQuest(event) {
     event.preventDefault(); // Prevent form submission
 
@@ -138,43 +191,63 @@ async function postQuest(event) {
     if (!accessToken) {
         alert("Please log in!");
         window.location.replace("/login");
-        return; // Stop execution if the user is not logged in
+        return;
     }
 
-    // Wait for the user ID to be fetched
     const userId = await getUserId(accessToken);
     if (!userId) {
         alert("Failed to fetch user ID. Please log in again.");
-        return; // Stop execution if user ID could not be retrieved
+        return;
     }
 
-    const taskType = selectedTaskType; // Use the stored selected task type
+    // Collect task conditions
+    const conditions = Array.from(document.querySelectorAll("#conditions-container input[type='checkbox']:checked"))
+        .map((checkbox) => {
+            // Find the closest input with the class "condition-input" within the same condition-item
+            const associatedInput = checkbox.closest(".condition-item").querySelector(".condition-input");
+
+            // Check if the associated input exists and has a value
+            const conditionValue = associatedInput && associatedInput.value.trim();
+            return conditionValue ? `${checkbox.value}:${conditionValue}` : checkbox.value;
+        });
+
+    if (conditions.length === 0 || (conditions.length === 1 && conditions.includes("조건 없음"))) {
+        alert("Please select at least one condition or specify '조건 없음'.");
+        return;
+    }
+
+    const taskType = selectedTaskType;
     const taskTitle = document.getElementById("quest-title").value;
     const taskSpecifics = document.getElementById("quest-content").value;
-    const taskConditions = Array.from(
-      document.getElementById("conditions").selectedOptions
-    ).map(opt => opt.value).join(","); // Convert to comma-separated string
     const taskBudget = parseInt(document.getElementById("task-budget").value, 10);
     const taskPersonnel = parseInt(document.getElementById("task-personnel").value, 10);
-    const taskPeriod = parseInt(document.getElementById("task-period").value, 10);
+    const taskPeriod = document.getElementById("task-period").value;
 
     if (!taskType) {
         alert("Please select a task type!");
-        return; // Stop execution if task type is not selected
+        return;
     }
+
+    alert(`Conditions: ${conditions.join(", ")}\n
+        Task Type: ${taskType}\n
+        Task Title: ${taskTitle}\n
+        Task Specifics: ${taskSpecifics}\n
+        Task Budget: ${taskBudget}\n
+        Task Personnel: ${taskPersonnel}\n
+        Task Period: ${taskPeriod}`);
 
     const taskData = {
         user_id: userId,
         quest_type: taskType,
         quest_title: taskTitle,
         quest_specifics: taskSpecifics,
-        quest_conditions: taskConditions,
+        quest_conditions: conditions.join(", "), // Comma-separated string
         quest_budget: taskBudget,
         quest_personnel: taskPersonnel,
-        quest_period: taskPeriod,
+        quest_period: taskPeriod
     };
 
-    // Send the data to the server
+    // Send data to the server
     try {
         const response = await fetch("/quest/create", {
             method: "POST",
@@ -185,22 +258,17 @@ async function postQuest(event) {
         });
 
         if (response.ok) {
-            alert("Task successfully created!");
-            document.querySelector(".quest-form").reset(); // Reset form after submission
+            alert("성공적으로 퀘스트를 생성했습니다!");
+            document.querySelector(".quest-form").reset(); // Reset form
             selectedTaskType = 1; // Reset to default
             const defaultButton = document.querySelector(".task-type button");
             taskTypeSpecifics(1, defaultButton); // Re-activate the default task type
         } else {
             const errorData = await response.json();
-            if (response.status === 422) {
-                const validationErrors = errorData.detail.map((error) => `${error.loc[1]}: ${error.msg}`).join("\n");
-                alert(`Validation Error:\n${validationErrors}`);
-            } else {
-                alert(`Error ${response.status}: ${errorData.detail || "An unexpected error occurred."}`);
-            }
+            alert(`Failed to create task: ${errorData.detail}`);
         }
     } catch (error) {
         console.error("Error submitting task:", error);
-        alert("An error occurred while communicating with the server. Please check your connection and try again.");
+        alert("An error occurred. Please try again.");
     }
 }

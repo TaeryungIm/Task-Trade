@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from typing import Optional
 from pydantic import BaseModel, field_validator, EmailStr, Field, root_validator
 
@@ -11,7 +11,7 @@ class QuestCreate(BaseModel):
     quest_conditions: str = Field(..., max_length=200, description="Conditions for participation")
     quest_budget: int = Field(..., ge=0, description="Budget for the quest, must be >= 0")
     quest_personnel: int = Field(..., ge=1, description="Number of participants, must be >= 1")
-    quest_period: int = Field(..., ge=1, le=365, description="Period in days, 1-365 days allowed")
+    quest_period: date = Field(..., description="Period in days, yyyy-mm-dd")
 
     @field_validator('quest_type', 'quest_title', 'quest_specifics', 'quest_conditions', mode='after')
     def not_empty_string(cls, v):
@@ -19,10 +19,26 @@ class QuestCreate(BaseModel):
             raise ValueError('빈칸을 채워주세요')  # "Please fill in the blank" in Korean
         return v
 
-    @field_validator('quest_budget', 'quest_personnel', 'quest_period', mode='after')
+    @field_validator('quest_budget', 'quest_personnel', mode='after')
     def positive_values(cls, v):
         if v is None or v < 0:
             raise ValueError('빈칸을 채워주세요')  # Handle invalid numeric fields as well
+        return v
+
+    @field_validator("quest_period", mode="before")
+    def validate_date(cls, v):
+        if isinstance(v, str):
+            # Convert string to `date` if possible
+            try:
+                v = datetime.strptime(v, "%Y-%m-%d").date()
+            except ValueError:
+                raise ValueError("Invalid date format. Please provide a valid date in yyyy-mm-dd.")
+        elif not isinstance(v, date):
+            raise ValueError("Invalid type. Expected a date.")
+
+        # Ensure the date is not in the past
+        if v < date.today():
+            raise ValueError("The date must not be in the past.")
         return v
 
 
@@ -34,7 +50,7 @@ class QuestUpdate(BaseModel):
     quest_conditions_upd: Optional[str] = Field(None, max_length=200, description="Conditions for participation")
     quest_budget_upd: Optional[int] = Field(None, ge=0, description="Budget for the quest, must be >= 0")
     quest_personnel_upd: Optional[int] = Field(None, ge=1, description="Number of participants, must be >= 1")
-    quest_period_upd: Optional[int] = Field(None, ge=1, le=365, description="Period in days, 1-365 days allowed")
+    quest_period_upd: Optional[date] = Field(None, description="Period in days, 1-365 days allowed")
     update_time: Optional[datetime] = Field(None, description="Time of the update")
 
     @root_validator(pre=True)

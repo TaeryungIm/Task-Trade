@@ -38,7 +38,7 @@
             <!-- Quest Form -->
             <form class="quest-form" onsubmit="postQuest(event)">
                 <!-- Task Type Selection -->
-                <label for="task-type">퀘스트 타입:</label>
+                <label for="task-type">퀘스트 타입</label>
                 <div class="task-type" id="task-type">
                     <button type="button" value="홍보" onclick="taskTypeSpecifics(1, this)" class="active">홍보</button>
                     <button type="button" value="리뷰" onclick="taskTypeSpecifics(2, this)">리뷰</button>
@@ -48,32 +48,54 @@
                 <div id="task-specifics" class="task-specifics"></div>
 
                 <!-- Task Title -->
-                <label for="quest-title">퀘스트 제목:</label>
+                <label for="quest-title">퀘스트 제목</label>
                 <input id="quest-title" type="text" placeholder="50자 이내의 제목을 적어주세요" required>
 
                 <!-- Task Specifics -->
-                <label for="quest-content">퀘스트 세부사항:</label>
+                <label for="quest-content">퀘스트 세부 사항</label>
                 <textarea id="quest-content" placeholder="500자 이내로 세부사항을 적어주세요" required></textarea>
 
-                <!-- Conditions -->
-                <label for="conditions">수행자 조건 여부:</label>
-                <select id="conditions" multiple required>
-                    <option value="나이">나이</option>
-                    <option value="성별">성별</option>
-                    <option value="지역">지역</option>
-                    <option value="기타">기타</option>
-                </select>
+                <label for="conditions-container">수행자 조건</label>
+                <div id="conditions-container">
+                    <div class="condition-item">
+                        <input type="checkbox" id="condition-age" value="나이">
+                        <label for="condition-age">나이</label>
+                        <input type="text" class="condition-input" placeholder="나이 제한조건" disabled>
+                    </div>
+                    <div class="condition-item">
+                        <input type="checkbox" id="condition-gender" value="성별">
+                        <label for="condition-gender">성별</label>
+                        <input type="text" class="condition-input" placeholder="성별 제한조건" disabled>
+                    </div>
+                    <div class="condition-item">
+                        <input type="checkbox" id="condition-location" value="지역">
+                        <label for="condition-location">지역</label>
+                        <input type="text" class="condition-input" placeholder="지역 제한조건" disabled>
+                    </div>
+                    <div class="condition-item">
+                        <input type="checkbox" id="condition-other" value="기타">
+                        <label for="condition-other">기타</label>
+                        <input type="text" class="condition-input" placeholder="기타 제한조건" disabled>
+                    </div>
+                    <div class="condition-item">
+                        <input type="checkbox" id="condition-none" value="조건 없음">
+                        <label for="condition-none">조건 없음</label>
+                    </div>
+                    <p class="condition-message"></p>
+                </div>
 
                 <!-- Budget and Personnel -->
-                <label for="task-budget">총 예산 (COIN):</label>
-                <input id="task-budget" type="number" min="0" placeholder="Enter Budget" required>
-                <label for="task-personnel">Personnel:</label>
-                <input id="task-personnel" type="number" min="1" placeholder="Number of Participants" required>
+                <label for="task-budget">총 보상 (COIN)</label>
+                <input id="task-budget" type="number" min="0" placeholder="전체 인원에 대한 보상을 COIN으로 입력하세요" required>
+                <label for="task-personnel">총 목표 인원 수(명):</label>
+                <input id="task-personnel" type="number" min="1" placeholder="총 참여 인원을 입력하세요" required>
 
                 <!-- Task Period -->
-                <label for="task-period">Task Period:</label>
-                <input id="task-period" type="range" min="1" max="30" value="7" id="period-range" oninput="updatePeriodLabel()">
-                <span id="period-label">7 Days</span>
+                <label for="task-period">퀘스트 수행 기간</label>
+                <div class="date-picker">
+                    <input id="task-period" type="date" required>
+                    <span class="calendar-icon">&#128197;</span> <!-- Unicode for calendar icon -->
+                </div>
 
                 <!-- Buttons -->
                 <div class="buttons">

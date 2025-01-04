@@ -28,13 +28,15 @@ async def quest_upload(request: Request):
 @quest.post("/create")
 async def create_quest_db(quest_create: QuestCreate, db: Session = Depends(get_db)):
     try:
+        print(f"Received data: {quest_create.dict()}")
         create_quest(db, quest_create)
         return {"message": "Quest created successfully!"}
     except ValidationError as ve:
+        print(f"Validation error: {ve.json()}")
         raise HTTPException(status_code=422, detail=ve.errors())
     except IntegrityError as e:
         db.rollback()
-        print(f"Error occurred: {str(e)}")
+        print(f"Database error: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 

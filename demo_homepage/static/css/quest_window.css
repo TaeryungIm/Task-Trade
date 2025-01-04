@@ -215,3 +215,55 @@ body {
 .quest-form button[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+#conditions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.condition-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.condition-input {
+    flex: 1;
+    padding: 5px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.condition-message {
+    color: red !important;
+    font-size: 0.9rem;
+}
+
+.date-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.date-picker input[type="date"] {
+    padding: 5px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    appearance: none;
+    width: 100%;
+}
+
+.date-picker .calendar-icon {
+    font-size: 1.2rem;
+    color: #007bff;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+}
