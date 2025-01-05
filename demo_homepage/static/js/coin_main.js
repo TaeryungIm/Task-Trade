@@ -214,6 +214,8 @@ async function charge(event) {
             document.getElementById("coin-balance").textContent = `${responseData.updated_balance} COIN`;
             alert(`총 ${coinInput} COIN 충전했습니다!`);
             document.getElementById("charge-input").value = "";
+            document.getElementById("charged-coin-amount").innerText = "총 입금 코인: 0 COIN";
+            document.getElementById("charged-krw-amount").innerText = "총 입금 금액: 0 원";
         } else {
             throw new Error("Failed to charge");
         }
@@ -252,9 +254,12 @@ async function exchange(event) {
 
         if (response.ok) {
             const responseData = await response.json();
-            document.getElementById("coin-balance").textContent = `${responseData.updated_balance} COIN`;
-
             alert(`총 ${coinInput * 0.9} 원 환전했습니다!`);
+
+            document.getElementById("coin-balance").textContent = `${responseData.updated_balance} COIN`;
+            document.getElementById("exchange-possible").textContent =
+                `최대 환전가능 코인: ${responseData.updated_balance} COIN`;
+            document.getElementById("exchanged-coin-amount").innerText = "총 환전 금액: 0 원";
             document.getElementById("exchange-input").value = "";
         } else {
             throw new Error("Failed to exchange");
@@ -308,6 +313,7 @@ function showTab(tabId) {
 function updateChargedCoinAmount() {
     const chargeInput = document.getElementById("charge-input");
     const chargedCoinAmount = document.getElementById("charged-coin-amount");
+    const chargedKRWAmount = document.getElementById("charged-krw-amount");
     const chargeButton = document.getElementById("charge-btn");
 
     // Add a new paragraph to display messages
@@ -327,13 +333,15 @@ function updateChargedCoinAmount() {
             // Show error message and disable button
             messageParagraph.textContent = "최소 충전 액수는 5000원 입니다.";
             chargedCoinAmount.textContent = "총 입금 코인: 0 COIN";
+            chargedKRWAmount.textContent = "총 입금 금액: 0 원";
             chargeButton.classList.add("disabled");
             chargeButton.disabled = true;
         } else {
             // Clear error and enable button
             messageParagraph.textContent = "";
-            const discountedValue = Math.floor(inputValue * 0.9);
-            chargedCoinAmount.textContent = `총 입금 코인: ${discountedValue} COIN`;
+            const valueWithMargin = Math.floor(inputValue * 1.1);
+            chargedCoinAmount.textContent = `총 입금 코인: ${inputValue} COIN`;
+            chargedKRWAmount.textContent = `총 입금 금액: ${valueWithMargin} 원`;
             chargeButton.classList.remove("disabled");
             chargeButton.disabled = false;
         }

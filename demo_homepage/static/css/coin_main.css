@@ -141,6 +141,11 @@ input[type="number"]::-webkit-outer-spin-button {
     display: none;
 }
 
+.tab-content h3 {
+    color: #007bff;
+    font-weight: bold;
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;

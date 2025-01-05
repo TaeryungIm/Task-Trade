@@ -54,10 +54,11 @@
                     <p id="registered-account">등록된 계좌: 12345678**** 카카오뱅크</p>
                     <button id="change-account" onclick="selectChargeMethod(event)">계좌 변경하기</button>
                 </div>
-                <input type="number" min="0" placeholder="입금 금액 (최소 5,000원)" id="charge-input" />
+                <input type="number" min="0" placeholder="충전 코인 (최소 5,000 COIN)" id="charge-input" />
 
                 <p class="alert-message" id="charge-message"></p>
-                <h3 id="charged-coin-amount">총 입금 코인: 0 COIN</h3>
+                <h4 id="charged-coin-amount">총 입금 코인: 0 COIN</h4>
+                <h3 id="charged-krw-amount">총 입금 금액: 0 원</h3>
 
                 <button class="transaction-btn" id="charge-btn" onclick="charge(event)">충전하기</button>
             </div>
