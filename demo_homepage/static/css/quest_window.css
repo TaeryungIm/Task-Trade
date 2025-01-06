@@ -141,6 +141,18 @@ body {
     width: 100%;
 }
 
+/* Reward message styling */
+#reward-per-personnel-message {
+    color: gray;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Error styling */
+#reward-per-personnel-message.error {
+    color: red; /* Red text for error messages */
+}
+
 .task-type {
     display: flex; /* Align buttons horizontally */
     gap: 10px; /* Add space between buttons */

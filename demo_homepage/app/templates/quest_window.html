@@ -85,16 +85,31 @@
                 </div>
 
                 <!-- Budget and Personnel -->
-                <label for="task-budget">총 보상 (COIN)</label>
-                <input id="task-budget" type="number" min="0" placeholder="전체 인원에 대한 보상을 COIN으로 입력하세요" required>
-                <label for="task-personnel">총 목표 인원 수(명):</label>
-                <input id="task-personnel" type="number" min="1" placeholder="총 참여 인원을 입력하세요" required>
+                <div>
+                    <label for="task-budget">총 보상 (COIN)</label>
+                    <input
+                        id="task-budget"
+                        type="number"
+                        min="0"
+                        placeholder="전체 인원에 대한 보상을 COIN으로 입력하세요"
+                        required>
+                </div>
+                <div>
+                    <label for="task-personnel">총 목표 인원 수(명):</label>
+                    <input
+                        id="task-personnel"
+                        type="number"
+                        min="1"
+                        placeholder="총 참여 인원을 입력하세요"
+                        required>
+                </div>
+                <p id="reward-per-personnel-message"></p>
 
                 <!-- Task Period -->
                 <label for="task-period">퀘스트 수행 기간</label>
                 <div class="date-picker">
                     <input id="task-period" type="date" required>
-                    <span class="calendar-icon">&#128197;</span> <!-- Unicode for calendar icon -->
+                    <span class="calendar-icon" onclick="openDatePicker()"></span>
                 </div>
 
                 <!-- Buttons -->

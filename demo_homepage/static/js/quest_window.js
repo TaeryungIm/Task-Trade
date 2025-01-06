@@ -55,6 +55,10 @@ window.onload = async function () {
     // Setup checkbox behavior for conditions
     setupConditionHandlers();
 
+    // Add event listeners to trigger calculation on input
+    document.getElementById('task-budget').addEventListener('input', calculateRewardPerPersonnel);
+    document.getElementById('task-personnel').addEventListener('input', calculateRewardPerPersonnel);
+
     // Set today's date as default for task period
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("task-period").value = today;
@@ -77,7 +81,7 @@ function handleConditionChange() {
 
     // Update the message based on the number of selected checkboxes
     conditionMessage.textContent = selectedCheckboxes.length === 0
-        ? "Please select at least one condition!"
+        ? "한개 이상의 항목을 선택해주세요!"
         : "";
 
     document.querySelectorAll("#conditions-container .condition-item").forEach((item) => {
@@ -182,6 +186,32 @@ function taskTypeSpecifics(selection, button) {
     // Show the corresponding task specifics
     const taskSpecificsDiv = document.getElementById("task-specifics");
     taskSpecificsDiv.textContent = taskDescriptions[selection];
+}
+
+// Function to calculate and display reward per personnel
+function calculateRewardPerPersonnel() {
+    const budgetInput = document.getElementById('task-budget');
+    const personnelInput = document.getElementById('task-personnel');
+    const rewardMessage = document.getElementById('reward-per-personnel-message');
+
+    // Parse the values
+    const budget = parseFloat(budgetInput.value);
+    const personnel = parseInt(personnelInput.value);
+
+    // Calculate reward per personnel if inputs are valid
+    if (!isNaN(budget) && !isNaN(personnel) && personnel > 0) {
+        const rewardPerPersonnel = budget / personnel;
+        rewardMessage.textContent = `1인당 보상: ${rewardPerPersonnel.toFixed(2)} COIN`;
+        rewardMessage.classList.remove('error'); // Remove error styling
+    } else {
+        rewardMessage.textContent = '총 보상과 목표 인원을 입력해주세요!';
+        rewardMessage.classList.add('error'); // Apply error styling
+    }
+}
+
+// Function to focus on the date input
+function openDatePicker() {
+    document.getElementById('task-period').focus(); // Open the date picker
 }
 
 async function postQuest(event) {
