@@ -49,7 +49,7 @@ def send_email_update_password(receiver_email: str):
         body = f"""
         You requested to update your password.
         Please click the link below to update your password:
-        http://127.0.0.1:8000/account/update/password?
+        http://127.0.0.1:8000/account/update/password
 
         If you did not request this, please ignore this email.
         """
