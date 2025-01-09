@@ -1,7 +1,9 @@
 from smtplib import SMTPException
+from email_validator import validate_email, EmailNotValidError
+
+from pydantic import ValidationError
 
 from fastapi import APIRouter, HTTPException, Depends, Form, Request
-from pydantic import EmailStr
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import scoped_session
 from starlette.templating import Jinja2Templates
@@ -12,7 +14,7 @@ from app.database.database import get_db, SessionLocal
 from app.account_system.account_schema import UserCreate, UserUpdate, UserIDRequest
 from app.account_system.account_db import get_existing_user, get_user_by_id, pwd_context
 from app.account_system.account_db import create_user, update_user
-from app.account_system.account_email import send_verification_email_userid
+from app.account_system.account_email import send_verification_email_userid, send_email_update_password
 
 session = scoped_session(SessionLocal)
 templates = Jinja2Templates(directory="app/templates")
@@ -85,11 +87,6 @@ async def pw_check_exist(userid: str = Form(...), userpw: str = Form(...), db: s
         return JSONResponse(status_code=500, content={"success": False, "message": "Internal server error"})
 
 
-@update.get("/password", response_class=HTMLResponse)
-async def open_password_upd(request: Request):
-    return templates.TemplateResponse("upd_user_pw.html", {'request': request})
-
-
 @update.get("/name", response_class=HTMLResponse)
 async def open_username_upd(request: Request):
     return templates.TemplateResponse("upd_user_name.html", {'request': request})
@@ -114,6 +111,47 @@ async def upd_user_data(userdata: UserUpdate, db: session = Depends(get_db)):
         db.rollback()
         print(f"Error occurred: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@update.get("/password", response_class=HTMLResponse)
+async def open_password_upd(request: Request):
+    return templates.TemplateResponse("upd_user_pw.html", {'request': request})
+
+
+@update.get("/password/check", response_class=HTMLResponse)
+async def open_password_upd(request: Request):
+    return templates.TemplateResponse("check_user_pw.html", {'request': request})
+
+
+@update.post("/password/email")
+async def send_email_pw_update_link(request: UserIDRequest):
+    try:
+        # Log request data for debugging
+        print(f"Received request to send password update email: {request.user_id}")
+
+        # Validate email format
+        try:
+            validate_email(request.user_id)
+        except EmailNotValidError as e:
+            print(f"Email validation error: {e}")
+            raise HTTPException(status_code=400, detail="Invalid email address")
+
+        # Call function to send the email
+        result = send_email_update_password(request.user_id)
+        print(f"Email sending result: {result}")
+        return {"message": "Password update email has been sent."}
+
+    except SMTPException as smtp_error:
+        print(f"SMTP error occurred: {smtp_error}")
+        raise HTTPException(status_code=500, detail="Failed to send email")
+
+    except ValidationError as validation_error:
+        print(f"Validation error: {validation_error}")
+        raise HTTPException(status_code=400, detail="Validation error occurred")
+
+    except Exception as e:
+        print(f"Unexpected error occurred: {e}")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred")
 
 
 @verify.post("/userid")

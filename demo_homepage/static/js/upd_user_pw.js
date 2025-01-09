@@ -13,8 +13,6 @@ const tokenManager = {
 
 // Block the inputs initially and check login status on page load
 window.onload = async function() {
-    document.getElementById('password').disabled = true;
-    document.getElementById('password_confirm').disabled = true;
 
     const accessToken = tokenManager.getToken();
     if (!accessToken) {
@@ -62,47 +60,6 @@ async function getUser(accessToken) {
         alert("An error occurred while verifying your session. Please log in again.");
         return null;
     }
-}
-
-// Handle password verification
-async function handlePWCheck(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    const accessToken = tokenManager.getToken();
-    const user = await getUser(accessToken);
-    if (!user) {
-        alert("Failed to retrieve user. Please log in again.");
-        return;
-    }
-
-    const userPW = document.getElementById('current_password').value;
-
-    const formData = new URLSearchParams();
-    formData.append('userid', user.user_id);
-    formData.append('userpw', userPW);
-
-    fetch('/account/pwcheck', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // ID is valid, enable the other fields
-                document.getElementById('password').disabled = false;
-                document.getElementById('password_confirm').disabled = false;
-                alert(data.message); // Show success message
-            } else {
-                alert(data.message); // Show failure message
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred: ' + error.message);
-        });
 }
 
 // Handle account update
