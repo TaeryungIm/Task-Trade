@@ -36,6 +36,7 @@ class UserUpdate(BaseModel):
     upd_id:      Optional[EmailStr] = None
     upd_pw:      Optional[str] = None
     upd_name:    Optional[str] = None
+    upd_contact:    Optional[str] = None
 
     @field_validator('cur_id')
     def not_empty(cls, v):

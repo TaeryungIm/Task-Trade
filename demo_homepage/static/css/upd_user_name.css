@@ -1,71 +1,84 @@
+/* Reset and Basic Styling */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-/* Styling for the title */
-.title {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    flex-direction: column; /* Ensure a vertical layout */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    min-height: 100vh; /* Make the body take the full viewport height */
 }
 
-/* Adjust image size within the title */
-.title img {
-    width: 100px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-}
-.container {
-    width: 100%;
-    max-width: 500px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-h2 {
+/* Title Styling */
+.title {
     text-align: center;
     margin-bottom: 20px;
 }
-.form-group {
-    margin-bottom: 15px;
+.title img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
 }
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+.title h2 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
 }
-.form-group input {
+
+/* Container Styling */
+.container {
+    max-width: 400px;
     width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Elements */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+label {
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+}
+input {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 4px;
     transition: border-color 0.3s ease;
+    width: 100%;
 }
-.form-group input:focus {
+input:focus {
     border-color: #007bff;
     outline: none;
 }
-.form-group button {
-    width: 100%;
+
+/* Button Styling */
+button {
     padding: 10px;
     font-size: 16px;
     background-color: #007bff;
-    color: white;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 100%; /* Make the button take full width */
 }
-.form-group button:hover {
+button:hover {
     background-color: #0056b3;
 }

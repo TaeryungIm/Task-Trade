@@ -97,6 +97,11 @@ async def open_userid_upd(request: Request):
     return templates.TemplateResponse("upd_user_id.html", {'request': request})
 
 
+@update.get("/contact", response_class=HTMLResponse)
+async def open_user_contact_upd(request: Request):
+    return templates.TemplateResponse("upd_user_contact.html", {'request': request})
+
+
 @update.post("/userdata")
 async def upd_user_data(userdata: UserUpdate, db: session = Depends(get_db)):
     try:

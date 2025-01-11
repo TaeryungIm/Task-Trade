@@ -49,6 +49,9 @@ def update_user(db: session, user_update: UserUpdate):
     if user_update.upd_name:
         db_user.username = user_update.upd_name
         context = "username"
+    if user_update.upd_contact:
+        db_user.contact_number = user_update.upd_contact
+        context = "contact_number"
 
     try:
         db.commit()
