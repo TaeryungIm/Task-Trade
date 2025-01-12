@@ -34,20 +34,40 @@
         </div>
 
         <!-- 메인 내용 -->
-        <div class="main-content">
-            <h2>문의하기</h2>
-            <form class="inquiry-form" onsubmit="handleInquiry(event)">
-                <label for="inquiry-title">문의 제목</label>
-                <input type="text" id="inquiry-title" placeholder="type inquiry title" required><br>
-
-                <label for="inquiry-content">문의 내용</label>
-                <textarea id="inquiry-content" rows="7" placeholder="type inquiry main context" required></textarea><br>
-
-                <button class="inquiry-submit" type="submit">문의 보내기</button>
-            </form>
-
+        <div class="container">
+            <!-- Sidebar Section on the left side -->
+            <div class="sidebar">
+                <p>name: TT</p>
+                <p>coin: 100c</p>
+                <p>friend: 40</p>
+                <p>inquiry: n</p>
+            </div>
+    
+            <!-- Main Content Section on the right side -->
+            <div class="main">
+                <!-- Left Panel for Notices and Recent Inquiries -->
+                <div class="left-panel">
+                    <h2>공지 및 최근 문의</h2>
+                    <ul>
+                        <li>공지사항 1</li>
+                        <li>공지사항 2</li>
+                        <li>문의 1</li>
+                        <li>문의 2</li>
+                    </ul>
+                </div>
+    
+                <!-- Right Panel for FAQ -->
+                <div class="right-panel">
+                    <h2>자주 묻는 질문</h2>
+                    <ul>
+                        <li>FAQ 1</li>
+                        <li>FAQ 2</li>
+                        <li>FAQ 3</li>
+                        <li>FAQ 4</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
 
 </body>
 </html>

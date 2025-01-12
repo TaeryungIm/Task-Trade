@@ -236,3 +236,18 @@ table tbody tr:nth-child(odd) {
     top: 110px; /* Adjusted for layout */
     right: 0;
 }
+.missions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.missions li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
