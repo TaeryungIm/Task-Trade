@@ -20,7 +20,6 @@ const tokenManager = {
 window.onload = function() {
     const accessToken = tokenManager.getToken();
 
-
     if (accessToken) {
         // User is logged in
         document.getElementById('logged-in-headers').style.display = 'block';
@@ -152,18 +151,4 @@ function showBoxes(page) {
             box.textContent = "No Quest";
         });
     });
-}
-
-function prevPage() {
-    if (current_page === 2) {
-        current_page = 1;
-        showBoxes(current_page);
-    }
-}
-
-function nextPage() {
-    if (current_page === 1) {
-        current_page = 2;
-        showBoxes(current_page);
-    }
 }
