@@ -38,6 +38,11 @@ body {
     margin: 20px;
 }
 
+.logo img:hover {
+    cursor: pointer;
+}
+
+
 .logo h1 {
     font-size: 1.5em;
     color: #007bff;

@@ -4,6 +4,7 @@ body {
     padding: 0;
     background-color: #f4f4f4;
 }
+
 /* 상단 메뉴바 */
 .header {
     display: flex;
@@ -13,10 +14,16 @@ body {
     width: 100%;
     box-sizing: border-box;
 }
+
 .header img {
-    width: 50px;
+    width: 70px;
     height: 50px;
 }
+
+.header img:hover {
+    cursor: pointer;
+}
+
 .header .header-menu button {
     margin: 5px;
     padding: 10px;
@@ -24,14 +31,17 @@ body {
     border: none;
     cursor: pointer;
 }
+
 .header-menu {
     display: flex;
     gap: 10px; /* Optional: Adds space between buttons */
     align-items: center; /* Center-aligns buttons vertically if needed */
 }
+
 .header .header-menu button:hover {
     background-color: #c0c0c0;
 }
+
 .button {
     margin: 5px;
     padding: 10px;
@@ -39,9 +49,11 @@ body {
     border: none;
     cursor: pointer;
 }
+
 .button:hover {
     background-color: #c0c0c0;
 }
+
 /* 전체 레이아웃 설정 */
 .container {
     display: flex;
@@ -52,6 +64,7 @@ body {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+
 /* Sidebar 위치를 왼쪽에 밀착 */
 .sidebar {
     flex: 1;
@@ -60,6 +73,7 @@ body {
     background-color: #f0f0f0;
     box-sizing: border-box;
 }
+
 .main-content {
     flex: 4;
     display: flex;

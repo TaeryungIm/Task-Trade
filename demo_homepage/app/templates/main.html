@@ -13,7 +13,9 @@
 </head>
 <body>
     <div class="header">
-        <img src="/static/images/main_logo.png" alt="Main Logo">
+        <a href="/">
+            <img src="/static/images/main_logo.png" alt="Main Logo">
+        </a>
 
         <div class="header-buttons">
             <div id="logged-in-headers">
@@ -42,7 +44,7 @@
                     <p id="user-friend">friend: 40</p>
                 </div>
 
-                <form action='/account/profile' method='get'>
+                <form class="my_account" action='/account/profile' method='get'>
                     <button type="submit">내 프로필</button>
                 </form>
 

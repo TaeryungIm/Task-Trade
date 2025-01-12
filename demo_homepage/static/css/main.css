@@ -20,6 +20,10 @@ body {
     height: 50px;
 }
 
+.header img:hover {
+    cursor: pointer;
+}
+
 .header-buttons {
     display: flex;
     flex-direction: row;
@@ -97,6 +101,10 @@ body {
     background-color: #007bff;
     color: #fff;
     border: none;
+    cursor: pointer;
+}
+
+.my_account button:hover {
     cursor: pointer;
 }
 

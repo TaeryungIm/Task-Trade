@@ -20,6 +20,10 @@ body {
     height: 50px;
 }
 
+.header img:hover {
+    cursor: pointer;
+}
+
 .header-buttons {
     display: flex;
     flex-direction: row;
