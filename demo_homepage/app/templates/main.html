@@ -12,15 +12,24 @@
     <script defer src="/static/js/main.js?v=1.1.0"></script>
 </head>
 <body>
+    <style>
+        .button {
+            margin: 5px;
+    padding: 10px;
+    background-color: #d0d0d0;
+    border: none;
+    cursor: pointer;
+        }
+    </style>
     <div class="header">
         <img src="/static/images/main_logo.png" alt="Main Logo">
         <div class="header-buttons">
             <div id="logged-in-headers">
-                <button id="quest-btn" onclick="link_quest()">퀘스트 등록</button>
-                <button id="inquiry-btn" onclick="link_inquiry()">문의하기</button>
-                <button id="charge-btn" onclick="link_coin_charge()">충전하기</button>
-                <button id="exchange-btn" onclick="link_coin_exchange()">환전하기</button>
-                <button id="logout-btn" onclick="logout()">로그아웃</button>
+                <button id="quest-btn" class="button" onclick="link_quest()">퀘스트 등록</button>
+                <button id="inquiry-btn" class="button" onclick="link_inquiry()">문의하기</button>
+                <button id="charge-btn" class="button" onclick="link_coin_charge()">충전하기</button>
+                <button id="exchange-btn" class="button" onclick="link_coin_exchange()">환전하기</button>
+                <button id="logout-btn" class="button" onclick="logout()">로그아웃</button>
             </div>
             <div id="logged-out-headers">
                 <button id="login-btn" onclick="login()">로그인</button>
@@ -87,6 +96,24 @@
                             <div class="mission-price">300c</div>
                         </div>
                     </div>
+                    <div class="mission-box">
+                        <img src="mission1.png" alt="Mission 1">
+                        <div class="mission-details">
+                            <div class="mission-title">미션 제목 4</div>
+                            <div class="mission-price">400c</div>
+                        </div>
+                    </div>
+                    <div class="mission-box">
+                        <img src="mission1.png" alt="Mission 1">
+                        <div class="mission-details">
+                            <div class="mission-title">미션 제목 5</div>
+                            <div class="mission-price">500c</div>
+                        </div>
+                    </div>
+                    <div class="pagination">
+                        <button onclick="previousPage()">&lt;</button>
+                        <button onclick="nextPage()">&gt;</button>
+                    </div>
                 </div>
             </div>
             <div class="info">
@@ -94,6 +121,10 @@
                 <div class="info-section">
                     <h3>공지사항</h3>
                     <p>여기에 최신 공지사항이 표시됩니다.</p>
+                </div>
+                <div class="info-section">
+                    <h3>문의</h3>
+                    <p>문의 관련 내용이 여기에 표시됩니다.</p>
                 </div>
                 <button class="write-button" onclick="alert('글쓰기 페이지로 이동')">글쓰기</button>
             </div>
