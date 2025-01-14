@@ -112,3 +112,43 @@ input[type="text"]:focus, textarea:focus {
     background-color: #0056b3;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly prominent shadow */
 }
+
+.main {
+    width: 80%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 20px;
+}
+
+.left-panel {
+    flex: 1;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.right-panel{
+    flex: 1;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.left-panel li{
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.right-panel li{
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
