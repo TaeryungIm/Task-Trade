@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 '''exec' "/Users/i_taeyori/Downloads/Team Task Trade/개발/Task-Trade/demo_homepage/.venv/bin/python" "$0" "$@"
 ' '''
+=======
+#!/Users/flore/Documents/GitHub/Task-Trade/demo_homepage/.venv/bin/python3.12
+>>>>>>> YSKim
 # -*- coding: utf-8 -*-
 import re
 import sys

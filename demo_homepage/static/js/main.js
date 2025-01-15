@@ -137,17 +137,3 @@ function showBoxes(page) {
         });
     });
 }
-
-function prevPage() {
-    if (current_page === 2) {
-        current_page = 1;
-        showBoxes(current_page);
-    }
-}
-
-function nextPage() {
-    if (current_page === 1) {
-        current_page = 2;
-        showBoxes(current_page);
-    }
-}
