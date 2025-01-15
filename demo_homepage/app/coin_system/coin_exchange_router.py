@@ -19,13 +19,6 @@ exchange = APIRouter(
 )
 
 
-# Handle POST request for creating an account
-@exchange.get("/", response_class=HTMLResponse)
-async def exchange_coin(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("coin_exchange.html", context)
-
-
 # Used for updating the balance
 @exchange.post("/update/balance")
 async def upd_user_balance_exg(update_balance: UpdateBalance, db: session = Depends(get_db)):

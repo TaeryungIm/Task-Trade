@@ -24,22 +24,21 @@ body {
     cursor: pointer;
 }
 
-.header-buttons {
+.header-menu {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
+    gap: 10px; /* Optional: Adds space between buttons */
+    align-items: center; /* Center-aligns buttons vertically if needed */
 }
 
-.header-buttons button {
+.header-menu button {
     margin: 5px;
     padding: 10px;
-    font-size: 16px;
     background-color: #d0d0d0;
     border: none;
     cursor: pointer;
 }
 
-.header-buttons button:hover {
+.header-menu button:hover {
     background-color: #c0c0c0;
 }
 

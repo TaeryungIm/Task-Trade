@@ -24,7 +24,13 @@ body {
     cursor: pointer;
 }
 
-.header .header-menu button {
+.header-menu {
+    display: flex;
+    gap: 10px; /* Optional: Adds space between buttons */
+    align-items: center; /* Center-aligns buttons vertically if needed */
+}
+
+.header-menu button {
     margin: 5px;
     padding: 10px;
     background-color: #d0d0d0;
@@ -32,13 +38,7 @@ body {
     cursor: pointer;
 }
 
-.header-menu {
-    display: flex;
-    gap: 10px; /* Optional: Adds space between buttons */
-    align-items: center; /* Center-aligns buttons vertically if needed */
-}
-
-.header .header-menu button:hover {
+.header-menu button:hover {
     background-color: #c0c0c0;
 }
 

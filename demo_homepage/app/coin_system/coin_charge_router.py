@@ -18,14 +18,6 @@ charge = APIRouter(
     prefix="/charge",
 )
 
-
-# Handle POST request for creating an account
-@charge.get("/", response_class=HTMLResponse)
-async def exchange_coin(request: Request):
-    context = {'request': request}
-    return templates.TemplateResponse("coin_charge.html", context)
-
-
 # Used for updating the balance
 @charge.post("/update/balance")
 async def upd_user_balance_chg(update_balance: UpdateBalance, db: session = Depends(get_db)):

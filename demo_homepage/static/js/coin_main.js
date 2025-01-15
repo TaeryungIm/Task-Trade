@@ -27,6 +27,10 @@ const tokenManager = {
 // Check status on main page according to login/logout states
 window.onload = async function () {
     const accessToken = tokenManager.getToken();
+
+    const coinAccountButton = document.getElementById("coin-account-btn");
+    coinAccountButton.style.color = "#007bff";
+
     const userid = await getUserId(accessToken);
 
     if (userid) {

@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -11,6 +12,7 @@ body {
     padding: 0;
     width: 100%;
 }
+
 /* 왼쪽 사이드바 */
 .sidebar {
     width: 20%;
@@ -20,9 +22,11 @@ body {
     font-size: 14px;
     color: #333;
 }
+
 .sidebar p {
     margin: 10px 0;
 }
+
 /* 상단 메뉴바 */
 .header {
     display: flex;
@@ -32,23 +36,31 @@ body {
     width: 100%;
     box-sizing: border-box;
 }
+
 .header img {
-    width: 50px;
+    width: 70px;
     height: 50px;
 }
-.header .header-menu button {
+
+.header img:hover {
+    cursor: pointer;
+}
+
+.header-menu {
+    display: flex;
+    gap: 10px; /* Optional: Adds space between buttons */
+    align-items: center; /* Center-aligns buttons vertically if needed */
+}
+
+.header-menu button {
     margin: 5px;
     padding: 10px;
     background-color: #d0d0d0;
     border: none;
     cursor: pointer;
 }
-.header-menu {
-    display: flex;
-    gap: 10px; /* Optional: Adds space between buttons */
-    align-items: center; /* Center-aligns buttons vertically if needed */
-}
-.header .header-menu button:hover {
+
+.header-menu button:hover {
     background-color: #c0c0c0;
 }
 

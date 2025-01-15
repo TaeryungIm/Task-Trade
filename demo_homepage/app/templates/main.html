@@ -6,47 +6,23 @@
     <title>Task Trade</title>
 
     <!-- Link to external CSS -->
-<<<<<<< HEAD
     <link rel="stylesheet" href="/static/css/main.css?v=1.2.0">
-=======
-    <link rel="stylesheet" href="/static/css/main.css">
->>>>>>> YSKim
 
     <!-- Link to external JS -->
     <script defer src="/static/js/main.js?v=1.2.0"></script>
 </head>
 <body>
-    <style>
-        .button {
-            margin: 5px;
-    padding: 10px;
-    background-color: #d0d0d0;
-    border: none;
-    cursor: pointer;
-        }
-    </style>
     <div class="header">
-<<<<<<< HEAD
         <a href="/">
             <img src="/static/images/main_logo.png" alt="Main Logo">
         </a>
 
-        <div class="header-buttons">
+        <div class="header-menu">
             <div id="logged-in-headers">
                 <button id="quest-btn" onclick="link_quest()">퀘스트 등록</button>
                 <button id="inquiry-btn" onclick="link_inquiry()">문의하기</button>
                 <button id="coin-account-btn" onclick="link_coin_account()">내 계좌</button>
                 <button id="logout-btn" onclick="logout()">로그아웃</button>
-=======
-        <img src="/static/images/main_logo.png" alt="Main Logo">
-        <div class="header-buttons">
-            <div id="logged-in-headers">
-                <button id="quest-btn" class="button" onclick="link_quest()">퀘스트 등록</button>
-                <button id="inquiry-btn" class="button" onclick="link_inquiry()">문의하기</button>
-                <button id="charge-btn" class="button" onclick="link_coin_charge()">충전하기</button>
-                <button id="exchange-btn" class="button" onclick="link_coin_exchange()">환전하기</button>
-                <button id="logout-btn" class="button" onclick="logout()">로그아웃</button>
->>>>>>> YSKim
             </div>
             <div id="logged-out-headers">
                 <button id="login-btn" onclick="login()">로그인</button>
@@ -57,11 +33,7 @@
     <div class="container">
         <!-- Sidebar Section -->
         <div class="sidebar">
-            <div class="profile-photo">
-                <img src="/static/images/taeyun329.png" alt="프로필사진">
-            </div>
             <div id="user-section">
-<<<<<<< HEAD
                 <!-- Profile Section -->
                 <div class="profile-box">
                     <div class="profile-photo">
@@ -73,14 +45,9 @@
                 </div>
 
                 <form class="my_account" action='/account/profile' method='get'>
-=======
-                <p id="user-name">name: TT</p>
-                <p id="user-coin">coin: 100c</p>
-                <p id="user-friend">friend: 40</p>
-                <form action='/account/profile' method='get'>
->>>>>>> YSKim
                     <button type="submit">내 프로필</button>
                 </form>
+
                 <div class="list-section" id="my-quest">
                     <h3>내 퀘스트 목록</h3>
                     <ul>

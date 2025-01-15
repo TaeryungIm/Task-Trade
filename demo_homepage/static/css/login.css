@@ -6,6 +6,7 @@ body {
     height: 100vh;
     background-color: #f4f4f4;
 }
+
 .login-container {
     background-color: white;
     padding: 20px;
@@ -14,14 +15,17 @@ body {
     width: 300px;
     text-align: center;
 }
+
 .login-container img {
     width: 70px;
     height: 50px;
     cursor: pointer;
 }
+
 .login-container h2 {
     margin-bottom: 20px;
 }
+
 input {
     width: 90%;
     padding: 10px;
@@ -29,6 +33,7 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 button {
     width: 95%;
     padding: 10px;
@@ -40,19 +45,23 @@ button {
     margin: 10px 0;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 button:hover {
     background-color: #0056b3;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
 .signup-link {
     color: #008CBA;
     text-decoration: none;
     display: inline-block;
     margin-top: 10px;
 }
+
 .signup-link:hover {
     text-decoration: underline;
 }
+
 .submit-text {
     text-decoration: underline;
     color: blue;
@@ -64,4 +73,3 @@ button:hover {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add a 3D shadow effect */
     transform: scale(1.05); /* Slightly scale the text for a pop effect */
 }
-
